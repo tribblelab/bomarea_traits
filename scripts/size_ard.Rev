@@ -37,6 +37,7 @@ monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
                                                    withStartStates=false) )
 
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2)
+# mymcmc.burnin() this will remove burnin
 mymcmc.run(generations=25000, tuningInterval=200)
 ->
 anc_states = readAncestralStateTrace("output/binary_type_ard_states_combined.txt")
