@@ -10,7 +10,11 @@ library(car)
 
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
-#function
+
+#####################
+##### Functions #####
+#####################
+
 get_most_frequent_discrete_value <- function(vec) {
   tbl <- table(vec)
   if (dim(tbl) > 0) {
@@ -21,7 +25,40 @@ get_most_frequent_discrete_value <- function(vec) {
   }
   }
 
-### Name Check
+#looking and 2 & 3 columns in dataset (branching and bracts)
+typeset <- function(df) {
+        if (any(is.na(df))) {
+                return(NA)
+        } else {
+                if (df[2]==TRUE & df[3]==FALSE) { ## umbellike, no bracteoles
+                        return(0)
+                }
+                else if (df[2]==TRUE & df[3]==TRUE) { ## umbellike w/ bracteoles
+                        return(1)
+                }
+                else if (df[2]==FALSE & df[3]==TRUE) { ## non umbel (branching) w/ bracteoles
+                        return(2)
+                } else {
+                        return(NA)
+                }  
+        }
+}
+
+get_gen_sp <- function(x) {
+        if (is.na(x)) {
+                return(NA)
+        } else if (grepl("_cf_", x)) {
+                namesplit <- unlist(strsplit(x, split = "_"))
+                newname <- paste0(namesplit[1], "_", namesplit[3])
+                return(newname) 
+        } else {
+                namesplit <- unlist(strsplit(x, split = "_"))
+                newname <- paste0(namesplit[1], "_", namesplit[2])
+                return(newname) 
+        }
+}
+
+
 sameName <- function(df) {
   if (is.na(df[2])) {
           return(NA)
@@ -34,6 +71,7 @@ sameName <- function(df) {
   }
 }
 
+### Name Check
 subsetName <- traits[, c("speciesName", "acceptedName")]
 subsetName$ifSame <- apply(subsetName, 1, sameName)
 subsetName <- na.omit(subsetName)
@@ -92,25 +130,6 @@ traitdata$numBranch1 <- as.numeric(traitdata$numBranch1)
 ##############################
 
 
-#looking and 2 & 3 columns in dataset (branching and bracts)
-typeset <- function(df) {
-  if (any(is.na(df))) {
-          return(NA)
-  } else {
-          if (df[2]==TRUE & df[3]==FALSE) { ## umbellike, no bracteoles
-                  return(0)
-          }
-          else if (df[2]==TRUE & df[3]==TRUE) { ## umbellike w/ bracteoles
-                  return(1)
-          }
-          else if (df[2]==FALSE & df[3]==TRUE) { ## non umbel (branching) w/ bracteoles
-                  return(2)
-          } else {
-                  return(NA)
-          }  
-  }
-}
-
 traitdata %>%
   mutate(umbellike = numBranch1==0) %>% #adds new column TRUE if numBranch1 is 0, FALSE if other
   mutate(bracteoles = Bracteoles=="Y") %>% #adds new column TRUE if Bracteoles == "Y", FALSE if other
@@ -118,22 +137,6 @@ traitdata %>%
   select(acceptedName, umbellike, bracteoles) -> traitdatasubset #only keeps acceptedName, umbellike, bracteoles columns
 
 traitdatasubset$type = apply(traitdatasubset, 1, typeset) #applies typeset function to data subset
-
-###infl trait isolation (size + tepal traits)
-
-traits %>%
-  group_by(acceptedName) %>% #same as above for size and tepal traits
-  summarise(maxBranchNo = max(numBranchP, na.rm = T),
-            maxBranchLength = max(lengthTotal1, lengthTotal2, lengthTotal3, lengthTotal4, lengthTotal5, na.rm = T),
-            degreeBranch = max(numBranch1, numBranch2, numBranch3, numBranch4, numBranch5, na.rm = T),
-            colorTepalP = get_most_frequent_discrete_value(colorTepalP),
-            colorTepalS = get_most_frequent_discrete_value(colorTepalS),
-            ifTepalLengthMatch = get_most_frequent_discrete_value(ifTepalLengthMatch),
-            ifExcerted = get_most_frequent_discrete_value(ifExcerted)) -> inflSelect #group and summarize
-inflSelect %>%
-  count(colorTepalP, sort = TRUE) #counts unique occurences and sorts
-inflSelect %>%
-  count(colorTepalS, sort = TRUE) #counts unique occurences and sorts
 
 
 #taking the max num of flowers per species
@@ -215,19 +218,6 @@ tree_edited <- ape::drop.tip(tree, tips_to_drop)
 write.tree(tree_edited, file = "data/tree_edited.tre")
 tree_df <- as_tibble(tree_edited)
 
-get_gen_sp <- function(x) {
-  if (is.na(x)) {
-    return(NA)
-  } else if (grepl("_cf_", x)) {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[3])
-    return(newname) 
-  } else {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[2])
-    return(newname) 
-  }
-}
 
 #combine species names
 tree_df$speciesName <- unlist(lapply(tree_df$label, get_gen_sp))
