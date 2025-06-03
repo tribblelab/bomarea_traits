@@ -47,17 +47,17 @@ branchiness_max$acceptedName <- gsub(" ", "_", branchiness_max$acceptedName)
 # Match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
 tips_to_drop <- grep(
-        paste0(
-                "caudata|herbertiana|glaucescens|parvifolia|",
-                "tribachiata|angustipetala|lehmannii|",
-                "chimborazensis|trimorphophylla|hartwegii|",
-                "alstroemeriodes|superba|acuminata|enanorojo|",
-                "killipii|foliosa|straminea|pauciflora|distichophylla|",
-                "Bomarea_edulis_Brazil_Campbell8900|",
-                "Bomarea_edulis_Venezuela_Bunting4817"
-        ),
-        tree$tip.label,
-        value = TRUE
+  paste0(
+    "caudata|herbertiana|glaucescens|parvifolia|",
+    "tribachiata|angustipetala|lehmannii|",
+    "chimborazensis|trimorphophylla|hartwegii|",
+    "alstroemeriodes|superba|acuminata|enanorojo|",
+    "killipii|foliosa|straminea|pauciflora|distichophylla|",
+    "Bomarea_edulis_Brazil_Campbell8900|",
+    "Bomarea_edulis_Venezuela_Bunting4817"
+  ),
+  tree$tip.label,
+  value = TRUE
 )
 tree_edited <- ape::drop.tip(tree, tips_to_drop)
 write.tree(tree_edited, file = "data/tree_edited.tre")
