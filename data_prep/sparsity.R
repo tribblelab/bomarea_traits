@@ -33,27 +33,6 @@ get_gen_sp <- function(x) {
   }
 }
 
-traits %>%
-  group_by(acceptedName) %>%
-  summarise(numBranchP = mean(numBranchP, na.rm = T),
-            numBracts = mean(numBracts, na.rm = T),
-            numBranch1 = mean(numBranch1, na.rm = T),
-            numBranch2 = mean(numBranch2, na.rm = T),
-            numBranch3 = mean(numBranch3, na.rm = T),
-            numBranch4 = mean(numBranch4, na.rm = T),
-            numBranch5 = mean(numBranch5, na.rm = T),
-            Bracteoles = most_frequent_discrete_value(Bracteoles),
-            ifFruiting = most_frequent_discrete_value(ifFruiting),
-            matFruit = most_frequent_discrete_value(matFruit),
-            ifFlowering = most_frequent_discrete_value(ifFlowering),
-            matFlower = most_frequent_discrete_value(matFlower),
-            allFlowersMat = most_frequent_discrete_value(allFlowersMat),
-            nectarGuides = most_frequent_discrete_value(nectarGuides),
-            colorTepalP = most_frequent_discrete_value(colorTepalP),
-            colorTepalS = most_frequent_discrete_value(colorTepalS),
-            ifTepalLengthMatch = most_frequent_discrete_value(ifTepalLengthMatch),
-            ETepalLength = most_frequent_discrete_value(ETepalLength),
-            ifExcerted = most_frequent_discrete_value(ifExcerted)) -> traits_by_species
 
 # Calculates max flowers and sparsity
 traits$maxFlowers <- pmax(traits$numFlowers_1,
@@ -61,7 +40,8 @@ traits$maxFlowers <- pmax(traits$numFlowers_1,
                           traits$numFlowers_3, na.rm = TRUE)
 
 sparsity_df <- traits %>%
-        mutate(numBranchesMeasured =rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
+        mutate(numBranchesMeasured = 
+               rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
         group_by(acceptedName) %>%
         slice_max(maxFlowers, with_ties = FALSE) %>%
         mutate(totalBranchLength = lengthTotal1 +
@@ -124,7 +104,7 @@ sparsity_dat <- sparsity_dat %>%
   select(label, sparsity)
 
 
-# Matrix for branchiness
+# Matrix for sparsity
 sparsity_mat <- as.matrix(sparsity_dat$sparsity)
 rownames(sparsity_mat) <- sparsity_dat$label
 colnames(sparsity_mat) <- "sparsity"
