@@ -8,11 +8,7 @@ library(ape)
 library(tidytree)
 library(car)
 
-traits <- read_xlsx("data/bomarea traits.xlsx", sheet = 1, na = "N/A")
-
-# erase that pesky Bomarea torquifes row
-traits <- traits[-which(traits$speciesName == "Bomarea torquifes"), ]
-traits <- traits[is.na(traits$acceptedName)==FALSE, ]
+traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
 #function
 get_most_frequent_discrete_value <- function(vec) {
@@ -36,12 +32,13 @@ sameName <- function(df) {
                   return(NA)
           }   
   }
-} #making a function that checks if names are the same
+}
 
-#subsetName <- traits[, c("speciesName", "acceptedName")]
-#subsetName$ifSame <- apply(subsetName, 1, sameName)
-#subsetName <- na.omit(subsetName)
+subsetName <- traits[, c("speciesName", "acceptedName")]
+subsetName$ifSame <- apply(subsetName, 1, sameName)
+subsetName <- na.omit(subsetName)
 #write.csv(subsetName, file = "NameCheck")
+
 ### Name Check End
 
 traits %>% 
@@ -89,6 +86,12 @@ traitdata$numBranchP <- as.numeric(traitdata$numBranchP)
 traitdata$numBracts <- as.numeric(traitdata$numBracts)
 traitdata$numBranch1 <- as.numeric(traitdata$numBranch1)
 
+
+##############################
+##### Inflorescence Type #####
+##############################
+
+
 #looking and 2 & 3 columns in dataset (branching and bracts)
 typeset <- function(df) {
   if (any(is.na(df))) {
@@ -108,7 +111,6 @@ typeset <- function(df) {
   }
 }
 
-##infl type
 traitdata %>%
   mutate(umbellike = numBranch1==0) %>% #adds new column TRUE if numBranch1 is 0, FALSE if other
   mutate(bracteoles = Bracteoles=="Y") %>% #adds new column TRUE if Bracteoles == "Y", FALSE if other
@@ -133,14 +135,14 @@ inflSelect %>%
 inflSelect %>%
   count(colorTepalS, sort = TRUE) #counts unique occurences and sorts
 
-#################
-### new stuff ###
-#################
 
 #taking the max num of flowers per species
 traits$maxFlowers <- pmax(traits$numFlowers_1, traits$numFlowers_2, traits$numFlowers_3, na.rm = TRUE)
 
-##sparsity
+####################
+##### Sparsity #####
+####################
+
 sparsity_df <- traits %>%
         mutate(numBranchesMeasured = rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
         group_by(acceptedName) %>%
@@ -156,7 +158,11 @@ sparsity_df <- traits %>%
         select(gbfID, acceptedName, maxFlowers, numBranchP, numBranchesMeasured, totalBranchLength, sparsity) %>%
         ungroup()
 
-##branchiness
+
+#######################
+##### Branchiness #####
+#######################
+
 branchiness_df <- traits %>%
         mutate(
                 totNumBranches = rowSums(!is.na(select(., numBranch1, numBranch2, 
@@ -167,14 +173,17 @@ branchiness_df <- traits %>%
                 ungroup()
 
         #averages of branchiness across species
-        branchiness_avg_df <- branchiness_df %>%
+        branchiness_max <- branchiness_df %>%
                 group_by(acceptedName) %>%
                 summarize(
-                        avg_branchiness = mean(branchiness, na.rm = TRUE)
+                        branchiness = max(totNumBranches, na.rm = TRUE)
                 ) %>%
                 ungroup()
 
-##size
+################
+##### Size #####
+################
+        
 size_df <- traits %>%
         mutate(totalBranchLength = lengthTotal1 + 
                        coalesce(lengthSeg1_1, 0) + coalesce(lengthBranch1_1, 0) +
@@ -190,12 +199,17 @@ size_df <- traits %>%
         ) %>%
         ungroup()
 
+######################
+##### Tree Edits #####
+######################
+        
 #match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
-tips_to_drop <- tree$tip.label[grep("caudata|herbertiana|glaucescens|Bomarea_edulis_Brazil_Campbell8900|Bomarea_sp__oso_Peru_Graham12613 
-                                        |Bomarea_sp__ponillalsoya_Peru_Graham12616|Bomarea_edulis_Venezuela_Bunting4817|
+tips_to_drop <- tree$tip.label[grep("caudata|herbertiana|glaucescens|Bomarea_edulis_Brazil_Campbell8900|Bomarea_edulis_Venezuela_Bunting4817|
                                         Bomarea_sp__catanatasoya_Peru_Graham12611|Bomarea_foliosa_Ecuador_Zak2268|Bomarea_lehmannii_AlzateS_N_
-                                        |Bomarea_straminea_Alzate3300|Bomarea_pauciflora_AlzateS_N_|Bomarea_distichophylla_Peru_Rojas2689", 
+                                        |Bomarea_straminea_Alzate3300|Bomarea_pauciflora_AlzateS_N_|Bomarea_distichophylla_Peru_Rojas2689|
+                                        Bomarea_superba_CultivatedinCA_SFBG20120052_A|Bomarea_foliosa_Ecuador_Zak2268|Bomarea_straminea_Alzate3300|
+                                        Bomarea_lehmannii_AlzateS_N_|Bomarea_distichophylla_Peru_Rojas2689 ", 
                                         tree$tip.label)]
 tree_edited <- ape::drop.tip(tree, tips_to_drop)
 write.tree(tree_edited, file = "data/tree_edited.tre")
@@ -248,8 +262,12 @@ typemat <- matrix(typedat$type, ncol =1)
 rownames(typemat) <- typedat$label
 colnames(typemat) <- "type"
 
+#matrix for branchiness
+branchiness_mat <- as.matrix(branchiness_max$branchiness)
+rownames(branchiness_mat) <- branchiness_max$acceptedName
+colnames(branchiness_mat) <- "branchiness"
+
 
 #write to nexus 
-write.nexus.data(typemat, file = "type_binary.nexus", format = "standard", missing = "?")
-
-
+write.nexus.data(typemat, file = "data/type_bi.nexus", format = "standard", missing = "?")
+write.nexus.data(branchiness_mat, file = "data/branch.nexus", format = "standard", missing = "?")
