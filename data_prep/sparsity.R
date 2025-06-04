@@ -40,11 +40,11 @@ traits$maxFlowers <- pmax(traits$numFlowers_1,
                           traits$numFlowers_3, na.rm = TRUE)
 
 sparsity_df <- traits %>%
-        mutate(numBranchesMeasured = 
-               rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
-        group_by(acceptedName) %>%
-        slice_max(maxFlowers, with_ties = FALSE) %>%
-        mutate(totalBranchLength = lengthTotal1 +
+  mutate(numBranchesMeasured = 
+           rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
+  group_by(acceptedName) %>%
+  slice_max(maxFlowers, with_ties = FALSE) %>%
+  mutate(totalBranchLength = lengthTotal1 +
       coalesce(lengthSeg1_1, 0) +
       coalesce(lengthBranch1_1, 0) + coalesce(lengthSeg1_2, 0) +
       coalesce(lengthBranch1_2, 0) + coalesce(lengthSeg1_3, 0) +

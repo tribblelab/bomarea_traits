@@ -1,0 +1,40 @@
+B. herbertiana is probably a syn. of B. diffracta and has a compound inflorescence [source: NYBG specimen that was sequenced for phylogeny]
+B. parvifolia is compound inflorescence [MOBOT specimen that was sequenced for phylogeny]
+B. tribachiata (spelled wrong) is compound [flora of edcuador]
+B. lehmanii is compound [treatment of Bomarea of colombia]
+B. straminea is compound [treatment of Bomarea of colombia]
+B. angustipetala is compound [treatment of Bomarea of colombia]
+Drop the tip of B. caudata from analysis
+B. foliosa is bracteole [flora of ecuador]
+B. euryphylla is bracteole [flora of ecuador] 
+B. acuminata bracteole [flora of CR]
+B. bredemeyerana Colombia is simple [treatment of Bomarea colombia]
+B. killipii Peru is compound 2
+B. bredemeyerana Colo is simple 0
+B. alstroemerioides Peru is simple 0
+B. hartwegii is simple [flora of ecuador]
+B. trimorphophylla is compound [flora of ecuador]
+B. chimborazensis is compound [flora of ecuador]
+B. edulis Brazil Campbell made into ?
+
+
+B. glaucescens Ecuador Caranqui1583 DROP FROM TREE
+B. pumila should be changed to 0 (plain umbel)
+Graham
+12611
+
+#B. parvifolia is 2
+#B. tribachiata is 2
+#B. lehmanii is 2
+#B. straminea is 2
+#B. angustipetala is 2
+#B. foliosa is 1
+#B. euryphylla is 1
+#B. acuminata is 1
+#B. bredemeyerana Venezula is 0
+#B. killipii is 2
+#B. bredemeyerana Colombia is 0
+#B. alstroemerioides 0
+#B. hartwegii is 0
+#B. trimorphophylla 2
+#B. chimborazensis is 2

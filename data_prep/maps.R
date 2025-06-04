@@ -23,8 +23,8 @@ nex_df <- nex_df[!is.na(nex_df$Inflorescence_type), ]
 xl <- read_excel("geo_data.xlsx")
 geo_data <- xl %>%
   left_join(nex_df, by = "Species")
-#write_xlsx(geo_data, "geo_data.xlsx")
 
+#write_xlsx(geo_data, "geo_data.xlsx")
 convert_to_decimal <- function(coord) {
   #remove brackets if they exist
   coord <- gsub("[\\[\\]]", "", coord)
