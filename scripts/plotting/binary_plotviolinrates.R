@@ -65,4 +65,4 @@ g <- ggplot(df_rates) +
 summarizeTrace(rates, vars = c("rate[1]", "rate[2]"))
 
 print(g)
-ggsave("binary_type_ase_ard_violinPlot.png", width = 7, height = 10, dpi = 200)
+ggsave("figures/binary_type_violinPlot.png", width = 7, height = 10, dpi = 200)
