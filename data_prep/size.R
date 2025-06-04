@@ -94,7 +94,7 @@ manual_add <- data.frame(
 # Merge into existing df
 size_dat <- size_dat %>%
   left_join(manual_add, by = "label") %>%
-  mutate(size = coalesce(size.y, size.x)) %>%
+  mutate(size = coalesce(avg_size.y, avg_size.x)) %>%
   select(label, avg_size)
 
 
