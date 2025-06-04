@@ -1,5 +1,3 @@
-setwd("~/Desktop/bomarea_traits/")
-
 library(dplyr)
 library(readxl)
 library(ape)
@@ -42,17 +40,15 @@ size_df <- traits %>%
       coalesce(lengthSeg1_3, 0) + coalesce(lengthBranch1_3, 0) +
       coalesce(lengthSeg1_4, 0) + coalesce(lengthBranch1_4, 0) +
       coalesce(lengthSeg1_5, 0),
-    size = totalBranchLength / numBranchP
+    avg_size = totalBranchLength / numBranchP
   ) %>%
   group_by(acceptedName) %>%
   summarize(
-    avg_size = mean(size, na.rm = TRUE)
+    avg_size = mean(avg_size, na.rm = TRUE)
   ) %>%
   ungroup()
 
 size_df$acceptedName <- gsub(" ", "_", size_df$acceptedName)
-size_df <- size_df %>%
-  mutate(size = round(avg_size, 2))
 
 # Match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
@@ -79,7 +75,7 @@ tree_df$speciesName <- unlist(lapply(tree_df$label, get_gen_sp))
 tree_df <- left_join(tree_df, size_df,
                      by = c("speciesName" = "acceptedName"))
 size_dat <- data.frame(label = tree_df$label,
-                       avg_size = tree_df$size)
+                       avg_size = tree_df$avg_size)
 size_dat <- size_dat[is.na(size_dat$label) == FALSE, ]
 
 
@@ -88,21 +84,23 @@ manual_add <- data.frame(
   label = c("Bomarea_sp__oso_Peru_Graham12613",
             "Bomarea_sp__ponillalsoya_Peru_Graham12616",
             "Bomarea_sp__catanatasoya_Peru_Graham12611"),
-  size = c(5.718, 695.805, 140.205)
+  avg_size = c(5.718, 695.805, 140.205)
 )
 
 # Merge into existing df
 size_dat <- size_dat %>%
   left_join(manual_add, by = "label") %>%
-  mutate(size = coalesce(avg_size.y, avg_size.x)) %>%
+  mutate(avg_size = coalesce(avg_size.y, avg_size.x)) %>%
   select(label, avg_size)
 
+size_dat <- size_dat %>%
+        mutate(avg_size = round(avg_size, 2))
 
 # Matrix for size
-size_mat <- as.matrix(size_dat$size)
+size_mat <- as.matrix(size_dat$avg_size)
 rownames(size_mat) <- size_dat$label
-colnames(size_mat) <- "size"
+colnames(size_mat) <- "avg_size"
 
 # Write to nexus
-write.nexus.data(size_mat, file = "data/siz.nexus",
+write.nexus.data(size_mat, file = "data/size.nexus",
                  format = "standard", missing = "?")
