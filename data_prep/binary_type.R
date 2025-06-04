@@ -134,5 +134,5 @@ colnames(type_mat) <- "type"
 
 
 # Write to nexus
-write.nexus.data(type_mat, file = "data/type_binary.nexus",
+write.nexus.data(type_mat, file = "data/binary_type.nexus",
                  format = "standard", missing = "?")
