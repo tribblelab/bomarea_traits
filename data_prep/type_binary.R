@@ -120,8 +120,12 @@ type_dat <- type_dat %>%
   mutate(type = ifelse(!is.na(type.y), type.y, type.x)) %>%
   select(label, type)
 
-# Turn all bracteoles into simple (remove for bracteole type)
+# Turn all bracteoles into simple (remove for 3 types)
 type_dat$type <- ifelse(type_dat$type == "1", "0", type_dat$type)
+
+# Turn simple into 0 and compound into 1 (remove for 3 types)
+type_dat$type <- ifelse(type_dat$type == 2, 1, type_dat$type)
+
 
 # Make a matrix for type
 type_mat <- matrix(type_dat$type, ncol = 1)
