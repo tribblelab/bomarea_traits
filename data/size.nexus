@@ -2,7 +2,7 @@
 [Data written by write.nexus.data.R, Wed Jun  4 08:12:25 2025]
 BEGIN DATA;
   DIMENSIONS NTAX=56 NCHAR=1;
-  FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789";
+  FORMAT DATATYPE=CONTINUOUS MISSING=? GAP=-;
   MATRIX
     Bomarea_brevis_Bolivia_Teran1759                         13.11
     Bomarea_coccinea_Peru_Nunez13229                         9.95
