@@ -1,0 +1,36 @@
+T <- readTrees("data/tree_edited.tre")[1]
+data <- readContinuousCharacterData("data/concat_size_sparsity.nexus")
+
+nchar <- data.nchar()
+
+moves    = VectorMoves()
+monitors = VectorMonitors()
+
+tree <- T
+
+sigma2 ~ dnLoguniform(1e-3, 1)
+moves.append( mvScale(sigma2, weight=4.0))
+
+alpha <- 1.0
+proportional_rates ~ dnDirichlet(rep(alpha, nchar))
+relative_rates := proportional_rates * nchar
+
+moves.append( mvBetaSimplex(proportional_rates, weight=2.0))
+
+eta <- 1.0
+R ~ dnLKJ(eta, nchar )
+
+moves.append(mvCorrelationMatrixRandomWalk(R, weight=3.0))
+moves.append(mvCorrelationMatrixSingleElementBeta(R, weight=5.0))
+
+correlations := R.upperTriangle()
+
+V := fnDecompVarCovar( relative_rates^0.5, R )
+X ~ dnPhyloMultivariateBrownianREML(tree, branchRates=sigma2^0.5, rateMatrix=V)
+X.clamp(data)
+
+mymodel = model(sigma2)
+monitors.append( mnModel(filename="output/multivariate_size_sparsity.log", printgen=10) )
+monitors.append( mnScreen(printgen=1000, sigma2) )
+mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
+mymcmc.run(generations=200000)
