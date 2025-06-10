@@ -1,28 +1,15 @@
-#######################
-# Number of states and rates #
-#######################
 NUM_STATES = 2
 NUM_HIDDEN = 2
 NUM_RATES = NUM_STATES * NUM_HIDDEN
 
-
-# Proposals (moves), and monitors vectors
 moves = VectorMoves()
 monitors = VectorMonitors()
 
-#########################
-# Reading the data
-#########################
-### Phylogenetic tree
 observed_phylogeny <- readTrees("data/tree_edited.tre")[1]
 
 
 ## Data
-data <- readCharacterDataDelimited("binary_type.nexus",
-stateLabels=2,
-type="NaturalNumbers",
-delimiter=",",
-header=TRUE)
+data <- readDiscreteCharacterData("data/binary_type.nexus")
 
 # Expand 0 and 1 to have A and B hidden states
 data_exp <- data.expandCharacters( NUM_HIDDEN )
@@ -33,18 +20,9 @@ taxa <- observed_phylogeny.taxa()
 ### How old is the phylogenetic tree?
 root_age <- observed_phylogeny.rootAge()
 
-
-#########################################################
-# Transition rates #
-#########################################################
-###### This is the version of RZF that allows for more flexibility in the transition rates both for main states and hidden states
-### In the RevBayes tutorial website this section is specified differently, stronger assumptions. In my experience that is OK as long as you have a tree less than 200 trees.
-
-## We define a gamma distribution with a rate and shape parameters
 shape_pr := 0.5
 rate_pr := observed_phylogeny.treeLength()/5
 
-#### Crea una matriz de 4x4 porque son 4 estados
 for (i in 1:NUM_RATES) {
 for (j in 1:NUM_RATES) {
 q[i][j] := 0.0
@@ -182,8 +160,8 @@ hisse.clampCharData( data_exp ) #note the clamping on the expanded dataset
 mymodel = model(rate_matrix)
 
 ### set up the monitors that will output parameter values to file and screen
-monitors.append(mnModel(filename="output/hisse_pollination.log", printgen=1))
-monitors.append(mnJointConditionalAncestralState(tree=hisse, cdbdp=hisse, type="NaturalNumbers", printgen=1000, withTips=true, withStartStates=false, filename="output/anc_states_hisse_pollination.log"))
+monitors.append(mnModel(filename="output/hisse_binary_type.log", printgen=1))
+monitors.append(mnJointConditionalAncestralState(tree=hisse, cdbdp=hisse, type="NaturalNumbers", printgen=1000, withTips=true, withStartStates=false, filename="output/anc_states_hisse_binary_type.log"))
 monitors.append(mnScreen(printgen=10, q_01A, q_10A, speciation, extinction))
 
 
@@ -195,15 +173,15 @@ monitors.append(mnScreen(printgen=10, q_01A, q_10A, speciation, extinction))
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2, moveschedule="random")
 
 ### pre-burnin to tune the proposals 20% of the sample
-#mymcmc.burnin(generations=2000,tuningInterval=100)
+mymcmc.burnin(generations=2000,tuningInterval=100)
 
 ### run the MCMC
 mymcmc.run(generations=150000)
 
 
-### Opcional reconstruccion ancestral
-###anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_pollination_run_1.log")
-###ancestralStateTree(tree=observed_phylogeny, ancestral_state_trace_vector=anc_state_trace, include_start_states=false, file="output/asr_hisse_polinizador.tree", summary_statistic="MAP", reconstruction="marginal")
+### Optional ancestral state
+###anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_binary_type_run_1.log")
+###ancestralStateTree(tree=observed_phylogeny, ancestral_state_trace_vector=anc_state_trace, include_start_states=false, file="output/asr_hisse_binary_type.tree", summary_statistic="MAP", reconstruction="marginal")
 
 q()
 

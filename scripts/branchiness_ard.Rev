@@ -6,22 +6,29 @@ moves = VectorMoves()
 monitors = VectorMonitors()
 
 NUM_STATES = 8
+num_rates = NUM_STATES * (NUM_STATES - 1)
+rates_prior <- rep(1.0, num_rates)
+rates ~ dnDirichlet(rates_prior)
+moves.append( mvBetaSimplex(rates, weight=2) )
+moves.append( mvDirichletSimplex(rates, weight=1) )
 
-pi_prior <- rep(1,NUM_STATES)
-pi ~ dnDirichlet(pi_prior)
-moves.append( mvBetaSimplex(pi, weight=2) )
-moves.append( mvDirichletSimplex(pi, weight=1) )
+Q := fnFreeK(NUM_STATES, rates)
+
+# pi_prior <- rep(1,NUM_STATES)
+# pi ~ dnDirichlet(pi_prior)
+# moves.append( mvBetaSimplex(pi, weight=2) )
+# moves.append( mvDirichletSimplex(pi, weight=1) )
 
 
 # specify the exchangeability rate parameters
-er_prior <- rep(1,NUM_STATES-1)
-er ~ dnDirichlet(er_prior)
-moves.append( mvBetaSimplex(er, weight=3) )
-moves.append( mvDirichletSimplex(er, weight=1) )
+# er_prior <- rep(1,NUM_STATES-1)
+# er ~ dnDirichlet(er_prior)
+# moves.append( mvBetaSimplex(er, weight=3) )
+# moves.append( mvDirichletSimplex(er, weight=1) )
 
 # create a deterministic variable for the rate matrix, GTR
-er_full := simplex(er[1],0,0,0,0,0,0, er[2], 0,0,0,0,0, er[3], 0,0,0,0, er[4], 0,0,0, er[5], 0,0, er[6], 0, er[7])
-Q := fnGTR(er_full,pi) 
+# er_full := simplex(er[1],0,0,0,0,0,0, er[2], 0,0,0,0,0, er[3], 0,0,0,0, er[4], 0,0,0, er[5], 0,0, er[6], 0, er[7])
+# Q := fnGTR(er_full,pi) 
 
 # root states
 rf_prior <- rep(1,NUM_STATES)

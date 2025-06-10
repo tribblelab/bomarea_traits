@@ -1,7 +1,7 @@
 #NEXUS
-[Data written by write.nexus.data.R, Tue Jun  3 10:15:02 2025]
+[Data written by write.nexus.data.R, Tue Jun 10 10:33:42 2025]
 BEGIN DATA;
-  DIMENSIONS NTAX=58 NCHAR=1;
+  DIMENSIONS NTAX=56 NCHAR=1;
   FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789";
   MATRIX
     Bomarea_brevis_Bolivia_Teran1759                         0
@@ -12,7 +12,6 @@ BEGIN DATA;
     Bomarea_dispar_Peru_SchunkeV_3544                        3
     Bomarea_sp__ponillalsoya_Peru_Graham12616                5
     Bomarea_diffracta_Colombia_Tribble12                     5
-    Bomarea_pauciflora_AlzateS_N_                            2
     Bomarea_amilcariana_Venezuela_Dorr8337                   3
     Bomarea_peruviana_Peru_Stein2033B                        0
     Bomarea_setacea_Colombia_Tribble7                        0
@@ -39,7 +38,6 @@ BEGIN DATA;
     Bomarea_densiflora_Alzate3151                            0
     Bomarea_cf_anceps_Peru_LopezM_8913                       0
     Bomarea_distichifolia_CultivatedinCA_SFBG20120053        0
-    Bomarea_edulis_Brazil_Campbell8900                       3
     Bomarea_nervosa_Alzate3154                               0
     Bomarea_euryphylla_Ecuador_Vargas2930                    0
     Bomarea_vestita_AlzateS_N_                               0
