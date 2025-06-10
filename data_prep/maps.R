@@ -8,9 +8,6 @@ library(ape)
 
 setwd("~/Desktop/bomarea_traits/data/")
 
-#######################################
-##data cleaning
-
 #adding inflorescence type to spreadsheet
 nex_file <- read.nexus.data("type_dropped_tips.nexus")
 nex_df <- data.frame(

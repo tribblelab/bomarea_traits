@@ -49,10 +49,10 @@ tree <- read.tree("data/bom_only_MAP.tre")
 tips_to_drop <- grep(
   paste0(
     "caudata|herbertiana|glaucescens|parvifolia|",
-    "tribachiata|angustipetala|lehmannii|",
+    "tribachiata|angustipetala|lehmannii|killipii|",
     "chimborazensis|trimorphophylla|hartwegii|",
     "alstroemeriodes|superba|acuminata|enanorojo|",
-    "killipii|foliosa|straminea|pauciflora|distichophylla|",
+    "foliosa|straminea|pauciflora|distichophylla|",
     "Bomarea_edulis_Brazil_Campbell8900|",
     "Bomarea_edulis_Venezuela_Bunting4817"
   ),
