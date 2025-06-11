@@ -129,7 +129,7 @@ moves.append(mvElementSwapSimplex(root_frequencies, weight=3))
 
 
 ### Sampling fraction
-rho <- 103/200
+rho <- 56/
 
 
 ####################################################################
