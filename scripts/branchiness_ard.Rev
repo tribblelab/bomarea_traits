@@ -22,8 +22,6 @@ moves.append( mvDirichletSimplex(er, weight=1) )
 # create a deterministic variable for the rate matrix, GTR
 er_full := simplex(er[1],0,0,0,0,0,0, er[2], 0,0,0,0,0, er[3], 0,0,0,0, er[4], 0,0,0, er[5], 0,0, er[6], 0, er[7])
 Q := fnGTR(er_full,pi) 
-# switch to using fnFreeK() and only have two transition (er) rates, one for increases and one for decreases. 
-# similar to how dysploidy is modeled in chromosome evolution: https://revbayes.github.io/tutorials/chromo/
 
 # root states
 rf_prior <- rep(1,NUM_STATES)
