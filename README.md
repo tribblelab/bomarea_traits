@@ -21,7 +21,7 @@
    - In another terminal window, change directory to `~/Desktop/bomarea_traits/output`.
    - Run the code to combine the runs (`.txt` files):
      ```bash
-     awk 'FNR == 1 && NR != 1 { next } { print }' branchiness_ard_states_run_1.txt branchiness_ard_states_run_2.txt > branchiness_ard_states_combined.txt
+     awk 'FNR == 1 && NR != 1 { next } { print }' branchiness_2rates_ard_states_run_1.txt branchiness_2rates_ard_states_run_2.txt > branchiness_2rates_ard_states_combined.txt
      ```
      The MCMC produces 2 sets of results, and we want to combine them without repeating any of the column names.
    - Run the code to remove the first 10% of the data:
