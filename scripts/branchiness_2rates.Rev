@@ -5,27 +5,23 @@ phylogeny <- readTrees("data/tree_edited.tre")[1]
 moves = VectorMoves()
 monitors = VectorMonitors()
 
+# define dimensions of our rate matrix 
 NUM_STATES = 8
-NUM_RATES = NUM_STATES * (NUM_STATES - 1)
-rates_prior <- rep(1.0, NUM_RATES)
-rates ~ dnDirichlet(rates_prior)
-moves.append( mvBetaSimplex(rates, weight=2) )
-moves.append( mvDirichletSimplex(rates, weight=1) )
 
-# rate_pr = phylogeny.treeLength()/5 # rates_prior did not work b/c matrix
-shape_pr := 0.5
+# specify our transition rate parameters to fill in our matrix 
+q_up ~ dnExponential(2)
+moves.append(mvScale(q_up, lambda = 0.2))
+q_down ~ dnExponential(2)
+moves.append(mvScale(q_down, lambda = 0.2))
 
-#### Create a Q-matrix
-for (i in 1:NUM_RATES) {
-for (j in 1:NUM_RATES) {
+#### Create an empty Q-matrix
+for (i in 1:NUM_STATES) {
+for (j in 1:NUM_STATES) {
 q[i][j] := 0.0
 }
 }
 
-q_down ~ dnGamma(shape=shape_pr, rate=rates_prior)
-moves.append(mvScale(q_down, weight=2 ))
-q_up ~ dnGamma(shape=shape_pr, rate=rates_prior)
-moves.append(mvScale(q_up, weight=2 ))
+
 q[1][2] :=q_up
 
 q[2][1] :=q_down
@@ -43,7 +39,12 @@ q[5][6] :=q_up
 q[6][5] :=q_down
 q[6][7] :=q_up
 
-Q := fnFreeK(NUM_STATES, rates)
+q[7][6] :=q_down
+q[7][8] :=q_up
+
+q[8][7] :=q_down
+
+Q := fnFreeK(q, rescale=FALSE)
 
 
 # root states
