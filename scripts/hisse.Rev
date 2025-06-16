@@ -20,9 +20,6 @@ taxa <- observed_phylogeny.taxa()
 ### How old is the phylogenetic tree?
 root_age <- observed_phylogeny.rootAge()
 
-shape_pr := 0.5
-rate_pr := observed_phylogeny.treeLength()/5
-
 for (i in 1:NUM_RATES) {
 for (j in 1:NUM_RATES) {
 q[i][j] := 0.0
@@ -30,32 +27,36 @@ q[i][j] := 0.0
 }
 
 # The way we will build the matrix: 1=0A, 2=1A, 3=0B, and 4=1B
-q_01A ~ dnGamma(shape=shape_pr, rate=rate_pr)
-moves.append(mvScale(q_01A, weight=2 ))
-q_10A ~ dnGamma(shape=shape_pr, rate=rate_pr)
-moves.append(mvScale(q_10A, weight=2 ))
-q_01B ~ dnGamma(shape=shape_pr, rate=rate_pr)
-moves.append(mvScale(q_01B, weight=2 ))
-q_10B ~ dnGamma(shape=shape_pr, rate=rate_pr)
-moves.append(mvScale(q_10B, weight=2 ))
+q_01A ~ dnExponential(2)
+moves.append(mvScale(q_01A, weight = 2 ))
+q_10A ~ dnExponential(2)
+moves.append(mvScale(q_10A, weight = 2 ))
+q_01B ~ dnExponential(2)
+moves.append(mvScale(q_01B, weight = 2 ))
+q_10B ~ dnExponential(2)
+moves.append(mvScale(q_10B, weight = 2 ))
 q[1][2] :=q_01A
 q[3][4] :=q_01B
 q[2][1] :=q_10A
-q[3][4] :=q_10B
+q[4][3] :=q_10B
 
 #########################################################
 # Hidden state transitions #
 #########################################################
 # We use an exponential as a prior for hidden rates
-hidden_rate1 ~ dnExponential(rate_pr)
+hidden_rate1 ~ dnExponential(2)
 moves.append(mvScale(hidden_rate1,lambda=0.2,tune=true,weight=2))
-hidden_rate2 ~ dnExponential(rate_pr)
+hidden_rate2 ~ dnExponential(2)
 moves.append(mvScale(hidden_rate2,lambda=0.2,tune=true,weight=2))
-#### Las tasas aqui van (alpha,beta, alpha, beta)
+hidden_rate3 ~ dnExponential(2)
+moves.append(mvScale(hidden_rate1,lambda=0.2,tune=true,weight=2))
+hidden_rate4 ~ dnExponential(2)
+moves.append(mvScale(hidden_rate2,lambda=0.2,tune=true,weight=2))
+
 q[1][3] := hidden_rate1
-q[2][4] := hidden_rate1
-q[3][1] := hidden_rate2
-q[4][2] := hidden_rate2
+q[2][4] := hidden_rate2
+q[3][1] := hidden_rate3
+q[4][2] := hidden_rate4
 ### Note here, we could define four different rates, but we are assuming going from A to B is equal for state 0 and 1, and vice versa is equal too.
 
 ######################################################################
@@ -75,7 +76,7 @@ rate_matrix := fnFreeK(q, rescaled=false, matrixExponentialMethod="scalingAndSqu
 ### Create the constant prior parameters of the diversification rates
 
 H = 0.5
-rate_mean <- ln(ln(103/2.0) /root_age) # Magallon and Sanderson (2001)
+rate_mean <- ln(ln(56/2.0) /root_age) # Magallon and Sanderson (2001)
 rate_sd <- 2*H
 
 ##We will be careful for the diversification rates of 0A y 0B. We will use a multiplier called sepciation_alpha for states in A and speciation_alpha+speciation_beta for B. We build them this way because A and B are hidden states derivated from the same main state so in theory they should be not so different. However, you can decide to define them separatedly.
@@ -129,7 +130,7 @@ moves.append(mvElementSwapSimplex(root_frequencies, weight=3))
 
 
 ### Sampling fraction
-rho <- 56/
+rho <- 56/120
 
 
 ####################################################################
@@ -176,12 +177,12 @@ mymcmc = mcmc(mymodel, monitors, moves, nruns=2, moveschedule="random")
 mymcmc.burnin(generations=2000,tuningInterval=100)
 
 ### run the MCMC
-mymcmc.run(generations=150000)
+mymcmc.run(generations=1500000)
 
 
 ### Optional ancestral state
-###anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_binary_type_run_1.log")
-###ancestralStateTree(tree=observed_phylogeny, ancestral_state_trace_vector=anc_state_trace, include_start_states=false, file="output/asr_hisse_binary_type.tree", summary_statistic="MAP", reconstruction="marginal")
+anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_binary_type_run_1.log")
+ancestralStateTree(tree=observed_phylogeny, ancestral_state_trace_vector=anc_state_trace, include_start_states=false, file="output/asr_hisse_binary_type.tree", summary_statistic="MAP", reconstruction="marginal")
 
 q()
 
