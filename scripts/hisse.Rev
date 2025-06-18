@@ -40,9 +40,6 @@ q[3][4] :=q_01B
 q[2][1] :=q_10A
 q[4][3] :=q_10B
 
-#########################################################
-# Hidden state transitions #
-#########################################################
 # We use an exponential as a prior for hidden rates
 hidden_rate1 ~ dnExponential(2)
 moves.append(mvScale(hidden_rate1,lambda=0.2,tune=true,weight=2))
@@ -61,7 +58,7 @@ rate_matrix := fnFreeK(q, rescaled=false, matrixExponentialMethod="scalingAndSqu
 
 # Diversification rates
 
-### Specify a prior on the diversification
+### Specify a prior on the diversification (didnt do this)
 
 ### Create the constant prior parameters of the diversification rates
 
@@ -110,8 +107,7 @@ extinction[index] := exp( extinction_alpha[i] + extinction_beta[j-1] )
 
 
 
-# Set up the root state frequencies #
-#####################################
+# Set up the root state frequencies
 
 ### Create a constant variable with the prior probabilities of each rate category at the root.
 root_frequencies ~ dnDirichlet(rep(1,NUM_RATES))
@@ -122,10 +118,6 @@ moves.append(mvElementSwapSimplex(root_frequencies, weight=3))
 ### Sampling fraction
 rho <- 56/120
 
-
-####################################################################
-# dnCDBDP= The model
-###################################################################
 
 ### Here is where I tie speciation, extinction, and Q using a Birth-Death with categories
 
