@@ -1,8 +1,10 @@
 history.txt
 data_prep/bomarea_traits.xlsx
-geography_elevation/*
+data_prep/geography_elevation/
 geo_data.xlsx
 NameCheck
 scripts/history.txt
 .DS_Store
 */.DS_Store
+data_prep/geo_data_wo_lat_long.xlsx
+/output/
