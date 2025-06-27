@@ -8,4 +8,5 @@ scripts/history.txt
 */.DS_Store
 data_prep/geo_data_wo_lat_long.xlsx
 /output/
+/figures/
 .Rhistory
