@@ -154,7 +154,7 @@ moves.append( mvDirichletSimplex( rf, weight=2 ) )
 ###################
 
 # Combine all of our elements into a CTMC.
-phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q, rootFrequencies=rf, type="Standard")
+phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q, rootFrequencies=rf, type="NaturalNumbers")
 phyMorpho.clamp( morpho )
 
 
@@ -166,17 +166,17 @@ phyMorpho.clamp( morpho )
 mymodel = model(phylogeny)
 monitors.append( mnModel(filename="output/elevation_type_corr_RJ.log", printgen=100) )
 monitors.append( mnScreen(printgen=100) )
-monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
-                                                  ctmc=phyMorpho,
-                                                  filename="output/elevation_type_corr_RJ.states.txt",
-                                                  type="NaturalNumbers",
-                                                  printgen=1,
-                                                  withTips=true,
-                                                  withStartStates=false) )
-monitors.append( mnStochasticCharacterMap(ctmc=phyMorpho,
-                                          filename="output/elevation_type_corr_RJ_stoch_char_map.log",
-                                          printgen=100,
-                                          include_simmap=true) )
+# monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
+#                                                   ctmc=phyMorpho,
+#                                                   filename="output/elevation_type_corr_RJ.states.txt",
+#                                                   type="NaturalNumbers",
+#                                                   printgen=1,
+#                                                   withTips=true,
+#                                                   withStartStates=false) )
+# monitors.append( mnStochasticCharacterMap(ctmc=phyMorpho,
+#                                           filename="output/elevation_type_corr_RJ_stoch_char_map.log",
+#                                           printgen=100,
+#                                           include_simmap=true) )
 
 
 # Initialize the MCMC object #
