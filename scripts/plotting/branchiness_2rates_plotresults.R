@@ -11,6 +11,10 @@ branchiness <- processAncStates("output/branchiness_ase_ard.tree",
                                                  "5" = "5",
                                                  "7" = "7"))
 
-g <- plotAncStatesPie(branchiness, tip_labels = TRUE)
-print(g)
-ggsave("figures/branchiness_2rates_asr_tree.png", width = 10, height = 10, dpi = 200)
+plotAncStatesPie(branchiness, tip_labels = FALSE) +
+  theme(
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 22)
+  )
+
+ggsave("figures/branchiness_2rates_nolabels_asr_tree.png", width = 15, height = 10, dpi = 200)
