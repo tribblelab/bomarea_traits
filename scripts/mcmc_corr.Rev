@@ -47,58 +47,59 @@ for (i in 1:8) {
     }
 }
 
+mix_prob <- 0.5
 
 rate_A0_A1_when_B0 ~ dnExponential( rate_pr )
 rate_A1_A2_when_B0 ~ dnExponential( rate_pr )
 rate_A2_A3_when_B0 ~ dnExponential( rate_pr )
 
-rate_A0_A1_when_B1 ~ dnExponential( rate_pr )
-rate_A1_A2_when_B1 ~ dnExponential( rate_pr )
-rate_A2_A3_when_B1 ~ dnExponential( rate_pr )
+rate_A0_A1_when_B1 ~ dnReversibleJumpMixture(rate_A0_A1_when_B0, dnExponential( rate_pr ), mix_prob)
+rate_A1_A2_when_B1 ~ dnReversibleJumpMixture(rate_A1_A2_when_B0, dnExponential( rate_pr ), mix_prob)
+rate_A2_A3_when_B1 ~ dnReversibleJumpMixture(rate_A2_A3_when_B0, dnExponential( rate_pr ), mix_prob)
 
 rate_A3_A2_when_B0 ~ dnExponential( rate_pr )
 rate_A2_A1_when_B0 ~ dnExponential( rate_pr )
 rate_A1_A0_when_B0 ~ dnExponential( rate_pr )
 
-rate_A3_A2_when_B1 ~ dnExponential( rate_pr )
-rate_A2_A1_when_B1 ~ dnExponential( rate_pr )
-rate_A1_A0_when_B1 ~ dnExponential( rate_pr )
+rate_A3_A2_when_B1 ~ dnReversibleJumpMixture(rate_A3_A2_when_B0, dnExponential( rate_pr ), mix_prob)
+rate_A2_A1_when_B1 ~ dnReversibleJumpMixture(rate_A2_A1_when_B0, dnExponential( rate_pr ), mix_prob)
+rate_A1_A0_when_B1 ~ dnReversibleJumpMixture(rate_A1_A0_when_B0, dnExponential( rate_pr ), mix_prob)
 
 rate_B0_B1_when_A0 ~ dnExponential( rate_pr )
-rate_B0_B1_when_A1 ~ dnExponential( rate_pr )
-rate_B0_B1_when_A2 ~ dnExponential( rate_pr )
-rate_B0_B1_when_A3 ~ dnExponential( rate_pr )
+rate_B0_B1_when_A1 ~ dnReversibleJumpMixture(rate_B0_B1_when_A0, dnExponential( rate_pr ), mix_prob)
+rate_B0_B1_when_A2 ~ dnReversibleJumpMixture(rate_B0_B1_when_A0, dnExponential( rate_pr ), mix_prob)
+rate_B0_B1_when_A3 ~ dnReversibleJumpMixture(rate_B0_B1_when_A0, dnExponential( rate_pr ), mix_prob)
 
 rate_B1_B0_when_A0 ~ dnExponential( rate_pr )
-rate_B1_B0_when_A1 ~ dnExponential( rate_pr )
-rate_B1_B0_when_A2 ~ dnExponential( rate_pr )
-rate_B1_B0_when_A3 ~ dnExponential( rate_pr )
+rate_B1_B0_when_A1 ~ dnReversibleJumpMixture(rate_B1_B0_when_A0, dnExponential( rate_pr ), mix_prob)
+rate_B1_B0_when_A2 ~ dnReversibleJumpMixture(rate_B1_B0_when_A0, dnExponential( rate_pr ), mix_prob)
+rate_B1_B0_when_A3 ~ dnReversibleJumpMixture(rate_B1_B0_when_A0, dnExponential( rate_pr ), mix_prob)
 
 moves.append( mvScale(rate_A0_A1_when_B0, weight=2 ) )
 moves.append( mvScale(rate_A1_A2_when_B0, weight=2 ) )
-moves.append( mvScale(rate_A3_A3_when_B0, weight=2 ) )
+moves.append( mvScale(rate_A2_A3_when_B0, weight=2 ) )
 
-moves.append( mvScale(rate_A0_A1_when_B1, weight=2 ) )
-moves.append( mvScale(rate_A1_A2_when_B1, weight=2 ) )
-moves.append( mvScale(rate_A3_A3_when_B1, weight=2 ) )
+moves.append( mvRJSwitch(rate_A0_A1_when_B1, weight=2 ) )
+moves.append( mvRJSwitch(rate_A1_A2_when_B1, weight=2 ) )
+moves.append( mvRJSwitch(rate_A2_A3_when_B1, weight=2 ) )
 
 moves.append( mvScale(rate_A3_A2_when_B0, weight=2 ) )
 moves.append( mvScale(rate_A2_A1_when_B0, weight=2 ) )
 moves.append( mvScale(rate_A1_A0_when_B0, weight=2 ) )
 
-moves.append( mvScale(rate_A3_A2_when_B1, weight=2 ) )
-moves.append( mvScale(rate_A2_A1_when_B1, weight=2 ) )
-moves.append( mvScale(rate_A1_A0_when_B1, weight=2 ) )
+moves.append( mvRJSwitch(rate_A3_A2_when_B1, weight=2 ) )
+moves.append( mvRJSwitch(rate_A2_A1_when_B1, weight=2 ) )
+moves.append( mvRJSwitch(rate_A1_A0_when_B1, weight=2 ) )
 
 moves.append( mvScale(rate_B0_B1_when_A0, weight=2 ) )
-moves.append( mvScale(rate_B0_B1_when_A1, weight=2 ) )
-moves.append( mvScale(rate_B0_B1_when_A2, weight=2 ) )
-moves.append( mvScale(rate_B0_B1_when_A3, weight=2 ) )
+moves.append( mvRJSwitch(rate_B0_B1_when_A1, weight=2 ) )
+moves.append( mvRJSwitch(rate_B0_B1_when_A2, weight=2 ) )
+moves.append( mvRJSwitch(rate_B0_B1_when_A3, weight=2 ) )
 
 moves.append( mvScale(rate_B1_B0_when_A0, weight=2 ) )
-moves.append( mvScale(rate_B1_B0_when_A1, weight=2 ) )
-moves.append( mvScale(rate_B1_B0_when_A2, weight=2 ) )
-moves.append( mvScale(rate_B1_B0_when_A3, weight=2 ) )
+moves.append( mvRJSwitch(rate_B1_B0_when_A1, weight=2 ) )
+moves.append( mvRJSwitch(rate_B1_B0_when_A2, weight=2 ) )
+moves.append( mvRJSwitch(rate_B1_B0_when_A3, weight=2 ) )
 
 #prob_gain_A_indep := ifelse( rate_gain_A_when_B0 == rate_gain_A_when_B1, 1.0, 0.0 )
 #prob_loss_A_indep := ifelse( rate_loss_A_when_B0 == rate_loss_A_when_B1, 1.0, 0.0 )
@@ -123,7 +124,7 @@ q[4][3] := rate_A3_A2_when_B0 # 30->20
 q[4][8] := rate_B0_B1_when_A3 # 30->31
 
 q[5][1] := rate_B1_B0_when_A0 # 01->00
-q[5][6] := rate_A0_A1_when B1 # 01->11
+q[5][6] := rate_A0_A1_when_B1 # 01->11
 
 q[6][2] := rate_B1_B0_when_A1 # 11->10
 q[6][5] := rate_A1_A0_when_B1 # 21->01

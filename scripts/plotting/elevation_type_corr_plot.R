@@ -50,7 +50,7 @@ plot2 <- plotTrace(trace = trace_qual, vars = vars_group2)[[1]] +
 
 # Save plots
 ggsave(paste0("figures/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ_part1.png"),
-       plot1, width = 5, height = 5)
+       plot1, width = 15, height = 5)
 
 ggsave(paste0("figures/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ_part2.png"),
-       plot2, width = 5, height = 5)
+       plot2, width = 15, height = 5)
