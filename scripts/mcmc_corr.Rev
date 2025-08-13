@@ -101,11 +101,19 @@ moves.append( mvRJSwitch(rate_B1_B0_when_A1, weight=2 ) )
 moves.append( mvRJSwitch(rate_B1_B0_when_A2, weight=2 ) )
 moves.append( mvRJSwitch(rate_B1_B0_when_A3, weight=2 ) )
 
-prob_gain_A_indep := ifelse( rate_gain_A_when_B0 == rate_gain_A_when_B1, 1.0, 0.0 )
-prob_loss_A_indep := ifelse( rate_loss_A_when_B0 == rate_loss_A_when_B1, 1.0, 0.0 )
-prob_gain_B_indep := ifelse( rate_gain_B_when_A0 == rate_gain_B_when_A1, 1.0, 0.0 )
-prob_loss_B_indep := ifelse( rate_loss_B_when_A0 == rate_loss_B_when_A1, 1.0, 0.0 )
+prob_A0_A1_indep := ifelse( rate_A0_A1_when_B0 == rate_A0_A1_when_B1, 1.0, 0.0 )
+prob_A1_A2_indep := ifelse( rate_A1_A2_when_B0 == rate_A1_A2_when_B1, 1.0, 0.0 )
+prob_A2_A3_indep := ifelse( rate_A2_A3_when_B0 == rate_A2_A3_when_B1, 1.0, 0.0 )
+prob_A3_A2_indep := ifelse( rate_A3_A2_when_B0 == rate_A3_A2_when_B1, 1.0, 0.0 )
+prob_A2_A1_indep := ifelse( rate_A2_A1_when_B0 == rate_A2_A1_when_B1, 1.0, 0.0 )
+prob_A1_A0_indep := ifelse( rate_A1_A0_when_B0 == rate_A1_A0_when_B1, 1.0, 0.0 )
 
+prob_B0_B1_indep_A0_A1 := ifelse( rate_B0_B1_when_A0 == rate_B0_B1_when_A1, 1.0, 0.0 )
+prob_B0_B1_indep_A1_A2 := ifelse( rate_B0_B1_when_A1 == rate_B0_B1_when_A2, 1.0, 0.0 )
+prob_B0_B1_indep_A2_A3 := ifelse( rate_B0_B1_when_A2 == rate_B0_B1_when_A3, 1.0, 0.0 )
+prob_B1_B0_indep_A0_A1 := ifelse( rate_B1_B0_when_A0 == rate_B1_B0_when_A1, 1.0, 0.0 )
+prob_B1_B0_indep_A1_A2 := ifelse( rate_B1_B0_when_A1 == rate_B1_B0_when_A2, 1.0, 0.0 )
+prob_B1_B0_indep_A2_A3 := ifelse( rate_B1_B0_when_A2 == rate_B1_B0_when_A3, 1.0, 0.0 )
 
 ##### update the part below with new rates 
 
