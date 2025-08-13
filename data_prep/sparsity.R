@@ -34,7 +34,7 @@ get_gen_sp <- function(x) {
 }
 
 
-# Calculates max flowers and sparsity
+# Calculates max branching and sparsity
 traits$maxBranch <- pmax(traits$numBranch1,
                          traits$numBranch2,
                          traits$numBranch3,
@@ -43,7 +43,7 @@ traits$maxBranch <- pmax(traits$numBranch1,
 
 sparsity_df <- traits %>%
   mutate(numBranchesMeasured =
-           rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
+           rowSums(!is.na(select(., starts_with("lengthSeg"))))) %>%
   group_by(acceptedName) %>%
   slice_max(maxBranch, with_ties = FALSE) %>%
   mutate(totalBranchLength = lengthTotal1 +
@@ -53,7 +53,7 @@ sparsity_df <- traits %>%
          coalesce(lengthBranch1_3, 0) + coalesce(lengthSeg1_4, 0) +
          coalesce(lengthBranch1_4, 0) + coalesce(lengthSeg1_5, 0),
          sparsity = ifelse(numBranchesMeasured == 0, 0,
-                    ((totalBranchLength / numBranchesMeasured) / maxBranch))
+                    ((totalBranchLength / numBranchesMeasured) / (maxBranch + 1))) 
   ) %>%
   select(acceptedName, sparsity) %>%
   ungroup()
