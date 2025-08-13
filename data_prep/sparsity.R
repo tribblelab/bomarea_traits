@@ -35,23 +35,25 @@ get_gen_sp <- function(x) {
 
 
 # Calculates max flowers and sparsity
-traits$maxFlowers <- pmax(traits$numFlowers_1,
-                          traits$numFlowers_2, 
-                          traits$numFlowers_3, na.rm = TRUE)
+traits$maxBranch <- pmax(traits$numBranch1,
+                         traits$numBranch2,
+                         traits$numBranch3,
+                         traits$numBranch4,
+                         traits$numBranch5, na.rm = TRUE)
 
 sparsity_df <- traits %>%
-  mutate(numBranchesMeasured = 
+  mutate(numBranchesMeasured =
            rowSums(!is.na(select(., starts_with("lengthBranch"))))) %>%
   group_by(acceptedName) %>%
-  slice_max(maxFlowers, with_ties = FALSE) %>%
+  slice_max(maxBranch, with_ties = FALSE) %>%
   mutate(totalBranchLength = lengthTotal1 +
-      coalesce(lengthSeg1_1, 0) +
-      coalesce(lengthBranch1_1, 0) + coalesce(lengthSeg1_2, 0) +
-      coalesce(lengthBranch1_2, 0) + coalesce(lengthSeg1_3, 0) +
-      coalesce(lengthBranch1_3, 0) + coalesce(lengthSeg1_4, 0) +
-      coalesce(lengthBranch1_4, 0) + coalesce(lengthSeg1_5, 0),
-    sparsity = ifelse(numBranchesMeasured == 0, 0,
-                      ((totalBranchLength / numBranchesMeasured) * numBranchP))
+         coalesce(lengthSeg1_1, 0) +
+         coalesce(lengthBranch1_1, 0) + coalesce(lengthSeg1_2, 0) +
+         coalesce(lengthBranch1_2, 0) + coalesce(lengthSeg1_3, 0) +
+         coalesce(lengthBranch1_3, 0) + coalesce(lengthSeg1_4, 0) +
+         coalesce(lengthBranch1_4, 0) + coalesce(lengthSeg1_5, 0),
+         sparsity = ifelse(numBranchesMeasured == 0, 0,
+                    ((totalBranchLength / numBranchesMeasured) / maxBranch))
   ) %>%
   select(acceptedName, sparsity) %>%
   ungroup()

@@ -1,3 +1,5 @@
+setwd("~/Desktop/bomarea_traits/")
+
 library(dplyr)
 library(readxl)
 library(ape)
@@ -33,6 +35,7 @@ get_gen_sp <- function(x) {
 
 
 # Calculates size
+
 size_df <- traits %>%
   mutate(totalBranchLength = lengthTotal1 +
       coalesce(lengthSeg1_1, 0) + coalesce(lengthBranch1_1, 0) +
@@ -40,11 +43,11 @@ size_df <- traits %>%
       coalesce(lengthSeg1_3, 0) + coalesce(lengthBranch1_3, 0) +
       coalesce(lengthSeg1_4, 0) + coalesce(lengthBranch1_4, 0) +
       coalesce(lengthSeg1_5, 0),
-    avg_size = totalBranchLength / numBranchP
+    size = ((totalBranchLength / numBranchP) * numBranchP)
   ) %>%
   group_by(acceptedName) %>%
   summarize(
-    avg_size = mean(avg_size, na.rm = TRUE)
+    avg_size = mean(size, na.rm = TRUE)
   ) %>%
   ungroup()
 
