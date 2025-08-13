@@ -197,8 +197,8 @@ mymcmc.run(generations=2000000)
 
 
 # Read in the tree trace and construct the ancestral states (ASE) #
-#anc_states = readAncestralStateTrace("output/elevation_type_corr_RJ.states.txt")
-#anc_tree = ancestralStateTree(tree=phylogeny,
+# anc_states = readAncestralStateTrace("output/elevation_type_corr_RJ.states.txt")
+# anc_tree = ancestralStateTree(tree=phylogeny,
 #                              ancestral_state_trace_vector=anc_states,
 #                              include_start_states=false, file="output/elevation_type_ase_corr_RJ.tree",
 #                              burnin=0.25,
@@ -209,13 +209,13 @@ mymcmc.run(generations=2000000)
 
 
 # read in the sampled character histories
-#anc_states_stoch_map = readAncestralStateTrace("output/elevation_type_corr_RJ_stoch_char_map.log")
+# anc_states_stoch_map = readAncestralStateTrace("output/elevation_type_corr_RJ_stoch_char_map.log")
 
-#summarizeCharacterMaps(anc_states_stoch_map, phylogeny, file="output/elevation_type_corr_RJ.events.tsv", burnin=0.25)
+# summarizeCharacterMaps(anc_states_stoch_map, phylogeny, file="output/elevation_type_corr_RJ.events.tsv", burnin=0.25)
 
 
 # make summary tree
-#char_map_tree = characterMapTree(tree=phylogeny,
+# char_map_tree = characterMapTree(tree=phylogeny,
 #                 ancestral_state_trace_vector=anc_states_stoch_map,
 #                 character_file="output/elevation_type_corr_RJ_marginal_character.tree",
 #                 posterior_file="output/elevation_type_corr_RJ_marginal_posterior.tree",

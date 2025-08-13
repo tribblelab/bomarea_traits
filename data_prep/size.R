@@ -107,3 +107,4 @@ colnames(size_mat) <- "avg_size"
 # Write to nexus
 write.nexus.data(size_mat, file = "data/size.nexus",
                  format = "standard", missing = "?")
+
