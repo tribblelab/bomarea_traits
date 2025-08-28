@@ -34,5 +34,5 @@ monitors.append( mnModel(filename="output/multivariate_size_sparsity.log", print
 monitors.append( mnScreen(printgen=1000, sigma2) )
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
 mymcmc.burnin(generations=200,tuningInterval=100)
-mymcmc.run(generations=8000000)
+mymcmc.run(generations=16000000)
 q()

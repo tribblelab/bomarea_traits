@@ -75,6 +75,7 @@ speciation_alpha[i] ~ dnNormal(mean=rate_mean,sd=rate_sd)
 moves.append(mvSlide(speciation_alpha[i],delta=0.20,tune=true,weight=2.0))
 
 ### Create a lognormal distributed variable for the extinction rate
+
 extinction_alpha[i] ~ dnNormal(mean=rate_mean,sd=rate_sd)
 moves.append(mvSlide(extinction_alpha[i],delta=0.20,tune=true,weight=2.0))
 }
@@ -143,7 +144,7 @@ hisse.clampCharData( data_exp ) #note the clamping on the expanded dataset
 mymodel = model(rate_matrix)
 
 ### set up the monitors that will output parameter values to file and screen
-monitors.append(mnModel(filename="output/hisse_binary_type.log", printgen=1))
+monitors.append(mnModel(filename="output/hisse_binary_type.log", printgen=10))
 monitors.append(mnJointConditionalAncestralState(tree=hisse, cdbdp=hisse, type="NaturalNumbers", printgen=1000, withTips=true, withStartStates=false, filename="output/anc_states_hisse_binary_type.log"))
 monitors.append(mnScreen(printgen=10, q_01A, q_10A, speciation, extinction))
 
@@ -156,7 +157,7 @@ monitors.append(mnScreen(printgen=10, q_01A, q_10A, speciation, extinction))
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2, moveschedule="random")
 
 ### pre-burnin to tune the proposals 20% of the sample
-mymcmc.burnin(generations=2000,tuningInterval=100)
+mymcmc.burnin(generations=300000,tuningInterval=100)
 
 ### run the MCMC
 mymcmc.run(generations=1500000)
