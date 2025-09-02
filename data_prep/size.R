@@ -43,7 +43,7 @@ size_df <- traits %>%
       coalesce(lengthSeg1_3, 0) + coalesce(lengthBranch1_3, 0) +
       coalesce(lengthSeg1_4, 0) + coalesce(lengthBranch1_4, 0) +
       coalesce(lengthSeg1_5, 0),
-    size = ((totalBranchLength / numBranchP) * numBranchP)
+    size = (log((totalBranchLength / numBranchP) * numBranchP))
   ) %>%
   group_by(acceptedName) %>%
   summarize(

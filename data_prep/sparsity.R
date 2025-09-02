@@ -53,7 +53,7 @@ sparsity_df <- traits %>%
          coalesce(lengthBranch1_3, 0) + coalesce(lengthSeg1_4, 0) +
          coalesce(lengthBranch1_4, 0) + coalesce(lengthSeg1_5, 0),
          sparsity = ifelse(numBranchesMeasured == 0, 0,
-                    ((totalBranchLength / numBranchesMeasured) / (maxBranch + 1))) 
+                    (log((totalBranchLength / numBranchesMeasured) / (maxBranch + 1)))) 
   ) %>%
   select(acceptedName, sparsity) %>%
   ungroup()
