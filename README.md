@@ -18,7 +18,7 @@
    - In another terminal window, change directory to `~/Desktop/bomarea_traits/output`.
    - Run the code to combine the runs (`.txt` files):
      ```bash
-     awk 'FNR == 1 && NR != 1 { next } { print }' branchiness_2rates_ard_states_run_1.txt branchiness_2rates_ard_states_run_2.txt > branchiness_2rates_ard_states_combined.txt
+     awk 'FNR == 1 && NR != 1 { next } { print }' size_ard_states_run_1.txt size_ard_states_run_2.txt > size_ard_states_combined.txt
      ```
 
 4. Return to the RevBayes window (where you ran the MCMC):

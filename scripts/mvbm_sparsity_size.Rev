@@ -8,8 +8,8 @@ monitors = VectorMonitors()
 
 tree <- T
 
-sigma2 ~ dnLoguniform(1e-3, 1)
-moves.append( mvScale(sigma2, weight=10.0))
+sigma2 ~ dnLoguniform(1e-3, 10)
+moves.append( mvScale(sigma2, weight=3.0))
 
 alpha <- 1.0
 proportional_rates ~ dnDirichlet(rep(alpha, nchar))
@@ -20,19 +20,19 @@ moves.append( mvBetaSimplex(proportional_rates, weight=2.0))
 eta <- 1.0
 R ~ dnLKJ(eta, nchar )
 
-moves.append(mvCorrelationMatrixRandomWalk(R, weight=3.0))
-moves.append(mvCorrelationMatrixSingleElementBeta(R, weight=5.0))
+moves.append(mvCorrelationMatrixRandomWalk(R, weight=2.0))
+moves.append(mvCorrelationMatrixSingleElementBeta(R, weight=2.0))
 
 correlations := R.upperTriangle()
 
 V := fnDecompVarCovar( relative_rates^0.5, R )
-X ~ dnPhyloMultivariateBrownianREML(tree, branchRates=sigma2^0.5, rateMatrix=V)
+X ~ dnPhyloMultivariateBrownianREML(tree, rateMatrix=V)
 X.clamp(data)
 
-mymodel = model(sigma2)
-monitors.append( mnModel(filename="output/multivariate_size_sparsity.log", printgen=10) )
+mymodel = model(sigma2, proportional_rates, R, X)
+monitors.append( mnModel(filename="output/multivariate_size_sparsity.log", printgen=1000) )
 monitors.append( mnScreen(printgen=1000, sigma2) )
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
 mymcmc.burnin(generations=200,tuningInterval=100)
-mymcmc.run(generations=16000000)
+mymcmc.run(generations=1600000)
 q()
