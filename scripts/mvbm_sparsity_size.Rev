@@ -8,7 +8,7 @@ monitors = VectorMonitors()
 
 tree <- T
 
-sigma2 ~ dnLoguniform(1e-3, 10)
+sigma2 ~ dnLoguniform(1e-3, 1)
 moves.append( mvScale(sigma2, weight=2.0))
 
 alpha <- 1.0

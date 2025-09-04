@@ -96,7 +96,7 @@ manual_add <- data.frame(
   label = c("Bomarea_sp__oso_Peru_Graham12613",
             "Bomarea_sp__ponillalsoya_Peru_Graham12616",
             "Bomarea_sp__catanatasoya_Peru_Graham12611"),
-  sparsity = c(5.718, 695.805, 140.205)
+  sparsity = c(0.757, 2.842, 2.146)
 )
 
 # Merge into existing df
