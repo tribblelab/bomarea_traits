@@ -209,4 +209,7 @@ mymcmc = mcmc(mymodel, monitors, moves, nruns=1, moveschedule="random")
 
 ### run the MCMC
 mymcmc.burnin(generations=1000,tuningInterval=50)
-mymcmc.run(generations=15000, tuningInterval=100)
+mymcmc.run(generations=30000, tuningInterval=100)
+
+anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_binary_type_run_1.log")
+ancestralStateTree(tree=observed_phylogeny, ancestral_state_trace_vector=anc_state_trace, include_start_states=false, file="output/asr_hisse_binary_type.tree", summary_statistic="MAP", reconstruction="marginal")
