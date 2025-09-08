@@ -113,4 +113,4 @@ colnames(sparsity_mat) <- "sparsity"
 
 # Write to nexus
 write.nexus.data(sparsity_mat, file = "data/sparsity.nexus",
-                 format = "standard", missing = "?")
+                 format = "continuous", missing = "?")
