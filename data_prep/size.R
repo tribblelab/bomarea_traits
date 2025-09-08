@@ -37,13 +37,16 @@ get_gen_sp <- function(x) {
 # Calculates size
 
 size_df <- traits %>%
+  mutate(numBranchesMeasured =
+            rowSums(!is.na(select(., starts_with("lengthSeg"))))) %>%
   mutate(totalBranchLength = lengthTotal1 +
       coalesce(lengthSeg1_1, 0) + coalesce(lengthBranch1_1, 0) +
       coalesce(lengthSeg1_2, 0) + coalesce(lengthBranch1_2, 0) +
       coalesce(lengthSeg1_3, 0) + coalesce(lengthBranch1_3, 0) +
       coalesce(lengthSeg1_4, 0) + coalesce(lengthBranch1_4, 0) +
       coalesce(lengthSeg1_5, 0),
-    size = (log((totalBranchLength / numBranchP) * numBranchP))
+    size = ifelse(numBranchesMeasured == 0, 0,
+           (log((totalBranchLength / numBranchesMeasured) * numBranchP)))
   ) %>%
   group_by(acceptedName) %>%
   summarize(

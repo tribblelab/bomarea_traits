@@ -1,65 +1,65 @@
 #NEXUS
-[Data written by write.nexus.data.R, Thu Sep  4 10:43:39 2025]
+[Data written by write.nexus.data.R, Mon Sep  8 10:09:35 2025]
 BEGIN DATA;
   DIMENSIONS NTAX=56 NCHAR=1;
   FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789";
   MATRIX
-    Bomarea_brevis_Bolivia_Teran1759                         4.12
-    Bomarea_coccinea_Peru_Nunez13229                         3.91
+    Bomarea_brevis_Bolivia_Teran1759                         4.2
+    Bomarea_coccinea_Peru_Nunez13229                         4.1
     Bomarea_sp__oso_Peru_Graham12613                         0.76
     Bomarea_pumila_Bolivia_Fuentes13830                      3.83
-    Bomarea_secundifolia_Peru_Macbride4962                   4.11
+    Bomarea_secundifolia_Peru_Macbride4962                   4.4
     Bomarea_dispar_Peru_SchunkeV_3544                        5.87
     Bomarea_sp__ponillalsoya_Peru_Graham12616                2.84
-    Bomarea_diffracta_Colombia_Tribble12                     5.84
-    Bomarea_amilcariana_Venezuela_Dorr8337                   4.97
-    Bomarea_peruviana_Peru_Stein2033B                        5.16
-    Bomarea_setacea_Colombia_Tribble7                        3.82
+    Bomarea_diffracta_Colombia_Tribble12                     5.18
+    Bomarea_amilcariana_Venezuela_Dorr8337                   4.46
+    Bomarea_peruviana_Peru_Stein2033B                        6.54
+    Bomarea_setacea_Colombia_Tribble7                        4.9
     Bomarea_sp__catanatasoya_Peru_Graham12611                2.15
-    Bomarea_ampayesana_Peru_Bocke3215                        4.7
-    Bomarea_macrocephala_Bolivia_Vargas7052                  4.04
-    Bomarea_involucrosa_Peru_Galiano6988                     3.39
-    Bomarea_andimarcana_Peru_Suclli1307                      4.47
-    Bomarea_libertadensis_Peru_Alayo020                      3.7
-    Bomarea_porrecta_Peru_AlayoB_020                         3.62
-    Bomarea_albimontana_Peru_LeivaS_N_                       2.81
-    Bomarea_aurantiaca_Bolivia_Fuentes13880                  4.4
-    Bomarea_cornuta_Bolivia_Fuentes17664                     5.71
-    Bomarea_campylophylla_Bolivia_Maldonado3174              5.45
-    Bomarea_ovata_Peru_Farfan526                             4.44
-    Bomarea_brachysepala_Ecuador_Jorgensen2129               5.16
-    Bomarea_hieronymi_Ecuador_Aluarez2557                    5.78
-    Bomarea_linifolia_Colombia_Tribble8                      3.97
-    Bomarea_lutea_Ecuador_vanderWerff12169                   4.9
-    Bomarea_multipes_Alzate3153                              4.94
-    Bomarea_torta_Alzate3270                                 4.02
-    Bomarea_angulata_Peru_Quiroz3208                         4.08
-    Bomarea_trichophylla_Venezuela_Rivero1217                5.97
-    Bomarea_densiflora_Alzate3151                            3.85
-    Bomarea_cf_anceps_Peru_LopezM_8913                       4.04
-    Bomarea_distichifolia_CultivatedinCA_SFBG20120053        3.65
-    Bomarea_nervosa_Alzate3154                               3.89
-    Bomarea_euryphylla_Ecuador_Vargas2930                    4.74
-    Bomarea_vestita_AlzateS_N_                               4.28
-    Bomarea_patinii_Colombia_Tribble3                        4.65
-    Bomarea_patacocensis_Ecuador_Luteyn14078                 4.74
-    Bomarea_multiflora_AlzateS_N_                            4.23
-    Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse      4.23
-    Bomarea_bredemeyerana_Venezuela_Liesner7935              3.56
-    Bomarea_chiriquina_Panama_Hammel6374                     4.72
-    Bomarea_hirsuta_CR_Bonifacino6052                        3.93
-    Bomarea_puracensis_GarciaBarriga13025                    4.1
-    Bomarea_suberecta_CR_Bonifacino6053                      4.18
-    Bomarea_bredemeyerana_Colombia_Tribble06                 3.56
-    Bomarea_tarmensis_Bolivia_Fernandez3467                  4.4
-    Bomarea_chaparensis_Bolivia_Steinbach8897                4.77
-    Bomarea_weigendii_Peru_Davis1224                         4.71
-    Bomarea_speciosa_Bolivia_Cornejo800                      6.26
-    Bomarea_edulis_Argentina_Novara2378                      5.48
-    Bomarea_edulis_MorelosN_Tribble325                       5.48
-    Bomarea_obovata_Ecuador_Clark4985                        5.98
-    Bomarea_ovallei_KEW                                      4.24
-    Bomarea_salsilla_Chile_Ackerman545                       4.67
+    Bomarea_ampayesana_Peru_Bocke3215                        4.36
+    Bomarea_macrocephala_Bolivia_Vargas7052                  4.91
+    Bomarea_involucrosa_Peru_Galiano6988                     3.35
+    Bomarea_andimarcana_Peru_Suclli1307                      3.8
+    Bomarea_libertadensis_Peru_Alayo020                      4.79
+    Bomarea_porrecta_Peru_AlayoB_020                         3.36
+    Bomarea_albimontana_Peru_LeivaS_N_                       3.79
+    Bomarea_aurantiaca_Bolivia_Fuentes13880                  5.1
+    Bomarea_cornuta_Bolivia_Fuentes17664                     5.25
+    Bomarea_campylophylla_Bolivia_Maldonado3174              5.48
+    Bomarea_ovata_Peru_Farfan526                             4.74
+    Bomarea_brachysepala_Ecuador_Jorgensen2129               4.42
+    Bomarea_hieronymi_Ecuador_Aluarez2557                    4.54
+    Bomarea_linifolia_Colombia_Tribble8                      4.02
+    Bomarea_lutea_Ecuador_vanderWerff12169                   5.84
+    Bomarea_multipes_Alzate3153                              5.93
+    Bomarea_torta_Alzate3270                                 5.14
+    Bomarea_angulata_Peru_Quiroz3208                         5.3
+    Bomarea_trichophylla_Venezuela_Rivero1217                6.07
+    Bomarea_densiflora_Alzate3151                            5.29
+    Bomarea_cf_anceps_Peru_LopezM_8913                       5.77
+    Bomarea_distichifolia_CultivatedinCA_SFBG20120053        3.76
+    Bomarea_nervosa_Alzate3154                               4.24
+    Bomarea_euryphylla_Ecuador_Vargas2930                    6.83
+    Bomarea_vestita_AlzateS_N_                               4.97
+    Bomarea_patinii_Colombia_Tribble3                        6.34
+    Bomarea_patacocensis_Ecuador_Luteyn14078                 6.71
+    Bomarea_multiflora_AlzateS_N_                            5.73
+    Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse      5.73
+    Bomarea_bredemeyerana_Venezuela_Liesner7935              4.49
+    Bomarea_chiriquina_Panama_Hammel6374                     5.5
+    Bomarea_hirsuta_CR_Bonifacino6052                        4.93
+    Bomarea_puracensis_GarciaBarriga13025                    4.75
+    Bomarea_suberecta_CR_Bonifacino6053                      4.5
+    Bomarea_bredemeyerana_Colombia_Tribble06                 4.49
+    Bomarea_tarmensis_Bolivia_Fernandez3467                  5.77
+    Bomarea_chaparensis_Bolivia_Steinbach8897                5.38
+    Bomarea_weigendii_Peru_Davis1224                         5.4
+    Bomarea_speciosa_Bolivia_Cornejo800                      6.22
+    Bomarea_edulis_Argentina_Novara2378                      5.19
+    Bomarea_edulis_MorelosN_Tribble325                       5.19
+    Bomarea_obovata_Ecuador_Clark4985                        4.94
+    Bomarea_ovallei_KEW                                      3.55
+    Bomarea_salsilla_Chile_Ackerman545                       4.46
   ;
 END;
 
