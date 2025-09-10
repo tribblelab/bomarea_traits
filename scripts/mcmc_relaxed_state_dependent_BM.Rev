@@ -13,7 +13,7 @@
 #######################
 
 ### Select the character to analyze
-character <- 1
+# character <- 1
 
 ### Read in the tree
 T <- readTrees("data/tree_edited.tre")[1]
@@ -21,14 +21,14 @@ ntips <- T.ntips()
 nbranches <- 2 * ntips - 2
 
 ### Read in the continuous-character data
-cont <- readContinuousCharacterData("data/size.nexus")
-cont.excludeAll()
-cont.includeCharacter(character)
+cont <- readContinuousCharacterData("data/concat_size_sparsity.nexus")
+nchar <- cont.nchar()
+# cont.includeCharacter(character)
 
 
 ### Read in the discrete-character data
 disc <- readDiscreteCharacterData("data/binary_type.nexus")
-num_disc_states <- disc.getStateDescriptions().size()
+num_disc_states <- 2
 
 # Create some vector for the moves and monitors of this analysis
 moves    = VectorMoves()
@@ -44,11 +44,11 @@ tree <- T
 # Specify the discrete-character model #
 ########################################
 
-# make the Q matrix
+# make the Q matrixn
 Q <- fnJC(num_disc_states)
 
 # make the transition rate parameter
-lambda ~ dnLoguniform(1e-3, 1)
+lambda ~ dnLoguniform(1e-8, 1e-1)
 moves.append( mvScale(lambda, weight=1.0) )
 
 # make the data-augmented CTCM model
@@ -112,11 +112,40 @@ num_rate_changes := sum( branch_rate_shift )
 
 # specify the relative state-dependent rates (with sum 1)
 concentration <- 1.0
-proportional_zeta ~ dnDirichlet( rep(concentration, num_disc_states) )
+proportional_zeta ~ dnReversibleJumpMixture( simplex(rep(1,num_disc_states)),
+                    dnDirichlet( rep(concentration, num_disc_states) ), p=0.5 )
+moves.append( mvRJSwitch(proportional_zeta, weight=1.0) )
 moves.append( mvBetaSimplex(proportional_zeta, weight=1.0) )
+is_state_dependent := ifelse( proportional_zeta == simplex(rep(1,num_disc_states)), 0.0, 1.0)
 
 # compute the state dependent rates (with mean 1)
 zeta := proportional_zeta * num_disc_states
+
+##############################
+# Continuous-character model #
+##############################
+
+# Global average rate
+beta ~ dnLoguniform(1e-3, 1)
+moves.append( mvScale(beta, weight=1.0) )
+
+# Relative state-dependent rates (sum=1)
+concentration <- 1.0
+relative_zeta ~ dnDirichlet( rep(concentration, num_disc_states) )
+moves.append( mvBetaSimplex(proportional_zeta, weight=1.0))
+
+# Rescale so mean = 1
+zeta := proportional_zeta * num_disc_states
+
+# Absolute rates per discrete state
+overall_rate := beta * zeta
+
+# Branch-specific state-dependent rate scalars
+for(i in 1:nbranches) {
+    state_branch_rate[i] := sum(X.relativeTimeInStates(i,1) * overall_rate)
+}
+
+branch_rates := state_branch_rate
 
 # compute the state-dependent branch rates
 for(i in 1:nbranches) {
@@ -126,13 +155,34 @@ for(i in 1:nbranches) {
 # compute the overall branch rates (including the background rates)
 branch_rates := state_branch_rate * background_rates
 
+####################################
+# Multivariate variance–covariance #
+####################################
+
+# Relative rates among continuous traits (mean = 1 across traits)
+alpha <- 1.0
+proportional_rates ~ dnDirichlet( rep(alpha, nchar) )
+relative_rates := proportional_rates * nchar
+moves.append( mvBetaSimplex(proportional_rates, weight=2.0) )
+
+# LKJ prior on partial correlations -> correlation matrix R
+eta <- 1.0
+P ~ dnLKJPartial( eta, nchar )
+moves.append( mvCorrelationMatrixRandomWalk(P, weight=3.0) )
+moves.append( mvCorrelationMatrixSingleElementBeta(P, weight=5.0) )
+R := fnPartialToCorr(P)
+correlations := R.upperTriangle()
+
+# Build variance–covariance matrix Σ (trait SDs × R × trait SDs)
+V := fnDecompVarCovar( relative_rates^0.5, R )
+
+
 ##########################
 # Specify the BM process #
 ##########################
 
-Y ~ dnPhyloBrownianREML(tree, branchRates=branch_rates^0.5)
+Y ~ dnPhyloMultivariateBrownianREML(tree, branchRates=branch_rates^0.5, rateMatrix=V)
 Y.clamp(cont)
-
 
 
 #############
@@ -153,11 +203,11 @@ monitors.append( mnExtNewick(filename="output/relaxed_state_dependent_BM.trees",
 ################
 
 ### workspace mcmc ###
-mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
+mymcmc = mcmc(mymodel, monitors, moves, nruns=1, combine="mixed")
 
 
 ### run the MCMC ###
-mymcmc.burnin(generations=1000, tuningInterval=100)
+mymcmc.burnin(generations=2000, tuningInterval=100)
 mymcmc.run(generations=200000)
 
 ## summarize the branch rates
