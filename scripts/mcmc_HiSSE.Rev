@@ -198,13 +198,13 @@ mymodel = model(rate_matrix)
 ### set up the monitors that will output parameter values to file and screen
 monitors.append( mnModel(filename="output/hisse.log", printgen=1) )
 monitors.append( mnScreen(printgen=10, speciation_observed, extinction_observed) )
-# monitors.append(mnJointConditionalAncestralState(tree=observed_phylogeny,
-#                                                  cdbdp=timetree,
-#                                                  type="NaturalNumbers",
-#                                                  printgen=100,
-#                                                  withTips=true,
-#                                                  withStartStates=false,
-#                                                  filename="output/anc_states_hisse_type.log"))
+monitors.append(mnJointConditionalAncestralState(tree=timetree,
+                                                 cdbdp=timetree,
+                                                 type="NaturalNumbers",
+                                                 printgen=100,
+                                                 withTips=true,
+                                                 withStartStates=false,
+                                                 filename="output/anc_states_hisse.log"))
 
 ################
 # The Analysis #
@@ -217,10 +217,10 @@ mymcmc = mcmc(mymodel, monitors, moves, nruns=1, moveschedule="random")
 mymcmc.burnin(generations=1000,tuningInterval=50)
 mymcmc.run(generations=30000, tuningInterval=100)
 
-anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_type_run_1.log")
+anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_binary_type_run_1.log")
 ancestralStateTree(tree=observed_phylogeny,
                    ancestral_state_trace_vector=anc_state_trace,
                    include_start_states=false,
-                   file="output/asr_hisse_binary_type.tree",
+                   file="output/asr_unknown_states.tree",
                    summary_statistic="MAP",
                    reconstruction="marginal")

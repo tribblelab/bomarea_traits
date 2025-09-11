@@ -130,12 +130,12 @@ beta ~ dnLoguniform(1e-3, 1)
 moves.append( mvScale(beta, weight=1.0) )
 
 # Relative state-dependent rates (sum=1)
-concentration <- 1.0
-relative_zeta ~ dnDirichlet( rep(concentration, num_disc_states) )
-moves.append( mvBetaSimplex(proportional_zeta, weight=1.0))
+#concentration <- 1.0
+#proportional_zeta ~ dnDirichlet( rep(concentration, num_disc_states) )
+#moves.append( mvBetaSimplex(proportional_zeta, weight=1.0))
 
 # Rescale so mean = 1
-zeta := proportional_zeta * num_disc_states
+#zeta := proportional_zeta * num_disc_states
 
 # Absolute rates per discrete state
 overall_rate := beta * zeta
