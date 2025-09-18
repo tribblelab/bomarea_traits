@@ -185,8 +185,6 @@ timetree.clamp( observed_phylogeny )
 timetree.clampCharData( data_exp )
 
 
-
-
 #############
 # The Model #
 #############
@@ -196,31 +194,31 @@ timetree.clampCharData( data_exp )
 mymodel = model(rate_matrix)
 
 ### set up the monitors that will output parameter values to file and screen
-monitors.append( mnModel(filename="output/hisse.log", printgen=1) )
+monitors.append( mnModel(filename="output/hisse_test_rj.log", printgen=10) )
 monitors.append( mnScreen(printgen=10, speciation_observed, extinction_observed) )
 monitors.append(mnJointConditionalAncestralState(tree=timetree,
                                                  cdbdp=timetree,
                                                  type="NaturalNumbers",
-                                                 printgen=100,
+                                                 printgen=10,
                                                  withTips=true,
                                                  withStartStates=false,
-                                                 filename="output/anc_states_hisse.log"))
+                                                 filename="output/anc_states_hisse_test_rj.log"))
 
 ################
 # The Analysis #
 ################
 
 ### workspace mcmc
-mymcmc = mcmc(mymodel, monitors, moves, nruns=1, moveschedule="random")
+mymcmc = mcmc(mymodel, monitors, moves, nruns=2, moveschedule="random", combine="mixed")
 
 ### run the MCMC
-mymcmc.burnin(generations=1000,tuningInterval=50)
+# mymcmc.burnin(generations=1000,tuningInterval=50)
 mymcmc.run(generations=30000, tuningInterval=100)
 
-anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_binary_type_run_1.log")
+anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_test_rj.log")
 ancestralStateTree(tree=observed_phylogeny,
                    ancestral_state_trace_vector=anc_state_trace,
                    include_start_states=false,
-                   file="output/asr_unknown_states.tree",
+                   file="output/asr_hisse_test_rj.tree",
                    summary_statistic="MAP",
                    reconstruction="marginal")
