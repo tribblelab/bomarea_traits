@@ -60,6 +60,7 @@ ln_speciation_hidden_mean <- ln(1.0)
 # (so that we expect the 95% interval of the hidden speciation rate to span 1 order of magnitude).
 speciation_hidden_sd ~ dnExponential( 1.0 / H )
 moves.append( mvScale(speciation_hidden_sd, lambda=1, tune=true, weight=2.0) )
+speciation_hidden_sd.setValue(0.344)
 
 # Create a deterministic variable for the hidden speciation rate categories
 # using a discretized lognormal distribution (the N-quantiles of it)
@@ -131,6 +132,7 @@ for ( i in 1:(NUM_STATES*(NUM_STATES-1)) ) {
 }
 
 
+
 #########################################################
 # Set up the transition rate matrix for hidden states #
 #########################################################
@@ -194,7 +196,7 @@ timetree.clampCharData( data_exp )
 mymodel = model(rate_matrix)
 
 ### set up the monitors that will output parameter values to file and screen
-monitors.append( mnModel(filename="output/hisse_test_rj.log", printgen=10) )
+monitors.append( mnModel(filename="output/hisse_test_setvalue.log", printgen=10) )
 monitors.append( mnScreen(printgen=10, speciation_observed, extinction_observed) )
 monitors.append(mnJointConditionalAncestralState(tree=timetree,
                                                  cdbdp=timetree,
@@ -202,7 +204,7 @@ monitors.append(mnJointConditionalAncestralState(tree=timetree,
                                                  printgen=10,
                                                  withTips=true,
                                                  withStartStates=false,
-                                                 filename="output/anc_states_hisse_test_rj.log"))
+                                                 filename="output/anc_states_hisse_test_setvalue.log"))
 
 ################
 # The Analysis #
@@ -212,13 +214,13 @@ monitors.append(mnJointConditionalAncestralState(tree=timetree,
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2, moveschedule="random", combine="mixed")
 
 ### run the MCMC
-# mymcmc.burnin(generations=1000,tuningInterval=50)
+mymcmc.burnin(generations=1000,tuningInterval=50)
 mymcmc.run(generations=30000, tuningInterval=100)
 
-anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_test_rj.log")
+anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_test_setvalue.log")
 ancestralStateTree(tree=observed_phylogeny,
                    ancestral_state_trace_vector=anc_state_trace,
                    include_start_states=false,
-                   file="output/asr_hisse_test_rj.tree",
+                   file="output/asr_hisse_test_setvalue.tree",
                    summary_statistic="MAP",
                    reconstruction="marginal")
