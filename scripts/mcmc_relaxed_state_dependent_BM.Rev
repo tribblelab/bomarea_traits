@@ -48,7 +48,11 @@ tree <- T
 Q <- fnJC(num_disc_states)
 
 # make the transition rate parameter
-lambda ~ dnLoguniform(1e-8, 1e-1)
+expected_num_changes <- 14
+expected_rate <- expected_num_changes / tree.treeLength()
+
+H = 0.578
+lambda ~ dnLognormal(ln(expected_rate) - 0.5 * H * H, H)
 moves.append( mvScale(lambda, weight=1.0) )
 
 # make the data-augmented CTCM model
@@ -79,8 +83,7 @@ expected_number_of_shifts <- 5
 rate_shift_probability    <- expected_number_of_shifts / nbranches
 
 # specify the prior on the magnitude of rate shifts
-sd = 0.578
-rate_shift_distribution = dnLognormal(-sd^2/2, sd)
+rate_shift_distribution = dnLognormal(-H^2/2, H)
 
 # specify the branch-specific rates
 for(i in nbranches:1) {
