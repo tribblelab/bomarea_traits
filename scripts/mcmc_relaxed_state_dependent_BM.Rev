@@ -110,7 +110,6 @@ for(i in nbranches:1) {
 # keep track of the number of rate shifts
 num_rate_changes := sum( branch_rate_shift )
 
-# specify the relative state-dependent rates (with sum 1)
 concentration <- 1.0
 proportional_zeta ~ dnReversibleJumpMixture( simplex(rep(1,num_disc_states)),
                     dnDirichlet( rep(concentration, num_disc_states) ), p=0.5 )
@@ -203,7 +202,7 @@ monitors.append( mnExtNewick(filename="output/relaxed_state_dependent_BM.trees",
 ################
 
 ### workspace mcmc ###
-mymcmc = mcmc(mymodel, monitors, moves, nruns=1, combine="mixed")
+mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
 
 
 ### run the MCMC ###
