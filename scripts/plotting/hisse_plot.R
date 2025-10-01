@@ -17,11 +17,11 @@ setwd("~/Desktop/bomarea_traits/output/")
 # mcmc_trace[[1]] <- as.mcmc(mcmc_trace[[1]]
 
 # ggplot+revgadgets
-mcmc_run1 <- readTrace(path = "hisse_binary_type_run_1.log", burnin = 0.1)
+mcmc_run1 <- readTrace(path = "hisse_run_1.log", burnin = 0.1)
 mcmc_run1 <- data.frame(mcmc_run1)
 mcmc_run1 <- cbind(mcmc_run1, run = rep("run 1", length(mcmc_run1$Iteration)))
 
-mcmc_run2 <- readTrace(path = "hisse_binary_type_run_2.log", burnin = 0.1)
+mcmc_run2 <- readTrace(path = "hisse.log", burnin = 0.1)
 mcmc_run2 <- data.frame(mcmc_run2)
 mcmc_run2 <- cbind(mcmc_run2, run = rep("run 2", length(mcmc_run2$Iteration)))
 
@@ -38,7 +38,7 @@ trace_plot
 
 traitcols <- c("#3D348B", "#7678ED", "#F18701", "#F35B04")
 
-hisse <- read.table("hisse_binary_type_run_1.log", header = TRUE)
+hisse <- read.table("hisse_run_1.log", header = TRUE)
 hisse <- hisse[-seq(1, 400000, 1), ] # make sure you are cutting the burn in!
 
 transition_rates <- data.frame(dens = c(hisse$q_01A, hisse$q_01B,

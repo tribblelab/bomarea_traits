@@ -4,7 +4,7 @@ library(RevGadgets)
 library(ape)
 
 # read in and process the ancestral states
-HiSSE_file <- paste0("output/asr_hisse_binary_type.tree")
+HiSSE_file <- paste0("output/asr_hisse_test.tree")
 p_anc <- processAncStates(HiSSE_file,
                           state_labels = c(
                             "0" = "simple_A",
@@ -34,7 +34,7 @@ pies <- plotAncStatesPie(
   )
 
 pies
-ggsave("figures/HiSSE_asr_pies.png", pies, width = 8, height = 8)
+ggsave("figures/HiSSE_asr_pies_test.png", pies, width = 8, height = 8)
 
 # plot the ancestral states
 plot <- plotAncStatesMAP(t = p_anc, tree_layout="rectangular",
@@ -52,7 +52,7 @@ plot
 ggsave(paste0("figures/HiSSE_asr.png"),plot, width=8, height=8)
 
 # read in and process the log file
-HiSSE_file <- paste0("output/hisse.log")
+HiSSE_file <- paste0("output/hisse_test_run_1.log")
 pdata <- processSSE(HiSSE_file)
 pdata$state_label <- paste0(
   ifelse(pdata$observed_state == 0, "simple_", "compound_"),
