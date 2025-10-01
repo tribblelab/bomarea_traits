@@ -1,0 +1,213 @@
+################################################################################
+#
+# RevBayes Analysis: Bayesian inference of diversification rates under a
+#                    character-dependent birth-death model.
+#                    Here each transition rate between observed states is
+#                    drawn from an independent exponentially distributed
+#                    rate. The transition rates between hidden states are
+#                    all equal and drawn from another exponentially
+#                    distributed rate.
+#
+#
+# authors: Sebastian Hoehna, Will Freyman
+#
+################################################################################
+
+#######################
+# Reading in the Data #
+#######################
+
+
+
+# Global parameters for our analysis
+NUM_TOTAL_SPECIES     = 120
+NUM_STATES            = 2
+NUM_HIDDEN            = 2
+NUM_RATES             = NUM_STATES * NUM_HIDDEN
+H                     = 0.587405
+
+# Read in the observed phylogeny
+observed_phylogeny <- readTrees("data/tree_edited.tre")[1]
+data <- readDiscreteCharacterData("data/binary_type.nexus")
+
+# we need to expand the data to the hidden states
+data_exp <- data.expandCharacters( NUM_HIDDEN )
+
+# Get the names of the taxa in the tree and the age of the tree. We need these later on.
+taxa <- observed_phylogeny.taxa()
+tree_length <- observed_phylogeny.treeLength()
+
+
+# Create some vector for the moves and monitors of this analysis
+moves    = VectorMoves()
+monitors = VectorMonitors()
+
+
+####################
+# Create the rates #
+####################
+
+### Specify a prior on the speciation and extinction rates
+rate_mean <- (NUM_TOTAL_SPECIES-2) / tree_length
+
+
+### First, we create the hidden speciation rates
+# relative_hidden_speciation ~ dnDirichlet([1,1])
+relative_hidden_speciation ~ dnRJMixture(simplex(v(0.5,0.5)), dnDirichlet([1,1]), p=0.5)
+moves.append( mvRJSwitch( relative_hidden_speciation, weight=2) )
+moves.append( mvBetaSimplex(relative_hidden_speciation, tune=true, weight=2) )
+moves.append( mvDirichletSimplex(relative_hidden_speciation,tune=true,weight=2) )
+speciation_hidden := relative_hidden_speciation * 2
+prob_hidden_speciation := ifelse( relative_hidden_speciation == simplex(v(0.5,0.5)), 1.0, 0.0 )
+
+
+### Second, we create the hidden extinction rates
+relative_hidden_extinction ~ dnRJMixture(simplex(v(0.5,0.5)), dnDirichlet([1,1]), p=0.5)
+moves.append( mvRJSwitch( relative_hidden_extinction, weight=2) )
+moves.append( mvBetaSimplex(relative_hidden_extinction,tune=true,weight=2) )
+moves.append( mvDirichletSimplex(relative_hidden_extinction,tune=true,weight=2) )
+extinction_hidden := relative_hidden_extinction * 2
+prob_hidden_extinction := ifelse( relative_hidden_extinction == simplex(v(0.5,0.5)), 1.0, 0.0 )
+
+
+### Third, we create the speciation and extinction rates for the observed states
+for (i in 1:NUM_STATES) {
+
+    ### Create a loguniform distributed variable for the speciation rate
+    speciation_observed[i] ~ dnLoguniform( 1E-6, 1E2)
+    speciation_observed[i].setValue( (NUM_TOTAL_SPECIES-2) / tree_length )
+    moves.append( mvScale(speciation_observed[i],lambda=1.0,tune=true,weight=3.0) )
+
+    ### Create a loguniform distributed variable for the speciation rate
+    extinction_observed[i] ~ dnLoguniform( 1E-6, 1E2)
+    extinction_observed[i].setValue( speciation_observed[i] / 10.0 )
+    moves.append( mvScale(extinction_observed[i],lambda=1.0,tune=true,weight=3.0) )
+
+}
+
+
+### Finally, we put the observed and hidden rates together
+for (j in 1:NUM_HIDDEN) {
+    for (i in 1:NUM_STATES) {
+        index = i+(j*NUM_STATES)-NUM_STATES
+        speciation[index] := speciation_observed[i] * speciation_hidden[j]
+        extinction[index] := extinction_observed[i] * extinction_hidden[j]
+    }
+}
+
+
+#########################################################
+# Set up the transition rate matrix for observed states #
+#########################################################
+
+# Each transition rate between observed states are drawn
+# from an exponential distribution with a mean of 10
+# character state transitions over the tree.
+rate_pr := observed_phylogeny.treeLength() / 10
+for ( i in 1:(NUM_STATES*(NUM_STATES-1)) ) {
+    transition_rates[i] ~ dnExp(rate_pr)
+    moves.append( mvScale(transition_rates[i],lambda=0.50,tune=true,weight=3.0) )
+}
+
+
+
+#########################################################
+# Set up the transition rate matrix for hidden states #
+#########################################################
+
+# We assume the transitions among the hidden states
+# are all equal and drawn from an exponential distriubtion.
+hidden_rate ~ dnExponential(rate_pr)
+moves.append( mvScale(hidden_rate,lambda=0.5,tune=true,weight=5) )
+
+for (i in 1:(NUM_HIDDEN * (NUM_HIDDEN - 1))) {
+    R[i] := hidden_rate
+}
+
+######################################################################
+# Create the rate matrix for the combined observed and hidden states #
+######################################################################
+rate_matrix := fnHiddenStateRateMatrix(transition_rates, R, rescaled=false)
+
+
+
+#####################################
+# Set up the root state frequencies #
+#####################################
+
+### Create a constant variable with the prior probabilities of each rate category at the root.
+# rate_category_prior ~ dnDirichlet( rep(1,NUM_RATES) )
+# moves.append( mvBetaSimplex(rate_category_prior,tune=true,weight=2) )
+# moves.append( mvDirichletSimplex(rate_category_prior,tune=true,weight=2) )
+
+state_1_priors ~ dnDirichlet(  rep(1,2) )
+moves.append( mvBetaSimplex(state_1_priors,tune=true,weight=2) )
+moves.append( mvDirichletSimplex(state_1_priors,tune=true,weight=2) )
+state_1_priors.setValue(v(0.5,0.5))
+rate_category_prior := simplex(v(0,state_1_priors[1], 0, state_1_priors[2]))
+
+
+### Create the fix parameter for the age of the root set to the observed age
+root <- observed_phylogeny.rootAge()
+
+
+### rho is the probability of sampling species at the present
+### fix this to 233/367
+rho <- observed_phylogeny.ntips()/120
+
+
+#### construct a variable for the tree drawn from a birth death process
+timetree ~ dnCDBDP( rootAge           = root,
+                    speciationRates   = speciation,
+                    extinctionRates   = extinction,
+                    Q                 = rate_matrix,
+                    delta             = 1.0,
+                    pi                = rate_category_prior,
+                    rho               = rho,
+                    condition         = "survival" )
+
+### clamp the model with the "observed" tree
+timetree.clamp( observed_phylogeny )
+timetree.clampCharData( data_exp )
+
+
+#############
+# The Model #
+#############
+
+
+### workspace model wrapper ###
+mymodel = model(rate_matrix)
+
+### set up the monitors that will output parameter values to file and screen
+monitors.append( mnModel(filename="output/hisse_rj.log", printgen=10) )
+monitors.append( mnScreen(printgen=10, speciation_observed, extinction_observed) )
+monitors.append(mnJointConditionalAncestralState(tree=timetree,
+                                                 cdbdp=timetree,
+                                                 type="NaturalNumbers",
+                                                 printgen=10,
+                                                 withTips=true,
+                                                 withStartStates=false,
+                                                 filename="output/anc_states_hisse_rj.log"))
+monitors.append( mnStochasticCharacterMap(cdbdp=timetree,
+                       filename="output/stoch_maps_hisse_rj.log",
+                       printgen=10) )
+
+################
+# The Analysis #
+################
+
+### workspace mcmc
+mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine = "sequential")
+
+### run the MCMC
+mymcmc.burnin(generations=500,tuningInterval=10)
+mymcmc.run(generations=10000)
+
+anc_state_trace = readAncestralStateTrace("output/anc_states_hisse_rj.log")
+ancestralStateTree(tree=observed_phylogeny,
+                   ancestral_state_trace_vector=anc_state_trace,
+                   include_start_states=false,
+                   file="output/asr_hisse_rj.tree",
+                   summary_statistic="MAP",
+                   reconstruction="marginal")
