@@ -1,4 +1,6 @@
 setwd("~/Desktop/bomarea_traits/")
+devtools::install_github("revbayes/RevGadgets@stochastic_map",force=TRUE)
+
 library(ggplot2)
 library(RevGadgets)
 library(ape)
