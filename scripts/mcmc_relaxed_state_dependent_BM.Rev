@@ -205,7 +205,7 @@ monitors.append( mnExtNewick(filename="output/relaxed_state_dependent_BM.trees",
 ################
 
 ### workspace mcmc ###
-mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
+mymcmc = mcmc(mymodel, monitors, moves, nruns=1, combine="mixed")
 
 
 ### run the MCMC ###
