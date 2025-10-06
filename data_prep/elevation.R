@@ -91,3 +91,5 @@ colnames(elevation_mat) <- "elevation"
 # Write to nexus
 write.nexus.data(elevation_mat, file = "data/elevation.nexus",
                  format = "standard", missing = "?")
+
+# this is pretty messing with the bins (-inf, 1000, 2500, 3500, 4500, inf)
