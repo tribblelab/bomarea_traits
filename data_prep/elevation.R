@@ -26,8 +26,8 @@ get_gen_sp <- function(x) {
 # Elevation bins
 traits$elevation_avg <- (traits$min_elevation + traits$max_elevation) / 2
 traits$elevation_bin <- cut(traits$elevation_avg,
-                        breaks = c(-Inf, 1000, 2500, 4500, Inf),
-                        labels = c("0", "1", "2", "3"),
+                        breaks = c(-Inf, 1000, 2500, 3200, 4500, Inf),
+                        labels = c("0", "1", "2", "3", "4"),
                         right = FALSE)
 elevation_df <- traits[, c("acceptedName", "elevation_avg", "elevation_bin")]
 elevation_df$acceptedName <- gsub(" ", "_", elevation_df$acceptedName)
