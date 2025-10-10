@@ -97,12 +97,13 @@ merged$elevation_label <- recode_factor(
   as.character(merged$elevation_bin),
   "0" = "0–1000",
   "1" = "1000–2500",
-  "2" = "2500–4500",
-  "3" = "4500+"
+  "2" = "2500–3200",
+  "3" = "3200-4500",
+  "4" = "4500-5000"
 )
 
 # Summarize counts per elevation zone and inflorescence type
-summary_df <- combined %>%
+summary_df <- merged %>%
   group_by(elevation_label, type) %>%
   summarise(species_count = n())
 
