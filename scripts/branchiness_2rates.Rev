@@ -11,8 +11,8 @@ NUM_STATES = 8
 # specify our transition rate parameters to fill in our matrix 
 mix_prob <- 0.5
 
-q_up_og   ~ dnExponential(2)
-q_up   ~ dnReversibleJumpMixture(q_up_og,   dnExponential(2), mix_prob)
+q_up_og ~ dnExponential(2)
+q_up ~ dnReversibleJumpMixture(q_up_og,   dnExponential(2), mix_prob)
 
 q_down_og ~ dnExponential(2)
 q_down ~ dnReversibleJumpMixture(q_down_og, dnExponential(2), mix_prob)
@@ -69,13 +69,13 @@ phyMorpho.clamp(morpho)
 mymodel = model(phylogeny)
 monitors.append( mnModel(filename="output/branchiness_2rates_rj_ard.log", printgen=10) )
 monitors.append( mnScreen(printgen=100) )
-monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
-                                                   ctmc=phyMorpho,
-                                                   filename="output/branchiness_2rates_rj_ard_states.txt",
-                                                   type="Standard",
-                                                   printgen=1,
-                                                   withTips=true,
-                                                   withStartStates=false) )
+# monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
+#                                                    ctmc=phyMorpho,
+#                                                    filename="output/branchiness_2rates_rj_ard_states.txt",
+#                                                    type="Standard",
+#                                                    printgen=1,
+#                                                    withTips=true,
+#                                                    withStartStates=false) )
 
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2)
 mymcmc.burnin(generations=500,tuningInterval=100)
