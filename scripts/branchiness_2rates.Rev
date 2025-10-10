@@ -9,21 +9,22 @@ monitors = VectorMonitors()
 NUM_STATES = 8
 
 # specify our transition rate parameters to fill in our matrix 
+
+# up rate is drawn from an exponential
+q_up ~ dnExponential(2)
+moves.append( mvScale(q_up,   lambda=0.2) )
+
+# down rate is drawn from a reversible jump, sampling
+# between being equal to the up rate or drawn from 
+# its own exponential
 mix_prob <- 0.5
-
-q_up_og ~ dnExponential(2)
-q_up ~ dnReversibleJumpMixture(q_up_og,   dnExponential(2), mix_prob)
-
-q_down_og ~ dnExponential(2)
-q_down ~ dnReversibleJumpMixture(q_down_og, dnExponential(2), mix_prob)
-
-moves.append( mvScale(q_up_og,   lambda=0.2) )
-moves.append( mvRJSwitch(q_up,   weight=2.0) )
-moves.append( mvScale(q_down_og,   lambda=0.2) )
+q_down ~ dnReversibleJumpMixture(q_up, dnExponential(2), mix_prob)
 moves.append( mvRJSwitch(q_down, weight=2.0) )
+moves.append( mvScale(q_down,   lambda=0.2) )
 
-# q_up_indep := ifelse( q_up == q_up_og, 1.0, 0.0 )
-# q_down_indep := ifelse( q_down == q_down_og, 1.0, 0.0 )
+# track the probability that the rates are the same
+up_down_same := ifelse(q_down == q_up, 1.0, 0.0 )
+
 
 #### Create an empty Q-matrix
 for (i in 1:NUM_STATES) {
@@ -67,7 +68,7 @@ moves.append( mvDirichletSimplex( rf, weight=2 ) )
 phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q, rootFrequencies=rf, type="Standard")
 phyMorpho.clamp(morpho)
 mymodel = model(phylogeny)
-monitors.append( mnModel(filename="output/branchiness_2rates_rj_ard.log", printgen=10) )
+monitors.append( mnModel(filename="output/branchiness_2rates_rj_cmt.log", printgen=10) )
 monitors.append( mnScreen(printgen=100) )
 # monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
 #                                                    ctmc=phyMorpho,
