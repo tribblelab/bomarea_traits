@@ -74,15 +74,17 @@ Q := fnFreeK(q, rescale=FALSE)
 
 
 # root states
-rf_prior <- rep(1,NUM_STATES)
-rf ~ dnDirichlet( rf_prior )
-moves.append( mvBetaSimplex( rf, weight=2 ) )
-moves.append( mvDirichletSimplex( rf, weight=2 ) )
+# let's not do this
+# rf_prior <- rep(1,NUM_STATES)
+# rf ~ dnDirichlet( rf_prior )
+# moves.append( mvBetaSimplex( rf, weight=2 ) )
+# moves.append( mvDirichletSimplex( rf, weight=2 ) )
 
-phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q, rootFrequencies=rf, type="Standard")
+# phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q, rootFrequencies=rf, type="Standard")
+phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type="Standard")
 phyMorpho.clamp(morpho)
 mymodel = model(phylogeny)
-monitors.append( mnModel(filename="output/branchiness_rj_cmt.log", printgen=10) )
+monitors.append( mnModel(filename="output/branchiness_rj_cmt_norf.log", printgen=10) )
 monitors.append( mnScreen(printgen=100) )
 # monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
 #                                                    ctmc=phyMorpho,
