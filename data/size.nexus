@@ -1,8 +1,8 @@
 #NEXUS
-[Data written by write.nexus.data.R, Mon Sep  8 10:40:51 2025]
+[Data written by write.nexus.data.R, Mon Sep  8 10:09:35 2025]
 BEGIN DATA;
   DIMENSIONS NTAX=56 NCHAR=1;
-  FORMAT DATATYPE=CONTINUOUS MISSING=? GAP=- INTERLEAVE=NO;
+  FORMAT DATATYPE=CONTINUOUS MISSING=? GAP=-;
   MATRIX
     Bomarea_brevis_Bolivia_Teran1759                         4.2
     Bomarea_coccinea_Peru_Nunez13229                         4.1
