@@ -24,20 +24,38 @@ get_gen_sp <- function(x) {
 }
 
 # Elevation bins
-traits$elevation_avg <- (traits$min_elevation + traits$max_elevation) / 2
-traits$elevation_bin <- cut(traits$elevation_avg,
-                        breaks = c(-Inf, 1000, 2500, 3200, 4500, Inf),
-                        labels = c("0", "1", "2", "3", "4"),
-                        right = FALSE)
-elevation_df <- traits[, c("acceptedName", "elevation_avg", "elevation_bin")]
-elevation_df$acceptedName <- gsub(" ", "_", elevation_df$acceptedName)
 
-elevation_df <- elevation_df %>%
-  group_by(acceptedName) %>%
-  summarise(
-    elevation_avg = first(elevation_avg),
-    elevation_bin = first(elevation_bin)
-  )
+# overlapping bins
+bins <- data.frame(
+  bin_label = c("0", "1", "2", "3", "4"),
+  lower = c(-Inf, 1000, 2500, 3200, 4500),
+  upper = c(1000, 2500, 3200, 4500, Inf)
+)
+
+elevation_min_max <- crossing(traits, bins) %>%
+  filter(max_elevation > lower & min_elevation < upper) %>%
+  mutate(elevation_bin = bin_label) %>%
+  select(acceptedName, min_elevation, max_elevation)
+
+elevation_min_max$acceptedName <- gsub(" ", "_", elevation_min_max$acceptedName)
+
+
+
+# traits$elevation_avg <- (traits$min_elevation + traits$max_elevation) / 2
+
+# traits$elevation_bin <- cut(traits$elevation_avg,
+                        # breaks = c(-Inf, 1000, 2500, 3200, 4500, Inf),
+                        # labels = c("0", "1", "2", "3", "4"),
+                        # right = FALSE)
+# elevation_df <- traits[, c("acceptedName", "elevation_avg", "elevation_bin")]
+# elevation_df$acceptedName <- gsub(" ", "_", elevation_df$acceptedName)
+
+# elevation_df <- elevation_df %>%
+#   group_by(acceptedName) %>%
+#   summarise(
+#     elevation_avg = first(elevation_avg),
+#     elevation_bin = first(elevation_bin)
+#   )
 
 # Match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
@@ -92,4 +110,4 @@ colnames(elevation_mat) <- "elevation"
 write.nexus.data(elevation_mat, file = "data/elevation.nexus",
                  format = "standard", missing = "?")
 
-# this is pretty messing with the bins (-inf, 1000, 2500, 3500, 4500, inf)
+# this is pre messing with the bins (-inf, 1000, 2500, 3500, 4500, inf)
