@@ -1,13 +1,15 @@
 library(RevGadgets)
 library(tidyverse)
 library(ggthemes)
-setwd("~/Desktop/bomarea_traits/")
+setwd("~/Desktop/")
 
 # Process data
-rates <- readTrace(c("output/branchiness_ard_run_1.log",
-                     "output/branchiness_ard_run_2.log"))
-
+rates <- readTrace(c("branchiness_rj_cmt_run_1.log",
+                     "branchiness_rj_cmt_run_2.log"))
 rates <- combineTraces(rates)
+
+df <- rates$combined %>%
+  select(q_change_type, q_down, q_up, q_within_compound)
 
 df <- rates[[1]]
 cols <- c("er[1]", "er[2]", "er[3]",
@@ -46,8 +48,8 @@ colors <- RevGadgets::colFun(7)
 
 names(colors) <- levels(df_rates$grp)
 
-g <- ggplot(df_rates) +
-  geom_violin(data = df_rates,
+g <- ggplot(df) +
+  geom_violin(data = df,
               aes(x = grp,
                   y = val,
                   group = grp,
@@ -78,3 +80,44 @@ g <- ggplot(df_rates) +
 
 print(g)
 ggsave("figures/branchiness_ase_ard_violinPlot.png", width = 15, height = 10, dpi = 200)
+
+
+library(tidyverse)
+library(ggthemes)
+library(RevGadgets)
+
+df_long <- df %>%
+  pivot_longer(cols = everything(),
+               names_to = "grp",
+               values_to = "val")
+
+colors <- RevGadgets::colFun(4)
+names(colors) <- unique(df_long$grp)
+
+# Create violin plot
+g <- ggplot(df_long, aes(x = grp, y = val, fill = grp)) +
+  geom_violin(color = "black",
+              linewidth = 1,
+              scale = "width",
+              show.legend = FALSE) +
+  stat_summary(fun = mean,
+               geom = "point",
+               size = 2.5,
+               color = "black") +
+  # Optional: Add zero line if relevant
+  # geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  scale_fill_manual(values = colors) +
+  scale_x_discrete(name = "Rates") +
+  ylab("Posterior density") +
+  ggthemes::theme_few() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "bold", size = 14, hjust = 0.5),
+    axis.text.y = element_text(size = 12),
+    axis.title.x = element_text(face = "bold", size = 18, margin = margin(t = 10)),
+    axis.title.y = element_text(face = "bold", size = 18, margin = margin(r = 10)),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8)
+  )
+
+print(g)
+ggsave("branchiness_violinPlot.png", width = 10, height = 10, dpi = 200)
