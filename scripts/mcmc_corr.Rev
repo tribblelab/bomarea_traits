@@ -41,109 +41,87 @@ phylogeny <- readTrees("data/tree_edited.tre")[1]
 
 # we assume every rate i <-> j to be independent and exponentially distributed
 rate_pr := phylogeny.treeLength() / 10
-for (i in 1:8) {
-    for (j in 1:8) {
+for (i in 1:14) {
+    for (j in 1:14) {
         q[i][j] <- 0.0
     }
 }
 
 mix_prob <- 0.5
 
-rate_A0_A1_when_B0 ~ dnExponential( rate_pr )
-rate_A1_A2_when_B0 ~ dnExponential( rate_pr )
-rate_A2_A3_when_B0 ~ dnExponential( rate_pr )
+rate_increase_when_0 ~ dnExponential(rate_pr)
+rate_decrease_when_0 ~ dnExponential(rate_pr)
 
-rate_A0_A1_when_B1 ~ dnReversibleJumpMixture(rate_A0_A1_when_B0, dnExponential( rate_pr ), mix_prob)
-rate_A1_A2_when_B1 ~ dnReversibleJumpMixture(rate_A1_A2_when_B0, dnExponential( rate_pr ), mix_prob)
-rate_A2_A3_when_B1 ~ dnReversibleJumpMixture(rate_A2_A3_when_B0, dnExponential( rate_pr ), mix_prob)
+rate_increase_when_1 ~ dnReversibleJumpMixture(rate_increase_when_0, dnExponential(rate_pr), mix_prob)
+rate_decrease_when_1 ~ dnReversibleJumpMixture(rate_decrease_when_0, dnExponential(rate_pr), mix_prob)
 
-rate_A3_A2_when_B0 ~ dnExponential( rate_pr )
-rate_A2_A1_when_B0 ~ dnExponential( rate_pr )
-rate_A1_A0_when_B0 ~ dnExponential( rate_pr )
+rate_0_to_1 ~ dnExponential(rate_pr)
+rate_1_to_0 ~ dnExponential(rate_pr)
 
-rate_A3_A2_when_B1 ~ dnReversibleJumpMixture(rate_A3_A2_when_B0, dnExponential( rate_pr ), mix_prob)
-rate_A2_A1_when_B1 ~ dnReversibleJumpMixture(rate_A2_A1_when_B0, dnExponential( rate_pr ), mix_prob)
-rate_A1_A0_when_B1 ~ dnReversibleJumpMixture(rate_A1_A0_when_B0, dnExponential( rate_pr ), mix_prob)
+moves.append(mvScale(rate_increase_when_0, weight = 2))
+moves.append(mvScale(rate_decrease_when_0, weight = 2))
+moves.append(mvScale(rate_0_to_1, weight = 2))
+moves.append(mvScale(rate_1_to_0, weight = 2))
 
-rate_B0_B1_when_A0 ~ dnExponential( rate_pr )
-rate_B0_B1_when_A1 ~ dnReversibleJumpMixture(rate_B0_B1_when_A0, dnExponential( rate_pr ), mix_prob)
-rate_B0_B1_when_A2 ~ dnReversibleJumpMixture(rate_B0_B1_when_A0, dnExponential( rate_pr ), mix_prob)
-rate_B0_B1_when_A3 ~ dnReversibleJumpMixture(rate_B0_B1_when_A0, dnExponential( rate_pr ), mix_prob)
+moves.append(mvRJSwitch(rate_increase_when_1, weight = 2))
+moves.append(mvRJSwitch(rate_decrease_when_1, weight = 2))
 
-rate_B1_B0_when_A0 ~ dnExponential( rate_pr )
-rate_B1_B0_when_A1 ~ dnReversibleJumpMixture(rate_B1_B0_when_A0, dnExponential( rate_pr ), mix_prob)
-rate_B1_B0_when_A2 ~ dnReversibleJumpMixture(rate_B1_B0_when_A0, dnExponential( rate_pr ), mix_prob)
-rate_B1_B0_when_A3 ~ dnReversibleJumpMixture(rate_B1_B0_when_A0, dnExponential( rate_pr ), mix_prob)
+prob_increase_indep := ifelse(rate_increase_when_1 == rate_increase_when_0, 1.0, 0.0 )
+prob_decrease_indep := ifelse(rate_decrease_when_1 == rate_decrease_when_0, 1.0, 0.0)
 
-moves.append( mvScale(rate_A0_A1_when_B0, weight=2 ) )
-moves.append( mvScale(rate_A1_A2_when_B0, weight=2 ) )
-moves.append( mvScale(rate_A2_A3_when_B0, weight=2 ) )
+##### new rates 
 
-moves.append( mvRJSwitch(rate_A0_A1_when_B1, weight=2 ) )
-moves.append( mvRJSwitch(rate_A1_A2_when_B1, weight=2 ) )
-moves.append( mvRJSwitch(rate_A2_A3_when_B1, weight=2 ) )
+q[1][2] := rate_increase_when_0
+q[1][8] := rate_0_to_1
 
-moves.append( mvScale(rate_A3_A2_when_B0, weight=2 ) )
-moves.append( mvScale(rate_A2_A1_when_B0, weight=2 ) )
-moves.append( mvScale(rate_A1_A0_when_B0, weight=2 ) )
+q[2][1] := rate_decrease_when_0
+q[2][3] := rate_increase_when_0
+q[2][9] := rate_0_to_1
 
-moves.append( mvRJSwitch(rate_A3_A2_when_B1, weight=2 ) )
-moves.append( mvRJSwitch(rate_A2_A1_when_B1, weight=2 ) )
-moves.append( mvRJSwitch(rate_A1_A0_when_B1, weight=2 ) )
+q[3][2] := rate_decrease_when_0
+q[3][4] := rate_increase_when_0
+q[3][10] := rate_0_to_1
 
-moves.append( mvScale(rate_B0_B1_when_A0, weight=2 ) )
-moves.append( mvRJSwitch(rate_B0_B1_when_A1, weight=2 ) )
-moves.append( mvRJSwitch(rate_B0_B1_when_A2, weight=2 ) )
-moves.append( mvRJSwitch(rate_B0_B1_when_A3, weight=2 ) )
+q[4][3] := rate_decrease_when_0
+q[4][5] := rate_increase_when_0
+q[4][11] := rate_0_to_1
 
-moves.append( mvScale(rate_B1_B0_when_A0, weight=2 ) )
-moves.append( mvRJSwitch(rate_B1_B0_when_A1, weight=2 ) )
-moves.append( mvRJSwitch(rate_B1_B0_when_A2, weight=2 ) )
-moves.append( mvRJSwitch(rate_B1_B0_when_A3, weight=2 ) )
+q[5][4] := rate_decrease_when_0
+q[5][6] := rate_increase_when_0
+q[5][12] := rate_0_to_1
 
-prob_A0_A1_indep := ifelse( rate_A0_A1_when_B0 == rate_A0_A1_when_B1, 1.0, 0.0 )
-prob_A1_A2_indep := ifelse( rate_A1_A2_when_B0 == rate_A1_A2_when_B1, 1.0, 0.0 )
-prob_A2_A3_indep := ifelse( rate_A2_A3_when_B0 == rate_A2_A3_when_B1, 1.0, 0.0 )
-prob_A3_A2_indep := ifelse( rate_A3_A2_when_B0 == rate_A3_A2_when_B1, 1.0, 0.0 )
-prob_A2_A1_indep := ifelse( rate_A2_A1_when_B0 == rate_A2_A1_when_B1, 1.0, 0.0 )
-prob_A1_A0_indep := ifelse( rate_A1_A0_when_B0 == rate_A1_A0_when_B1, 1.0, 0.0 )
+q[6][5] := rate_decrease_when_0
+q[6][7] := rate_increase_when_0
+q[6][13] := rate_0_to_1
 
-prob_B0_B1_indep_A0_A1 := ifelse( rate_B0_B1_when_A0 == rate_B0_B1_when_A1, 1.0, 0.0 )
-prob_B0_B1_indep_A1_A2 := ifelse( rate_B0_B1_when_A1 == rate_B0_B1_when_A2, 1.0, 0.0 )
-prob_B0_B1_indep_A2_A3 := ifelse( rate_B0_B1_when_A2 == rate_B0_B1_when_A3, 1.0, 0.0 )
-prob_B1_B0_indep_A0_A1 := ifelse( rate_B1_B0_when_A0 == rate_B1_B0_when_A1, 1.0, 0.0 )
-prob_B1_B0_indep_A1_A2 := ifelse( rate_B1_B0_when_A1 == rate_B1_B0_when_A2, 1.0, 0.0 )
-prob_B1_B0_indep_A2_A3 := ifelse( rate_B1_B0_when_A2 == rate_B1_B0_when_A3, 1.0, 0.0 )
+q[7][6] := rate_decrease_when_0
+q[7][14] := rate_0_to_1
 
-##### update the part below with new rates 
+q[8][1] := rate_1_to_0
+q[8][9] := rate_increase_when_1
 
-q[1][2] := rate_A0_A1_when_B1 # 00->10
-q[1][5] := rate_B0_B1_when_A0 # 00->01
+q[9][2] := rate_1_to_0
+q[9][8] := rate_decrease_when_1
+q[9][10] := rate_increase_when_1
 
-q[2][1] := rate_A1_A0_when_B0 # 10->00
-q[2][3] := rate_A1_A2_when_B0 # 10->20
-q[2][6] := rate_B0_B1_when_A1 # 10->11
+q[10][3] := rate_1_to_0
+q[10][9] := rate_decrease_when_1
+q[10][11] := rate_increase_when_1
 
-q[3][2] := rate_A1_A2_when_B0 # 20->10
-q[3][4] := rate_A2_A3_when_B0 # 20->30
-q[3][7] := rate_B0_B1_when_A2 # 20->21
+q[11][4] := rate_1_to_0
+q[11][10] := rate_decrease_when_1
+q[11][12] := rate_increase_when_1
 
-q[4][3] := rate_A3_A2_when_B0 # 30->20
-q[4][8] := rate_B0_B1_when_A3 # 30->31
+q[12][5] := rate_1_to_0
+q[12][11] := rate_decrease_when_1
+q[12][13] := rate_increase_when_1
 
-q[5][1] := rate_B1_B0_when_A0 # 01->00
-q[5][6] := rate_A0_A1_when_B1 # 01->11
+q[13][6] := rate_1_to_0
+q[13][12] := rate_decrease_when_1
+q[13][14] := rate_increase_when_1
 
-q[6][2] := rate_B1_B0_when_A1 # 11->10
-q[6][5] := rate_A1_A0_when_B1 # 21->01
-q[6][7] := rate_A1_A2_when_B1 # 11->21
-
-q[7][3] := rate_B1_B0_when_A2 # 21->20
-q[7][6] := rate_A2_A1_when_B1 # 21->11
-q[7][8] := rate_A2_A3_when_B1 # 21->31
-
-q[8][4] := rate_B1_B0_when_A3 # 31->30
-q[8][7] := rate_A3_A2_when_B1 # 31->21
+q[14][7] := rate_1_to_0
+q[14][13] := rate_decrease_when_1
 
 Q := fnFreeK(q, rescaled=FALSE)
 
