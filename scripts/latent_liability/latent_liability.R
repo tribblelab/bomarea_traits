@@ -1,6 +1,6 @@
 library(ape)
 library(tidyverse)
-source("beast/print_latent_liability_xml(1).R")
+source("print_latent_liability_xml(1).R")
 
 ### Turn traits into df
 
@@ -66,6 +66,5 @@ printLatentLiability(file="bomarea_traits/scripts/latent_liability/bomarea_laten
                      ngen="100000000", log.every="10000",
                      walk.or.scale="walk",
                      name.for.traits="bomareaTraits",
-                     jitter=0.2, precision=0.05, wishart=0.1,
-                     is.multistate=1)
+                     jitter=0.2, precision=0.05, wishart=0.1)
 

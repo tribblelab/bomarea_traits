@@ -62,14 +62,12 @@
 <generalDataType id="multinomial">
 	<state code="0"/>
 	<state code="1"/>
-	<state code="2"/>
-	<state code="1"/>
 </generalDataType>
 <alignment id="alignment">
 <dataType idref="multinomial"/>
 	<sequence>
 		<taxon idref="Bomarea_albimontana_Peru_LeivaS_N_"/>
-		000
+		100
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_amilcariana_Venezuela_Dorr8337"/>
@@ -85,11 +83,11 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_angulata_Peru_Quiroz3208"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_aurantiaca_Bolivia_Fuentes13880"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_brachysepala_Ecuador_Jorgensen2129"/>
@@ -97,15 +95,15 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_bredemeyerana_Colombia_Tribble06"/>
-		000
+		100
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_bredemeyerana_Venezuela_Liesner7935"/>
-		000
+		100
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_brevis_Bolivia_Teran1759"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_campylophylla_Bolivia_Maldonado3174"/>
@@ -113,19 +111,19 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_cf_anceps_Peru_LopezM_8913"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_chaparensis_Bolivia_Steinbach8897"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_chiriquina_Panama_Hammel6374"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_coccinea_Peru_Nunez13229"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_cornuta_Bolivia_Fuentes17664"/>
@@ -133,7 +131,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_densiflora_Alzate3151"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_diffracta_Colombia_Tribble12"/>
@@ -145,7 +143,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_distichifolia_CultivatedinCA_SFBG20120053"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_edulis_Argentina_Novara2378"/>
@@ -157,7 +155,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_euryphylla_Ecuador_Vargas2930"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_hieronymi_Ecuador_Aluarez2557"/>
@@ -165,7 +163,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_hirsuta_CR_Bonifacino6052"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_involucrosa_Peru_Galiano6988"/>
@@ -173,27 +171,27 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_libertadensis_Peru_Alayo020"/>
-		000
+		100
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_linifolia_Colombia_Tribble8"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_lutea_Ecuador_vanderWerff12169"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_macrocephala_Bolivia_Vargas7052"/>
-		010
+		110
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_multiflora_AlzateS_N_"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_multipes_Alzate3153"/>
@@ -201,7 +199,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_nervosa_Alzate3154"/>
-		000
+		100
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_obovata_Ecuador_Clark4985"/>
@@ -217,15 +215,15 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_patacocensis_Ecuador_Luteyn14078"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_patinii_Colombia_Tribble3"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_peruviana_Peru_Stein2033B"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_porrecta_Peru_AlayoB_020"/>
@@ -233,11 +231,11 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_pumila_Bolivia_Fuentes13830"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_puracensis_GarciaBarriga13025"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_salsilla_Chile_Ackerman545"/>
@@ -245,11 +243,11 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_secundifolia_Peru_Macbride4962"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_setacea_Colombia_Tribble7"/>
-		010
+		110
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_sp__catanatasoya_Peru_Graham12611"/>
@@ -257,7 +255,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_sp__oso_Peru_Graham12613"/>
-		000
+		100
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_sp__ponillalsoya_Peru_Graham12616"/>
@@ -269,7 +267,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_suberecta_CR_Bonifacino6053"/>
-		001
+		101
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_tarmensis_Bolivia_Fernandez3467"/>
@@ -277,7 +275,7 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_torta_Alzate3270"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_trichophylla_Venezuela_Rivero1217"/>
@@ -285,11 +283,11 @@
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_vestita_AlzateS_N_"/>
-		011
+		111
 	</sequence>
 	<sequence>
 		<taxon idref="Bomarea_weigendii_Peru_Davis1224"/>
-		011
+		111
 	</sequence>
 </alignment>
 
@@ -396,7 +394,7 @@
 			<parameter idref="threshold"/>
 		</threshold>
 		<numClasses>
-			<parameter value = "2 1.0 1.0"/>
+			<parameter value = "2.0 1.0 1.0"/>
 		</numClasses>
 	</orderedLatentLiabilityLikelihood>
 
@@ -405,9 +403,6 @@
 	<operators id="operators" optimizationSchedule="log">
 		<randomWalkOperator windowSize="1.0" weight="100" >
 			<maskedParameter idref="latentParameters"/>
-		</randomWalkOperator>
-		<randomWalkOperator windowSize="0.01" weight="1" >
-			<compountParameter idref="threshold"/>
 		</randomWalkOperator>
 		<precisionGibbsOperator weight="1">
 			<multivariateTraitLikelihood idref="traitLikelihood"/>
