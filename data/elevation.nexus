@@ -1,5 +1,5 @@
 #NEXUS
-[Data written by write.nexus.data.R, Tue Oct 21 09:17:10 2025]
+[Data written by write.nexus.data.R, Tue Oct 21 10:03:01 2025]
 BEGIN DATA;
   DIMENSIONS NTAX=54 NCHAR=1;
   FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789";
@@ -18,14 +18,14 @@ BEGIN DATA;
     Bomarea_sp__catanatasoya_Peru_Graham12611                4
     Bomarea_ampayesana_Peru_Bocke3215                        9
     Bomarea_macrocephala_Bolivia_Vargas7052                  6
-    Bomarea_involucrosa_Peru_Galiano6988                     12
-    Bomarea_andimarcana_Peru_Suclli1307                      10
-    Bomarea_libertadensis_Peru_Alayo020                      10
-    Bomarea_porrecta_Peru_AlayoB_020                         10
-    Bomarea_albimontana_Peru_LeivaS_N_                       12
+    Bomarea_involucrosa_Peru_Galiano6988                     C
+    Bomarea_andimarcana_Peru_Suclli1307                      A
+    Bomarea_libertadensis_Peru_Alayo020                      A
+    Bomarea_porrecta_Peru_AlayoB_020                         A
+    Bomarea_albimontana_Peru_LeivaS_N_                       C
     Bomarea_aurantiaca_Bolivia_Fuentes13880                  9
     Bomarea_cornuta_Bolivia_Fuentes17664                     7
-    Bomarea_campylophylla_Bolivia_Maldonado3174              12
+    Bomarea_campylophylla_Bolivia_Maldonado3174              C
     Bomarea_brachysepala_Ecuador_Jorgensen2129               8
     Bomarea_hieronymi_Ecuador_Aluarez2557                    9
     Bomarea_linifolia_Colombia_Tribble8                      7
@@ -52,7 +52,7 @@ BEGIN DATA;
     Bomarea_bredemeyerana_Colombia_Tribble06                 6
     Bomarea_tarmensis_Bolivia_Fernandez3467                  2
     Bomarea_chaparensis_Bolivia_Steinbach8897                6
-    Bomarea_weigendii_Peru_Davis1224                         11
+    Bomarea_weigendii_Peru_Davis1224                         B
     Bomarea_speciosa_Bolivia_Cornejo800                      6
     Bomarea_edulis_Argentina_Novara2378                      3
     Bomarea_edulis_MorelosN_Tribble325                       3
