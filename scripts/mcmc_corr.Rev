@@ -85,14 +85,12 @@ rate_1_to_0_when_D ~ dnReversibleJumpMixture(rate_0_to_1_when_A, dnExponential( 
 rate_1_to_0_when_DE ~ dnReversibleJumpMixture(rate_0_to_1_when_A, dnExponential( rate_pr ), mix_prob)
 rate_1_to_0_when_E ~ dnReversibleJumpMixture(rate_0_to_1_when_A, dnExponential( rate_pr ), mix_prob)
 
-moves.append(mvScale(rate_increase_when_0, weight = 2))
-moves.append(mvScale(rate_decrease_when_0, weight = 2))
+moves.append(mvScale(rate_increase_when_0, weight = 4))
+moves.append(mvScale(rate_decrease_when_0, weight = 4))
+moves.append(mvRJSwitch(rate_increase_when_1, weight = 4))
+moves.append(mvRJSwitch(rate_decrease_when_1, weight = 4))
+
 moves.append(mvScale(rate_0_to_1_when_A, weight = 2))
-moves.append(mvScale(rate_1_to_0_when_A, weight = 2))
-
-moves.append(mvRJSwitch(rate_increase_when_1, weight = 2))
-moves.append(mvRJSwitch(rate_decrease_when_1, weight = 2))
-
 moves.append(mvRJSwitch(rate_0_to_1_when_AB, weight = 2))
 moves.append(mvRJSwitch(rate_0_to_1_when_ABC, weight = 2))
 moves.append(mvRJSwitch(rate_0_to_1_when_B, weight = 2))
@@ -105,6 +103,7 @@ moves.append(mvRJSwitch(rate_0_to_1_when_D, weight = 2))
 moves.append(mvRJSwitch(rate_0_to_1_when_DE, weight = 2))
 moves.append(mvRJSwitch(rate_0_to_1_when_E, weight = 2))
 
+moves.append(mvScale(rate_1_to_0_when_A, weight = 2))
 moves.append(mvRJSwitch(rate_1_to_0_when_AB, weight = 2))
 moves.append(mvRJSwitch(rate_1_to_0_when_ABC, weight = 2))
 moves.append(mvRJSwitch(rate_1_to_0_when_B, weight = 2))
