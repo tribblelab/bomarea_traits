@@ -89,7 +89,7 @@ tips_to_drop <- grep(
     "alstroemeriodes|superba|acuminata|enanorojo|",
     "foliosa|straminea|pauciflora|distichophylla|",
     "Bomarea_edulis_Brazil_Campbell8900|",
-    "Bomarea_edulis_Venezuela_Bunting4817"
+    "Bomarea_edulis_Venezuela_Bunting4817|Bomarea_ovata_Peru_Farfan526| " #<- if doing different than corr then do include ovata
   ),
   tree$tip.label,
   value = TRUE
@@ -132,7 +132,7 @@ type_mat <- matrix(type_dat$type, ncol = 1)
 rownames(type_mat) <- type_dat$label
 colnames(type_mat) <- "type"
 
-
 # Write to nexus
-write.nexus.data(type_mat, file = "data/binary_type.nexus",
+write.nexus.data(type_mat, file = "data/binary_type_corr.nexus",
                  format = "standard", missing = "?")
+

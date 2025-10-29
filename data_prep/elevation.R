@@ -43,18 +43,18 @@ elevation_df <- crossing(traits, bins) %>%
   mutate(acceptedName = gsub(" ", "_", acceptedName))
 
 state_map <- c(
-  "0"   = 1,
-  "01"  = 2,
-  "012" = 3,
-  "1"   = 4,
-  "12"  = 6,
-  "123" = 7,
-  "2"   = 8,
-  "23"  = 9,
-  "234" = "A",
-  "3"   = "B",
-  "34"  = "C",
-  "4"   = "D"
+  "0"   = 0,
+  "01"  = 1,
+  "012" = 2,
+  "1"   = 3,
+  "12"  = 4,
+  "123" = 5,
+  "2"   = 6,
+  "23"  = 7,
+  "234" = 8,
+  "3"   = 9,
+  "34"  = "A",
+  "4"   = "B"
 )
 
 elevation_df <- elevation_df %>%
@@ -92,7 +92,7 @@ tips_to_drop <- grep(
     "alstroemeriodes|superba|acuminata|enanorojo|",
     "foliosa|straminea|pauciflora|distichophylla|",
     "Bomarea_edulis_Brazil_Campbell8900|",
-    "Bomarea_edulis_Venezuela_Bunting4817|ovata"
+    "Bomarea_edulis_Venezuela_Bunting4817|Bomarea_ovata_Peru_Farfan526"
   ),
   tree$tip.label,
   value = TRUE
