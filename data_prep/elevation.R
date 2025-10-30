@@ -92,7 +92,7 @@ tips_to_drop <- grep(
     "alstroemeriodes|superba|acuminata|enanorojo|",
     "foliosa|straminea|pauciflora|distichophylla|",
     "Bomarea_edulis_Brazil_Campbell8900|",
-    "Bomarea_edulis_Venezuela_Bunting4817|Bomarea_ovata_Peru_Farfan526"
+    "Bomarea_edulis_Venezuela_Bunting4817"
   ),
   tree$tip.label,
   value = TRUE
