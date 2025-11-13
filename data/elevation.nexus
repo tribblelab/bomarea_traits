@@ -1,7 +1,7 @@
 #NEXUS
-[Data written by write.nexus.data.R, Tue Oct 21 11:23:30 2025]
+[Data written by write.nexus.data.R, Thu Oct 30 10:41:14 2025]
 BEGIN DATA;
-  DIMENSIONS NTAX=55 NCHAR=1;
+  DIMENSIONS NTAX=56 NCHAR=1;
   FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789AB";
   MATRIX
     Bomarea_brevis_Bolivia_Teran1759                         7
@@ -26,6 +26,7 @@ BEGIN DATA;
     Bomarea_aurantiaca_Bolivia_Fuentes13880                  7
     Bomarea_cornuta_Bolivia_Fuentes17664                     5
     Bomarea_campylophylla_Bolivia_Maldonado3174              A
+    Bomarea_ovata_Peru_Farfan526                             5
     Bomarea_brachysepala_Ecuador_Jorgensen2129               6
     Bomarea_hieronymi_Ecuador_Aluarez2557                    7
     Bomarea_linifolia_Colombia_Tribble8                      5
