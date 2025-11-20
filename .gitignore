@@ -11,3 +11,6 @@ data_prep/geo_data_wo_lat_long.xlsx
 figures/*
 figures
 .Rhistory
+scripts/latent_liability/*.log
+scripts/latent_liability/*.ops
+scripts/latent_liability/*.txt
