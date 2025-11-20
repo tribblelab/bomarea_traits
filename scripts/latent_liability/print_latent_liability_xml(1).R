@@ -22,14 +22,14 @@
 library(ape)
 
 printLatentLiability = function(file,latent.liability.info,tree,log.name,ngen,log.every,walk.or.scale,name.for.traits="Traits",jitter=0.01,precision=0.01,wishart=1,autoOptimize=TRUE,...){
-	# recover()
+	
   table = latent.liability.info
 	taxa = row.names(table)
 	types = names(table)
 	d.or.c <- names(table)
 	
 	ntraits= length(types)
-	
+	#recover()
 	if (length(taxa) != length(tree$tip.label)) {
 		stop("ERROR: tree size not equal to number of species in table")
 	}
@@ -57,7 +57,7 @@ printLatentLiability = function(file,latent.liability.info,tree,log.name,ngen,lo
 	}
 	
 	types[which(tolower(types) == "c")] = "1.0"
-	types[which(tolower(types) == "d")] = "2.0"
+	types[which(tolower(types) == "d")] = "1.0"
 	# recover()
 	if (hasArg(is.multistate)) {
 		is.multistate <- list(...)$is.multistate

@@ -1,11 +1,14 @@
 library(ape)
 library(tidyverse)
-source("print_latent_liability_xml(1).R")
+setwd("bomarea_traits")
+
+source("scripts/latent_liability/print_latent_liability_xml(1).R")
+
 
 ### Turn traits into df
 
 # Type
-type_lines <- readLines("bomarea_traits/data/binary_type.nexus")
+type_lines <- readLines("data/binary_type.nexus")
 start_type <- grep("MATRIX", type_lines, ignore.case = TRUE) + 1
 end_type <- grep(";", type_lines[start_type:length(type_lines)], fixed = TRUE)[1] + start_type - 2
 
@@ -19,7 +22,7 @@ type_df$Species <- trimws(type_df$species)
 ## Continuous
 
 # Size
-size_lines <- readLines("bomarea_traits/data/size.nexus")
+size_lines <- readLines("data/size.nexus")
 start_size <- grep("MATRIX", size_lines, ignore.case = TRUE) + 1
 end_size <- grep(";", size_lines[start_size:length(size_lines)], fixed = TRUE)[1] + start_size - 2
 
@@ -30,7 +33,7 @@ size_df <- read.table(text = size_mat, header = FALSE, stringsAsFactors = FALSE)
 names(size_df) <- c("species", "size")
 
 # Sparsity
-sparsity_lines <- readLines("bomarea_traits/data/sparsity.nexus")
+sparsity_lines <- readLines("data/sparsity.nexus")
 start_sparsity <- grep("MATRIX", sparsity_lines, ignore.case = TRUE) + 1
 end_sparsity <- grep(";", sparsity_lines[start_sparsity:length(sparsity_lines)], fixed = TRUE)[1] + start_sparsity - 2
 
@@ -44,7 +47,7 @@ names(sparsity_df) <- c("species", "sparsity")
 ## Load in data and tree (D,C,C)
 bom.data <- Reduce(function(x, y) merge(x, y, by = "species", all = TRUE),
                    list(type_df, size_df, sparsity_df))
-bom.tree <- read.tree("bomarea_traits/data/tree_edited.tre")
+bom.tree <- read.tree("data/tree_edited.tre")
 
 bom.data.for.xml <- bom.data[, -1]
 names(bom.data.for.xml) <- c("d", "c", "c")
@@ -59,12 +62,14 @@ names(bom.data.for.xml) <- c("d", "c", "c")
 bom.data.for.xml[, 2:3] <- scale(bom.data.for.xml[, 2:3])
 
 ## Write the xml
-printLatentLiability(file="bomarea_traits/scripts/latent_liability/bomarea_latent_liability.xml",
+printLatentLiability(file="scripts/latent_liability/bomarea_latent_liability_edited.xml",
                      latent.liability.info=bom.data.for.xml,
                      tree=bom.tree,
                      log.name="bomarea_latent_liability",
                      ngen="100000000", log.every="10000",
                      walk.or.scale="walk",
+                     is.multistate = 1,
                      name.for.traits="bomareaTraits",
-                     jitter=0.2, precision=0.05, wishart=0.1)
+                     jitter=0, precision=0.05, wishart=0.1)
+
 
