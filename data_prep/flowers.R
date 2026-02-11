@@ -4,6 +4,7 @@ library(readxl)
 library(ape)
 library(car)
 
+setwd("~/Desktop/bomarea_traits/")
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
 # Function to get most discrete value
@@ -36,7 +37,7 @@ get_gen_sp <- function(x) {
 flowers <- traits %>%
   mutate(max_flowers_branch = 1 + pmax(numBranch1, numBranch2, numBranch3,
                             numBranch4, numBranch5, na.rm = TRUE),
-         flowers = (numBranchP * max_flowers_branch)) %>%
+         flowers = log(numBranchP * max_flowers_branch)) %>%
   group_by(acceptedName) %>%
   summarise(flowers = max(flowers, na.rm = TRUE)) %>%
   ungroup()
@@ -97,3 +98,4 @@ colnames(flowers_mat) <- "flowers"
 # Write to nexus
 write.nexus.data(flowers_mat, file = "data/flowers.nexus",
                  format = "standard", missing = "?")
+

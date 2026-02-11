@@ -131,7 +131,7 @@ plotCorrelationDistributions = function(correlations,labels,lwd=1,cex.labels=1,o
   keepers = keepers[which(row.index != col.index)]
   keepers = keepers[which(row.index[keepers] < col.index[keepers])]
  
-  corr.means = apply(correlations[,keepers],2,mean)
+  corr.means = apply(correlations[,keepers, drop = FALSE],2,mean)
   
   # assign colors 
   neg.corr.colors = brewer.pal(9,"Blues")
@@ -222,8 +222,8 @@ compareCorrelationDistributions = function(correlations.upper,correlations.lower
   keepers = keepers[which(row.index != col.index)]
   keepers = keepers[which(row.index[keepers] < col.index[keepers])]
   
-  corr.means.upper = apply(correlations.upper[,keepers],2,mean)
-  corr.means.lower = apply(correlations.lower[,keepers],2,mean)
+corr.means.upper = apply(as.matrix(correlations.upper[, keepers, drop = FALSE]), 2, mean)
+corr.means.lower = apply(as.matrix(correlations.lower[, keepers, drop = FALSE]), 2, mean)
   
   # assign colors for upper diagonal
   neg.corr.colors = brewer.pal(9,"Blues")

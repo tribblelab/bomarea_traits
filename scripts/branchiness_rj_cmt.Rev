@@ -40,7 +40,7 @@ moves.append( mvScale(q_change_type,   lambda=0.2) )
 within_between_same := ifelse(q_within_compound == q_change_type, 1.0, 0.0 )
 
 
-#### Create an empty Q-matrix
+#### create an empty Q-matrix
 for (i in 1:NUM_STATES) {
 for (j in 1:NUM_STATES) {
 q[i][j] := 0.0

@@ -1,0 +1,7 @@
+
+Operator analysis
+Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) Smoothed_Pr(accept)
+randomWalkOperator(latentParameters)              1.062   97057187   3374290  0.03     0.234       0.26        
+randomWalkOperator(threshold)                     1.791   971035     7897     0.01     0.2338      0.19        
+precisionGibbsOperator                                    971778     35020    0.04     1.0         1.0         
+

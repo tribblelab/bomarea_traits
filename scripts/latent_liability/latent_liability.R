@@ -1,6 +1,6 @@
 library(ape)
 library(tidyverse)
-setwd("bomarea_traits")
+setwd("~/Desktop/bomarea_traits")
 
 source("scripts/latent_liability/print_latent_liability_xml(1).R")
 
@@ -32,21 +32,23 @@ size_mat <- size_mat[!grepl("^\\s*$|\\[|#", size_mat)]
 size_df <- read.table(text = size_mat, header = FALSE, stringsAsFactors = FALSE)
 names(size_df) <- c("species", "size")
 
-# Sparsity
-sparsity_lines <- readLines("data/sparsity.nexus")
-start_sparsity <- grep("MATRIX", sparsity_lines, ignore.case = TRUE) + 1
-end_sparsity <- grep(";", sparsity_lines[start_sparsity:length(sparsity_lines)], fixed = TRUE)[1] + start_sparsity - 2
+# Density
+density_lines <- readLines("data/density.nexus")
+start_density <- grep("MATRIX", density_lines, ignore.case = TRUE) + 1
+end_density <- grep(";", density_lines[start_density:length(density_lines)], fixed = TRUE)[1] + start_density - 2
 
-sparsity_mat <- sparsity_lines[start_sparsity:end_sparsity]
-sparsity_mat <- sparsity_mat[!grepl("^\\s*$|\\[|#", sparsity_mat)]
+density_mat <- density_lines[start_density:end_density]
+density_mat <- density_mat[!grepl("^\\s*$|\\[|#", density_mat)]
 
-sparsity_df <- read.table(text = sparsity_mat, header = FALSE, stringsAsFactors = FALSE)
-names(sparsity_df) <- c("species", "sparsity")
+density_df <- read.table(text = density_mat, header = FALSE, stringsAsFactors = FALSE)
+names(density_df) <- c("species", "density")
 
 ### Make df for .xml file
 ## Load in data and tree (D,C,C)
+
+# 3 variables
 bom.data <- Reduce(function(x, y) merge(x, y, by = "species", all = TRUE),
-                   list(type_df, size_df, sparsity_df))
+                   list(type_df, size_df, density_df))
 bom.tree <- read.tree("data/tree_edited.tre")
 
 bom.data.for.xml <- bom.data[, -1]
@@ -61,8 +63,25 @@ names(bom.data.for.xml) <- c("d", "c", "c")
 
 bom.data.for.xml[, 2:3] <- scale(bom.data.for.xml[, 2:3])
 
+# 2 variables
+bom.data <- Reduce(function(x, y) merge(x, y, by = "species", all = TRUE),
+                   list(type_df, density_df))
+bom.tree <- read.tree("data/tree_edited.tre")
+
+bom.data.for.xml <- bom.data[, -1]
+names(bom.data.for.xml) <- c("d", "c")
+row.names(bom.data.for.xml) <- bom.data$species
+
+bom.data.for.xml[, 1] <- gsub("\\?", NA, bom.data.for.xml[, 1])
+bom.data.for.xml[, 1] <- as.numeric(bom.data.for.xml[, 1])
+
+bom.data.for.xml <- bom.data.for.xml[, c(1, 3)]
+names(bom.data.for.xml) <- c("d", "c")
+
+bom.data.for.xml[, 2] <- scale(bom.data.for.xml[, 2])
+
 ## Write the xml
-printLatentLiability(file="scripts/latent_liability/bomarea_latent_liability_edited.xml",
+printLatentLiability(file="scripts/latent_liability/sparsity/bomarea_latent_liability_density.xml",
                      latent.liability.info=bom.data.for.xml,
                      tree=bom.tree,
                      log.name="bomarea_latent_liability",
@@ -71,5 +90,3 @@ printLatentLiability(file="scripts/latent_liability/bomarea_latent_liability_edi
                      is.multistate = 1,
                      name.for.traits="bomareaTraits",
                      jitter=0, precision=0.05, wishart=0.1)
-
-
