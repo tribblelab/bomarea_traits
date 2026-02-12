@@ -1,0 +1,56 @@
+label,speciesName,type,branchiness,flowers,density,avg_size,elevation_bin
+Bomarea_albimontana_Peru_LeivaS_N_,Bomarea albimontana,0,0,2.08,1.71,3.79,34
+Bomarea_amilcariana_Venezuela_Dorr8337,Bomarea amilcariana,1,3,3.18,0.82,4.46,2
+Bomarea_ampayesana_Peru_Bocke3215,Bomarea ampayesana,1,3,2.48,2.5,4.36,23
+Bomarea_andimarcana_Peru_Suclli1307,Bomarea andimarcana,1,3,2.48,1.17,3.8,234
+Bomarea_angulata_Peru_Quiroz3208,Bomarea angulata,0,0,3.22,2.91,5.3,12
+Bomarea_aurantiaca_Bolivia_Fuentes13880,Bomarea aurantiaca,0,0,3.14,3.03,5.1,23
+Bomarea_brachysepala_Ecuador_Jorgensen2129,Bomarea brachysepala,1,2,2.2,2.54,4.42,2
+Bomarea_bredemeyerana_Colombia_Tribble06,Bomarea bredemeyerana,0,0,2.89,1.47,4.49,12
+Bomarea_bredemeyerana_Venezuela_Liesner7935,Bomarea bredemeyerana,0,0,2.89,1.47,4.49,12
+Bomarea_brevis_Bolivia_Teran1759,Bomarea brevis,0,0,1.1,2.63,4.2,23
+Bomarea_campylophylla_Bolivia_Maldonado3174,Bomarea campylophylla,1,2,2.71,1.89,5.48,34
+Bomarea_cf_anceps_Peru_LopezM_8913,Bomarea cf anceps,0,0,3.69,2.44,5.77,1
+Bomarea_chaparensis_Bolivia_Steinbach8897,Bomarea chaparensis,0,0,2.48,3.32,5.38,12
+Bomarea_chiriquina_Panama_Hammel6374,Bomarea chiriquina,0,0,2.71,2.62,5.5,1
+Bomarea_coccinea_Peru_Nunez13229,Bomarea coccinea,0,0,1.95,3.03,4.1,23
+Bomarea_cornuta_Bolivia_Fuentes17664,Bomarea cornuta,1,3,3.69,2.56,5.25,123
+Bomarea_densiflora_Alzate3151,Bomarea densiflora,0,0,4.13,2.45,5.29,123
+Bomarea_diffracta_Colombia_Tribble12,Bomarea diffracta,1,5,4.28,1.34,5.18,12
+Bomarea_dispar_Peru_SchunkeV_3544,Bomarea dispar,1,3,2.77,3.1,5.87,01
+Bomarea_distichifolia_CultivatedinCA_SFBG20120053,Bomarea distichifolia,0,0,1.95,2.36,3.76,123
+Bomarea_edulis_Argentina_Novara2378,Bomarea edulis,1,3,3.78,1.61,5.19,012
+Bomarea_edulis_MorelosN_Tribble325,Bomarea edulis,1,3,3.78,1.61,5.19,012
+Bomarea_euryphylla_Ecuador_Vargas2930,Bomarea euryphylla,0,0,4.08,3.02,6.83,123
+Bomarea_hieronymi_Ecuador_Aluarez2557,Bomarea hieronymi,1,4,3,2.22,4.54,23
+Bomarea_hirsuta_CR_Bonifacino6052,Bomarea hirsuta,0,0,3.09,2.45,4.93,123
+Bomarea_involucrosa_Peru_Galiano6988,Bomarea involucrosa,1,1,2.64,0.67,3.35,34
+Bomarea_libertadensis_Peru_Alayo020,Bomarea libertadensis,0,0,2.48,2.31,4.79,234
+Bomarea_linifolia_Colombia_Tribble8,Bomarea linifolia,0,0,1.79,3.62,4.02,123
+Bomarea_lutea_Ecuador_vanderWerff12169,Bomarea lutea,0,0,2.71,3.3,5.84,23
+Bomarea_macrocephala_Bolivia_Vargas7052,Bomarea macrocephala,0,0,2.56,2.21,4.91,12
+Bomarea_multiflora_AlzateS_N_,Bomarea multiflora,0,0,3.22,2.75,5.73,123
+Bomarea_multipes_Alzate3153,Bomarea multipes,1,1,3.4,2.35,5.93,12
+Bomarea_nervosa_Alzate3154,Bomarea nervosa,0,0,2.3,2.31,4.24,23
+Bomarea_obovata_Ecuador_Clark4985,Bomarea obovata,1,7,3.69,2.43,4.94,0
+Bomarea_ovallei_KEW,Bomarea ovallei,1,1,1.39,2.16,3.55,0
+Bomarea_ovata_Peru_Farfan526,Bomarea ovata,1,2,4.09,1,4.74,0123
+Bomarea_patacocensis_Ecuador_Luteyn14078,Bomarea patacocensis,0,0,3.95,2.83,6.71,1
+Bomarea_patinii_Colombia_Tribble3,Bomarea patinii,0,0,3.87,2.95,6.34,123
+Bomarea_peruviana_Peru_Stein2033B,Bomarea peruviana,0,0,3,3.55,6.54,2
+Bomarea_porrecta_Peru_AlayoB_020,Bomarea porrecta,1,2,2.2,0.6,3.36,234
+Bomarea_pumila_Bolivia_Fuentes13830,Bomarea pumila,0,0,0,3.92,3.83,23
+Bomarea_puracensis_GarciaBarriga13025,Bomarea puracensis,0,0,2.56,3.73,4.75,123
+Bomarea_salsilla_Chile_Ackerman545,Bomarea salsilla,1,2,3.4,1.42,4.46,0
+Bomarea_secundifolia_Peru_Macbride4962,Bomarea secundifolia,0,0,1.39,3.01,4.4,23
+Bomarea_setacea_Colombia_Tribble7,Bomarea setacea,0,0,3.14,2.01,4.9,123
+Bomarea_sp__catanatasoya_Peru_Graham12611,Bomarea sp catanatasoya,1,2,12,3.45,2.15,2
+Bomarea_sp__oso_Peru_Graham12613,Bomarea sp oso,0,0,3,2.54,0.76,2
+Bomarea_sp__ponillalsoya_Peru_Graham12616,Bomarea sp ponillalsoya,1,5,6,4.46,2.84,2
+Bomarea_speciosa_Bolivia_Cornejo800,Bomarea speciosa,1,2,3.58,2.61,6.22,12
+Bomarea_suberecta_CR_Bonifacino6053,Bomarea suberecta,0,0,2.4,2.53,4.5,1
+Bomarea_tarmensis_Bolivia_Fernandez3467,Bomarea tarmensis,1,2,4.28,1.1,5.77,01
+Bomarea_torta_Alzate3270,Bomarea torta,0,0,3.85,2.89,5.14,23
+Bomarea_trichophylla_Venezuela_Rivero1217,Bomarea trichophylla,1,3,4.94,2.37,6.07,23
+Bomarea_vestita_AlzateS_N_,Bomarea vestita,0,0,2.64,3.04,4.97,23
+Bomarea_weigendii_Peru_Davis1224,Bomarea weigendii,0,0,2.08,3.32,5.4,3
