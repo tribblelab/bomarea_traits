@@ -4,8 +4,8 @@ library(ggthemes)
 setwd("~/Desktop/bomarea_traits/")
 
 # process data
-rates <- readTrace(c("output/binary_type_ard_run_1.log",
-                     "output/binary_type_ard_run_2.log"))
+rates <- readTrace(c("output/type_ard_run_1.log",
+                     "output/type_ard_run_2.log"))
 
 rates <- combineTraces(rates)
 
@@ -65,4 +65,4 @@ g <- ggplot(df_rates) +
 summarizeTrace(rates, vars = c("rate[1]", "rate[2]"))
 
 print(g)
-ggsave("figures/binary_type_violinPlot.png", width = 15, height = 10, dpi = 200)
+ggsave("figures/type_violin.png", width = 15, height = 10, dpi = 200)
