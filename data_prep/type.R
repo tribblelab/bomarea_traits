@@ -50,13 +50,14 @@ tips_to_drop <- grep(
     "foliosa|straminea|pauciflora|distichophylla|",
     "Bomarea_edulis_Brazil_Campbell8900|",
     "Bomarea_edulis_Venezuela_Bunting4817|",
-    "Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse" # |Bomarea_ovata_Peru_Farfan526" # don't include if doing correlated
+    "Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse|",
+    "Bomarea_ovata_Peru_Farfan526" # don't include if doing correlated cuz it occupies >3 bins
   ),
   tree$tip.label,
   value = TRUE
 )
 tree_edited <- ape::drop.tip(tree, tips_to_drop)
-write.tree(tree_edited, file = "data/tree_edited.tre") # change to tree_edited_corr.tre if doing correlated
+write.tree(tree_edited, file = "data/tree_edited_corr.tre") # change to tree_edited_corr.tre if doing correlated
 tree_df <- as_tibble(tree_edited)
 
 # combine species names
@@ -94,9 +95,9 @@ colnames(type_mat) <- "type"
 ## Write to nexus
 
 # for everything else
-write.nexus.data(type_mat, file = "data/type.nexus",
-                 format = "standard", missing = "?")
+# write.nexus.data(type_mat, file = "data/type.nexus",
+#                  format = "standard", missing = "?")
 
 # for correlation analysis
-# write.nexus.data(type_mat, file = "data/type_corr.nexus",
-#                  format = "standard", missing = "?")
+write.nexus.data(type_mat, file = "data/type_corr.nexus",
+                 format = "standard", missing = "?")
