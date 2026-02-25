@@ -5,35 +5,11 @@ library(ape)
 library(car)
 
 setwd("~/Desktop/bomarea_traits/")
+source("scripts/functions.R")
+
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
-# Function to get most discrete value
-most_frequent_discrete_value <- function(vec) {
-  tbl <- table(vec)
-  if (dim(tbl) > 0) {
-    value <- names(tbl)[which.max(tbl)]
-    return(value)
-  } else {
-    return(NA)
-  }
-}
-
-# Function to create species name
-get_gen_sp <- function(x) {
-  if (is.na(x)) {
-    return(NA)
-  } else if (grepl("_cf_", x)) {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[3])
-    return(newname)
-  } else {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[2])
-    return(newname)
-  }
-}
-
-# Calculates max number of branches per species
+## Calculates max number of branches per species
 flowers <- traits %>%
   mutate(max_flowers_branch = 1 + pmax(numBranch1, numBranch2, numBranch3,
                             numBranch4, numBranch5, na.rm = TRUE),
@@ -44,9 +20,8 @@ flowers <- traits %>%
 
 flowers$acceptedName <- gsub(" ", "_", flowers$acceptedName)
 
-
-
-# Match names to tree and drop some tips
+## Tree and data cleaning
+# match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
 tips_to_drop <- grep(
   paste0(
@@ -67,7 +42,7 @@ write.tree(tree_edited, file = "data/tree_edited.tre")
 tree_df <- as_tibble(tree_edited)
 
 
-# Combine species names
+# combine species names
 tree_df$speciesName <- unlist(lapply(tree_df$label, get_gen_sp))
 tree_df <- left_join(tree_df, flowers,
                      by = c("speciesName" = "acceptedName"))
@@ -76,7 +51,7 @@ flowers_dat <- data.frame(label = tree_df$label,
 flowers_dat <- flowers_dat[is.na(flowers_dat$label) == FALSE, ]
 
 
-# Manually added these to nexus file
+# manually added these to nexus file
 manual_add <- data.frame(
   label = c("Bomarea_sp__oso_Peru_Graham12613",
             "Bomarea_sp__ponillalsoya_Peru_Graham12616",
@@ -84,19 +59,18 @@ manual_add <- data.frame(
   flowers = c(3, 6, 12)
 )
 
-# Merge into existing df
+# merge into existing df
 flowers_dat <- flowers_dat %>%
   left_join(manual_add, by = "label") %>%
   mutate(flowers = coalesce(flowers.y, flowers.x)) %>%
   select(label, flowers)
 
 
-# Matrix for flowers
+# matrix for flowers
 flowers_mat <- as.matrix(flowers_dat$flowers)
 rownames(flowers_mat) <- flowers_dat$label
 colnames(flowers_mat) <- "flowers"
 
-# Write to nexus
+## Write to nexus
 write.nexus.data(flowers_mat, file = "data/flowers.nexus",
                  format = "standard", missing = "?")
-
