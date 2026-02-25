@@ -93,9 +93,9 @@ colnames(type_mat) <- "type"
 ## Write to nexus
 
 # for everything else
-write.nexus.data(type_mat, file = "data/binary_type.nexus",
+write.nexus.data(type_mat, file = "data/type.nexus",
                  format = "standard", missing = "?")
 
 # for correlation analysis
-# write.nexus.data(type_mat, file = "data/binary_type_corr.nexus",
+# write.nexus.data(type_mat, file = "data/type_corr.nexus",
 #                  format = "standard", missing = "?")
