@@ -1,41 +1,14 @@
-setwd("~/Desktop/bomarea_traits/")
-
 library(dplyr)
 library(readxl)
 library(ape)
 library(tidytree)
 
+setwd("~/Desktop/bomarea_traits/")
+source("scripts/functions.R")
+
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
-# Function to get most discrete value
-most_frequent_discrete_value <- function(vec) {
-  tbl <- table(vec)
-  if (dim(tbl) > 0) {
-    value <- names(tbl)[which.max(tbl)]
-    return(value)
-  } else {
-    return(NA)
-  }
-}
-
-# Function to create species name
-get_gen_sp <- function(x) {
-  if (is.na(x)) {
-    return(NA)
-  } else if (grepl("_cf_", x)) {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[3])
-    return(newname)
-  } else {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[2])
-    return(newname)
-  }
-}
-
-
-# Calculates size
-
+## Calculates size
 size_df <- traits %>%
   mutate(numBranchesMeasured =
             rowSums(!is.na(select(., starts_with("lengthSeg"))))) %>%
@@ -56,7 +29,8 @@ size_df <- traits %>%
 
 size_df$acceptedName <- gsub(" ", "_", size_df$acceptedName)
 
-# Match names to tree and drop some tips
+## Tree and data cleaning
+# match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
 tips_to_drop <- grep(
   paste0(
@@ -77,7 +51,7 @@ write.tree(tree_edited, file = "data/tree_edited.tre")
 tree_df <- as_tibble(tree_edited)
 
 
-# Combine species names
+# combine species names
 tree_df$speciesName <- unlist(lapply(tree_df$label, get_gen_sp))
 tree_df <- left_join(tree_df, size_df,
                      by = c("speciesName" = "acceptedName"))
@@ -86,7 +60,7 @@ size_dat <- data.frame(label = tree_df$label,
 size_dat <- size_dat[is.na(size_dat$label) == FALSE, ]
 
 
-# Manually added these to nexus file
+# manually added these to nexus file
 manual_add <- data.frame(
   label = c("Bomarea_sp__oso_Peru_Graham12613",
             "Bomarea_sp__ponillalsoya_Peru_Graham12616",
@@ -94,7 +68,7 @@ manual_add <- data.frame(
   avg_size = c(0.757, 2.842, 2.146)
 )
 
-# Merge into existing df
+# merge into existing df
 size_dat <- size_dat %>%
   left_join(manual_add, by = "label") %>%
   mutate(avg_size = coalesce(avg_size.y, avg_size.x)) %>%
@@ -103,11 +77,11 @@ size_dat <- size_dat %>%
 size_dat <- size_dat %>%
         mutate(avg_size = round(avg_size, 2))
 
-# Matrix for size
+# matrix for size
 size_mat <- as.matrix(size_dat$avg_size)
 rownames(size_mat) <- size_dat$label
 colnames(size_mat) <- "avg_size"
 
-# Write to nexus
+## Write to nexus
 write.nexus.data(size_mat, file = "data/size.nexus",
                  format = "continuous", missing = "?")
