@@ -1,5 +1,4 @@
-morpho <- readDiscreteCharacterData("data/type_binary.nexus")
-
+morpho <- readDiscreteCharacterData("data/type.nexus")
 phylogeny <- readTrees("data/tree_edited.tre")[1]
 
 moves = VectorMoves()
@@ -7,37 +6,60 @@ monitors = VectorMonitors()
 
 rate_pr := phylogeny.treeLength() / 10
 
-NUM_STATES = 3
+NUM_STATES = 2
 
 NUM_RATES = NUM_STATES * (NUM_STATES-1)
 for ( i in 1:NUM_RATES ) {
     rate[i] ~ dnExp(rate_pr)
-    moves.append( mvScale( rate[i], weight=2 ) )
+    moves.append( mvScale(rate[i], lambda=1, weight=2.0) )
 }
 
 Q_morpho := fnFreeK( rate, rescale=false )
 
-# root states
-rf_prior <- [1,1,1]
-rf ~ dnDirichlet( rf_prior )
-moves.append( mvBetaSimplex( rf, weight=2 ) )
-moves.append( mvDirichletSimplex( rf, weight=2 ) )
-
-phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, rootFrequencies=rf, type="Standard")
+phyMorpho ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, type="Standard")
 phyMorpho.clamp(morpho)
+
 mymodel = model(phylogeny)
-monitors.append( mnModel(filename="output/binary_type_ard.log", printgen=10) )
+monitors.append( mnModel(filename="output/type_asr/type_ard.log", printgen=10) )
 monitors.append( mnScreen(printgen=100) )
 monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
                                                    ctmc=phyMorpho,
-                                                   filename="output/binary_type_ard_states.txt",
+                                                   filename="output/type_asr/type_ard_states.txt",
                                                    type="Standard",
                                                    printgen=1,
                                                    withTips=true,
                                                    withStartStates=false) )
 
-mymcmc = mcmc(mymodel, monitors, moves, nruns=2)
+mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
+mymcmc.burnin(generations=500,tuningInterval=100)
 mymcmc.run(generations=25000, tuningInterval=200)
 ->
-anc_states = readAncestralStateTrace("output/binary_type_ard_states_comb.txt")
-anc_tree = ancestralStateTree(tree=phylogeny, ancestral_state_trace_vector=anc_states, include_start_states=false, file="output/binary_type_ase_ard.tree", burnin=0, summary_statistic="MAP", site=1)
+## in output/type_asr/ and bash 
+# "awk 'FNR == 1 && NR != 1 { next } { print }' 
+# type_run_1.txt type_run_2.txt > type_run_combined.txt"
+
+## to remove 10% burn in
+# total_lines=$(wc -l < branchiness_combined.txt)
+# skip_lines=$((total_lines / 10))
+# awk -v skip="$skip_lines" 'NR > skip || NR == 1' branchiness_combined.txt > branchiness_combined_trimmed.txt
+
+anc_states = readAncestralStateTrace("output/type_asr/type_ard_states_trimmed.txt")
+anc_tree = ancestralStateTree(tree=phylogeny,
+                              ancestral_state_trace_vector=anc_states,
+                              include_start_states=false,
+                              file="output/type_asr/type_ase_ard.tree",
+                              burnin=0,
+                              summary_statistic="MAP",
+                              site=1)
+
+
+
+
+
+
+
+
+
+
+
+
