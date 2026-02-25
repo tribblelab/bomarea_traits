@@ -1,7 +1,7 @@
 #NEXUS
 [Data written by write.nexus.data.R, Wed Jun  4 08:12:25 2025]
 BEGIN DATA;
-  DIMENSIONS NTAX=56 NCHAR=2;
+  DIMENSIONS NTAX=55 NCHAR=2;
   FORMAT DATATYPE=CONTINUOUS MISSING=? GAP=-;
   MATRIX                                                    [size           sparsity]
     Bomarea_brevis_Bolivia_Teran1759                         4.2            2.63
@@ -44,7 +44,6 @@ BEGIN DATA;
     Bomarea_patinii_Colombia_Tribble3                        6.34           2.95
     Bomarea_patacocensis_Ecuador_Luteyn14078                 6.71           2.83
     Bomarea_multiflora_AlzateS_N_                            5.73           2.75
-    Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse      5.73           2.75
     Bomarea_bredemeyerana_Venezuela_Liesner7935              4.49           1.47
     Bomarea_chiriquina_Panama_Hammel6374                     5.5            2.62
     Bomarea_hirsuta_CR_Bonifacino6052                        4.93           2.45

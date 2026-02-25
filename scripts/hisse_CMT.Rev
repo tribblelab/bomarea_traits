@@ -140,6 +140,7 @@ rate_matrix := fnHiddenStateRateMatrix(transition_rates, R, rescaled=false)
 # moves.append( mvBetaSimplex(rate_category_prior,tune=true,weight=2) )
 # moves.append( mvDirichletSimplex(rate_category_prior,tune=true,weight=2) )
 
+### constraining the root to compound
 state_1_priors ~ dnDirichlet(  rep(1,2) )
 moves.append( mvBetaSimplex(state_1_priors,tune=true,weight=2) )
 moves.append( mvDirichletSimplex(state_1_priors,tune=true,weight=2) )
