@@ -35,14 +35,14 @@ mymcmc.burnin(generations=500,tuningInterval=100)
 mymcmc.run(generations=25000, tuningInterval=200)
 ->
 ## in output/type_asr/ and bash 
-# "awk 'FNR == 1 && NR != 1 { next } { print }' 
-# type_run_1.txt type_run_2.txt > type_run_combined.txt"
+# awk 'FNR == 1 && NR != 1 { next } { print }' type_ard_states_run_1.txt type_ard_states_run_2.txt > type_ard_states_combined.txt
 
 ## to remove 10% burn in
-# total_lines=$(wc -l < branchiness_combined.txt)
+# total_lines=$(wc -l < type_ard_states_combined.txt)
 # skip_lines=$((total_lines / 10))
-# awk -v skip="$skip_lines" 'NR > skip || NR == 1' branchiness_combined.txt > branchiness_combined_trimmed.txt
+# awk -v skip="$skip_lines" 'NR > skip || NR == 1' type_ard_states_combined.txt > type_ard_states_trimmed.txt
 
+## back to revbayes
 anc_states = readAncestralStateTrace("output/type_asr/type_ard_states_trimmed.txt")
 anc_tree = ancestralStateTree(tree=phylogeny,
                               ancestral_state_trace_vector=anc_states,
