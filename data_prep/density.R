@@ -33,8 +33,6 @@ density_df <- traits %>%
   ungroup()
 
 density_df$acceptedName <- gsub(" ", "_", density_df$acceptedName)
-density_df <- density_df %>%
-  mutate(density = round(density, 2))
 
 ## Tree and data cleaning
 # Match names to tree and drop some tips
@@ -81,8 +79,8 @@ manual_add <- data.frame(
 density_dat <- density_dat %>%
   left_join(manual_add, by = "label") %>%
   mutate(density = coalesce(density.y, density.x)) %>%
-  select(label, density)
-
+  select(label, density) %>%
+  mutate(density = round(density, 2))
 
 # matrix for density
 density_mat <- as.matrix(density_dat$density)
