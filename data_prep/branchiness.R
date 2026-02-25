@@ -22,7 +22,7 @@ branchiness_max$acceptedName <- gsub(" ", "_", branchiness_max$acceptedName)
 
 ## Tree and data cleaning
 # match names to tree and drop some tips
-tree <- read.tree("data/bom_only_MAP.tre")
+tree <- read.tree("data_prep/bom_only_MAP.tre")
 tips_to_drop <- grep(
   paste0(
     "caudata|herbertiana|glaucescens|parvifolia|",
