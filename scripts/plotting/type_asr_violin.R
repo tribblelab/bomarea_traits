@@ -1,11 +1,12 @@
 library(RevGadgets)
 library(tidyverse)
 library(ggthemes)
+
 setwd("~/Desktop/bomarea_traits/")
 
 # process data
-rates <- readTrace(c("output/type_ard_run_1.log",
-                     "output/type_ard_run_2.log"))
+rates <- readTrace(c("output/type_asr/type_ard_run_1.log",
+                     "output/type_asr/type_ard_run_2.log"))
 
 rates <- combineTraces(rates)
 
@@ -14,11 +15,10 @@ cols <- c("rate[1]", "rate[2]")
 
 
 # change column names to more informative parameters
-#    A  B  C
-# A  X  1  2
-# B  3  X  4
-# C  5  6  X
-# where A = plain, B = bracteole, C = compound
+#    A  B
+# A  X  1
+# B  2  X
+# where A = plain, B = compound
 
 df_cols <- df[,cols]
 colnames(df_cols) <- c("Simple to compound",
