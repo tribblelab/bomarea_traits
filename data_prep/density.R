@@ -1,38 +1,12 @@
-setwd("~/Desktop/bomarea_traits/")
-
 library(dplyr)
 library(readxl)
 library(ape)
 library(tidytree)
 
+setwd("~/Desktop/bomarea_traits/")
+source("scripts/functions.R")
+
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
-
-# Function to get most discrete value
-most_frequent_discrete_value <- function(vec) {
-  tbl <- table(vec)
-  if (dim(tbl) > 0) {
-    value <- names(tbl)[which.max(tbl)]
-    return(value)
-  } else {
-    return(NA)
-  }
-}
-
-# Function to create species name
-get_gen_sp <- function(x) {
-  if (is.na(x)) {
-    return(NA)
-  } else if (grepl("_cf_", x)) {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[3])
-    return(newname)
-  } else {
-    namesplit <- unlist(strsplit(x, split = "_"))
-    newname <- paste0(namesplit[1], "_", namesplit[2])
-    return(newname)
-  }
-}
-
 
 # Calculates max branching and density
 traits$maxBranch <- pmax(traits$numBranch1,
@@ -62,6 +36,7 @@ density_df$acceptedName <- gsub(" ", "_", density_df$acceptedName)
 density_df <- density_df %>%
   mutate(density = round(density, 2))
 
+## Tree and data cleaning
 # Match names to tree and drop some tips
 tree <- read.tree("data/bom_only_MAP.tre")
 tips_to_drop <- grep(
@@ -83,7 +58,7 @@ write.tree(tree_edited, file = "data/tree_edited.tre")
 tree_df <- as_tibble(tree_edited)
 
 
-# Combine species names
+# combine species names
 tree_df$speciesName <- unlist(lapply(tree_df$label, get_gen_sp))
 tree_df <- left_join(tree_df, density_df,
                      by = c("speciesName" = "acceptedName"))
@@ -92,7 +67,7 @@ density_dat <- data.frame(label = tree_df$label,
 density_dat <- density_dat[is.na(density_dat$label) == FALSE, ]
 
 
-# Manually added these to nexus file
+# manually added these to nexus file
 manual_add <- data.frame(
   label = c("Bomarea_sp__oso_Peru_Graham12613",
             "Bomarea_sp__ponillalsoya_Peru_Graham12616",
@@ -102,18 +77,18 @@ manual_add <- data.frame(
               log((((179.4 + 198.3) / 2) * 3) / (6 * (2 + 1)))
 ))
 
-# Merge into existing df
+# merge into existing df
 density_dat <- density_dat %>%
   left_join(manual_add, by = "label") %>%
   mutate(density = coalesce(density.y, density.x)) %>%
   select(label, density)
 
 
-# Matrix for density
+# matrix for density
 density_mat <- as.matrix(density_dat$density)
 rownames(density_mat) <- density_dat$label
 colnames(density_mat) <- "density"
 
-# Write to nexus
+## Write to nexus
 write.nexus.data(density_mat, file = "data/density.nexus",
                  format = "standard", missing = "?")
