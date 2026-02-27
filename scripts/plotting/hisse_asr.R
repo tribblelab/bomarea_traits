@@ -5,8 +5,10 @@ library(ggplot2)
 library(RevGadgets)
 library(ape)
 
+setwd("~/Desktop/bomarea_traits/")
+
 # read in and process the ancestral states
-HiSSE_file <- paste0("output/asr_hisse_test.tree")
+HiSSE_file <- paste0("output/hisse/hisse_rj_asr.tree")
 p_anc <- processAncStates(HiSSE_file,
                           state_labels = c(
                             "0" = "simple_A",
@@ -36,7 +38,7 @@ pies <- plotAncStatesPie(
   )
 
 pies
-ggsave("figures/HiSSE_asr_pies_test.png", pies, width = 8, height = 8)
+ggsave("figures/hisse/HiSSE_asr_pies_test.png", pies, width = 8, height = 8)
 
 # plot the ancestral states
 plot <- plotAncStatesMAP(t = p_anc, tree_layout="rectangular",

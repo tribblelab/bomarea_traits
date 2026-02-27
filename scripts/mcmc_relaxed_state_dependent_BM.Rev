@@ -196,7 +196,13 @@ mymodel = model(zeta)
 ### set up the monitors that will output parameter values to file and screen
 monitors.append( mnModel(filename="output/relaxed_state_dependent_BM.log", printgen=10) )
 monitors.append( mnScreen(printgen=100, zeta, num_rate_changes, total_num_changes) )
-monitors.append( mnExtNewick(filename="output/relaxed_state_dependent_BM.trees", isNodeParameter=TRUE, printgen=10, separator=TAB, tree=tree, state_branch_rate, background_rates, branch_rates) )
+monitors.append( mnExtNewick(filename="output/relaxed_state_dependent_BM.trees",
+                             isNodeParameter=TRUE, printgen=10,
+                             separator=TAB,
+                             tree=tree,
+                             state_branch_rate,
+                             background_rates,
+                             branch_rates) )
 
 
 

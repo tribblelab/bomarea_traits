@@ -4,7 +4,7 @@ library(ape)
 library(tidytree)
 
 setwd("~/Desktop/bomarea_traits/")
-source("scripts/functions.R")
+source("data_prep/functions.R")
 
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
@@ -101,3 +101,5 @@ colnames(type_mat) <- "type"
 # for correlation analysis
 write.nexus.data(type_mat, file = "data/type_corr.nexus",
                  format = "standard", missing = "?")
+
+# make sure to remove 2-9 for symbols in nexus file

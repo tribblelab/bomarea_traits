@@ -2,9 +2,9 @@ library(RevGadgets)
 library(tidyverse)
 
 # files 
-HiSSE_tree_file <- "output/asr_hisse_rj.tree"
-HiSSE_rates_file <- "output/hisse_rj.log"
-HiSSE_maps_file <- "output/stoch_maps_hisse_rj.log"
+HiSSE_tree_file <- "output/hisse/hisse_rj_asr.tree"
+HiSSE_rates_file <- "output/hisse/hisse_rj.log"
+HiSSE_maps_file <- "output/hisse/hisse_rj_stoch_maps.log"
 
 # read in data
 p_tree <- readTrees(HiSSE_tree_file)

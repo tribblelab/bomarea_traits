@@ -5,7 +5,7 @@ library(ape)
 library(car)
 
 setwd("~/Desktop/bomarea_traits/")
-source("scripts/functions.R")
+source("data_prep/functions.R")
 
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 

@@ -5,7 +5,7 @@ library(ape)
 library(car)
 
 setwd("~/Desktop/bomarea_traits/")
-source("scripts/functions.R")
+source("data_prep/functions.R")
 
 traits <- read_xlsx("data_prep/bomarea_traits.xlsx", sheet = 1, na = "N/A")
 
@@ -84,7 +84,8 @@ tips_to_drop <- grep(
     "foliosa|straminea|pauciflora|distichophylla|",
     "Bomarea_edulis_Brazil_Campbell8900|",
     "Bomarea_edulis_Venezuela_Bunting4817|",
-    "Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse"
+    "Bomarea_multiflora_CultivatedinCAfromCol_Greenhouse|",
+    "Bomarea_ovata_Peru_Farfan526"
   ),
   tree$tip.label,
   value = TRUE
@@ -126,3 +127,6 @@ colnames(elevation_mat) <- "elevation"
 ## Write to nexus
 write.nexus.data(elevation_mat, file = "data/elevation.nexus",
                  format = "standard", missing = "?")
+
+# you'll have to manually add AB to symbols in nexus files
+

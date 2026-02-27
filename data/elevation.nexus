@@ -1,8 +1,8 @@
 #NEXUS
-[Data written by write.nexus.data.R, Wed Feb 25 08:40:59 2026]
+[Data written by write.nexus.data.R, Thu Feb 26 08:29:20 2026]
 BEGIN DATA;
-  DIMENSIONS NTAX=55 NCHAR=1;
-  FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789";
+  DIMENSIONS NTAX=54 NCHAR=1;
+  FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789AB";
   MATRIX
     Bomarea_brevis_Bolivia_Teran1759                       7
     Bomarea_coccinea_Peru_Nunez13229                       7
@@ -26,7 +26,6 @@ BEGIN DATA;
     Bomarea_aurantiaca_Bolivia_Fuentes13880                7
     Bomarea_cornuta_Bolivia_Fuentes17664                   5
     Bomarea_campylophylla_Bolivia_Maldonado3174            A
-    Bomarea_ovata_Peru_Farfan526                           NA
     Bomarea_brachysepala_Ecuador_Jorgensen2129             6
     Bomarea_hieronymi_Ecuador_Aluarez2557                  7
     Bomarea_linifolia_Colombia_Tribble8                    5

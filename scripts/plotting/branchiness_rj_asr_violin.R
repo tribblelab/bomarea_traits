@@ -77,4 +77,5 @@ g <- ggplot(df_rates) +
 #                                "er[7]"))
 
 print(g)
-ggsave("branchiness_ase_ard_violinPlot.png", width = 15, height = 10, dpi = 200)
+
+ggsave("/figures/branchiness_ase_ard_violinPlot.png", width = 15, height = 10, dpi = 200)
