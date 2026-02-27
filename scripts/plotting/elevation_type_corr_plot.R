@@ -1,11 +1,13 @@
 library(RevGadgets)
 library(ggplot2)
 
+setwd("~/Desktop/bomarea_traits/")
+
 CHARACTER_A <- "elevation"
 CHARACTER_B <- "type"
 
 # Specify the input file
-file <- paste0("output/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ.log")
+file <- paste0("output/corr/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ.log")
 
 # Read the trace and discard burnin
 trace_qual <- readTrace(path = file, burnin = 0.25)
@@ -16,16 +18,10 @@ thresholds <- BF / (1 + BF)
 
 # All variables to plot (20 total)
 vars_to_plot <- c(
-  "rate_A0_A1_when_B0", "rate_A0_A1_when_B1",
-  "rate_A1_A0_when_B0", "rate_A1_A0_when_B1",
-  "rate_A1_A2_when_B0", "rate_A1_A2_when_B1",
-  "rate_A2_A1_when_B0", "rate_A2_A1_when_B1",
-  "rate_A2_A3_when_B0", "rate_A2_A3_when_B1",
-  "rate_A3_A2_when_B0", "rate_A3_A2_when_B1",
-  "rate_B0_B1_when_A0", "rate_B0_B1_when_A1",
-  "rate_B0_B1_when_A2", "rate_B0_B1_when_A3",
-  "rate_B1_B0_when_A0", "rate_B1_B0_when_A1",
-  "rate_B1_B0_when_A2", "rate_B1_B0_when_A3"
+"prob_decrease_indep", "prob_increase_indep",
+"rate_0_to_1", "rate_1_to_0",
+"rate_decrease_when_0", "rate_decrease_when_1",
+"rate_increase_when_0", "rate_increase_when_1"
 )
 
 # Split variables into two groups (max 10 per group)

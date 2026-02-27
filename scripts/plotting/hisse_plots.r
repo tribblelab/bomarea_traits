@@ -1,6 +1,8 @@
 library(RevGadgets)
 library(tidyverse)
 
+setwd("~/Desktop/bomarea_traits/")
+
 # files 
 HiSSE_tree_file <- "output/hisse/hisse_rj_asr.tree"
 HiSSE_rates_file <- "output/hisse/hisse_rj.log"
@@ -30,7 +32,7 @@ pies <- plotAncStatesPie(
     legend.title = element_text(size = 15)
   )
 
-ggsave("~/Desktop/hisse_asr.pdf",
+ggsave("~/Desktop/bomarea_traits/figures/hisse_asr.pdf",
            height = 10, width = 8)
 
 # plot net div rates
@@ -52,7 +54,7 @@ p_rates[[1]] %>%
     theme_bw() +
     theme(legend.position = "none" )
 
-ggsave("~/Desktop/hisse_rates_violin.pdf",
+ggsave("~/Desktop/bomarea_traits/figures/hisse_violin.pdf",
            height = 6, width = 6)
 
 #plot sctochastic maps
@@ -64,5 +66,5 @@ map_plot <- plotStochMaps(tree = p_tree,
                          "3" = colFun(4)[4]),
               color_by = "MAP")
 
-ggsave("~/Desktop/hisse_stoch_maps.pdf",
+ggsave("~/Desktop/bomarea_traits/figures/hisse_stoch_maps.pdf",
            height = 10, width = 8)
