@@ -30,7 +30,7 @@ X ~ dnPhyloMultivariateBrownianREML(tree, branchRates=sigma2^0.5, rateMatrix=V)
 X.clamp(data)
 
 mymodel = model(sigma2)
-monitors.append( mnModel(filename="output/multivariate_size_sparsity.log", printgen=1000) )
+monitors.append( mnModel(filename="output/mvbm/multivariate_size_sparsity.log", printgen=1000) )
 monitors.append( mnScreen(printgen=1000, sigma2) )
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
 mymcmc.burnin(generations=200,tuningInterval=100)

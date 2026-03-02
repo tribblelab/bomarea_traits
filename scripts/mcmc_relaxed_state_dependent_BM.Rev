@@ -194,9 +194,9 @@ Y.clamp(cont)
 mymodel = model(zeta)
 
 ### set up the monitors that will output parameter values to file and screen
-monitors.append( mnModel(filename="output/BM/relaxed_state_dependent_BM.log", printgen=10) )
+monitors.append( mnModel(filename="output/muscrat/relaxed_state_dependent_BM.log", printgen=10) )
 monitors.append( mnScreen(printgen=100, zeta, num_rate_changes, total_num_changes) )
-monitors.append( mnExtNewick(filename="output/BM/relaxed_state_dependent_BM.trees",
+monitors.append( mnExtNewick(filename="output/muscrat/relaxed_state_dependent_BM.trees",
                              isNodeParameter=TRUE, printgen=10,
                              separator=TAB,
                              tree=tree,
@@ -219,8 +219,8 @@ mymcmc.burnin(generations=2000, tuningInterval=100)
 mymcmc.run(generations=200000)
 
 ## summarize the branch rates
-treetrace = readTreeTrace("output/bm/relaxed_state_dependent_BM.trees")
-map_tree = mapTree(treetrace,"output/bm/relaxed_state_dependent_BM_MAP.tre")
+treetrace = readTreeTrace("output/muscrat/relaxed_state_dependent.trees")
+map_tree = mapTree(treetrace,"output/muscrat/relaxed_state_dependent_MAP.tre")
 
 
 ## quit ##
