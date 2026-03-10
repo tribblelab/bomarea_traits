@@ -25,13 +25,19 @@ pies <- plotAncStatesPie(
   tip_labels = TRUE,
   state_transparency = 1.0,
   node_pie_size = 1,
-  tip_pie_size = 0.85
+  tip_pie_size = 0.85,
+  pie_colors = c(
+    "0A" = "#660000",
+    "1A" = "#003049",
+    "0B" = "#e86064",
+    "1B" = "#669BBC"
+  )
 ) +
   theme(
     legend.text  = element_text(size = 13),
     legend.title = element_text(size = 15)
   )
-
+pies
 ggsave("~/Desktop/bomarea_traits/figures/hisse_asr.pdf",
            height = 10, width = 8)
 
@@ -64,7 +70,7 @@ map_plot <- plotStochMaps(tree = p_tree,
                          "1" = colFun(4)[3],
                          "2" = colFun(4)[2],
                          "3" = colFun(4)[4]),
-              color_by = "MAP")
+              color_by = "PROB")
 
-ggsave("~/Desktop/bomarea_traits/figures/hisse_stoch_maps.pdf",
+ggsave("~/Desktop/bomarea_traits/figures/hisse_stoch_maps_PROB.pdf",
            height = 10, width = 8)

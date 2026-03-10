@@ -180,7 +180,7 @@ timetree.clampCharData( data_exp )
 mymodel = model(rate_matrix)
 
 ### set up the monitors that will output parameter values to file and screen
-monitors.append( mnModel(filename="output/hisse/hisse_rj.log", printgen=10) )
+monitors.append( mnModel(filename="output/hisse/constrained/hisse_rj.log", printgen=10) )
 monitors.append( mnScreen(printgen=10, speciation_observed, extinction_observed) )
 monitors.append(mnJointConditionalAncestralState(tree=timetree,
                                                  cdbdp=timetree,
@@ -188,9 +188,9 @@ monitors.append(mnJointConditionalAncestralState(tree=timetree,
                                                  printgen=10,
                                                  withTips=true,
                                                  withStartStates=false,
-                                                 filename="output/hisse/hisse_rj_anc_states.log"))
+                                                 filename="output/hisse/constrained/hisse_rj_anc_states.log"))
 monitors.append( mnStochasticCharacterMap(cdbdp=timetree,
-                       filename="output/hisse/hisse_rj_stoch_maps.log",
+                       filename="output/hisse/constrained/hisse_rj_stoch_maps.log",
                        printgen=10) )
 
 ################
@@ -204,10 +204,10 @@ mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine = "sequential")
 mymcmc.burnin(generations=500,tuningInterval=10)
 mymcmc.run(generations=10000)
 
-anc_state_trace = readAncestralStateTrace("output/hisse/hisse_rj_anc_states.log")
+anc_state_trace = readAncestralStateTrace("output/hisse/constrained/hisse_rj_anc_states.log")
 ancestralStateTree(tree=observed_phylogeny,
                    ancestral_state_trace_vector=anc_state_trace,
                    include_start_states=false,
-                   file="output/hisse/hisse_rj_asr.tree",
+                   file="output/hisse/constrained/hisse_rj_asr.tree",
                    summary_statistic="MAP",
                    reconstruction="marginal")

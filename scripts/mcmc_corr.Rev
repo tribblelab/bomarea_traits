@@ -209,17 +209,17 @@ phyMorpho.clamp( morpho )
 mymodel = model(phylogeny)
 monitors.append( mnModel(filename="output/corr/elevation_type_corr_RJ.log", printgen=100) ) 
 monitors.append( mnScreen(printgen=100) )
-# monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
-#                                                  ctmc=phyMorpho,
-#                                                  filename="output/elevation_type_corr_RJ.states.txt",
-#                                                  type="NaturalNumbers",
-#                                                  printgen=1,
-#                                                  withTips=true,
-#                                                  withStartStates=false) )
-# monitors.append( mnStochasticCharacterMap(ctmc=phyMorpho,
-#                                          filename="output/elevation_type_corr_RJ_stoch_char_map.log",
-#                                          printgen=1000,
-#                                          include_simmap=true) )
+monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
+                                                 ctmc=phyMorpho,
+                                                 filename="output/corr/elevation_type_corr_RJ.states.txt",
+                                                 type="NaturalNumbers",
+                                                 printgen=1,
+                                                 withTips=true,
+                                                 withStartStates=false) )
+monitors.append( mnStochasticCharacterMap(ctmc=phyMorpho,
+                                         filename="output/corr/elevation_type_corr_RJ_stoch_char_map.log",
+                                         printgen=1000,
+                                         include_simmap=true) )
 
 
 # Initialize the MCMC object #
@@ -230,30 +230,28 @@ mymcmc.burnin(2000, tuningInterval = 50)
 mymcmc.run(generations=40000)
 
 # Read in the tree trace and construct the ancestral states (ASE) #
-# anc_states = readAncestralStateTrace("output/elevation_type_corr_RJ.states.txt")
-# anc_tree = ancestralStateTree(tree=phylogeny,
-#                              ancestral_state_trace_vector=anc_states,
-#                              include_start_states=false, file="output/elevation_type_ase_corr_RJ.tree",
-#                              burnin=0.25,
-#                              summary_statistic="MAP",
-#                              site=1,
-#                              nStates=NUM_STATES_A*NUM_STATES_B)
-
+anc_states = readAncestralStateTrace("output/corr/elevation_type_corr_RJ.states.txt")
+anc_tree = ancestralStateTree(tree=phylogeny,
+                             ancestral_state_trace_vector=anc_states,
+                             include_start_states=false, file="output/corr/elevation_type_ase_corr_RJ.tree",
+                             burnin=0.25,
+                             summary_statistic="MAP",
+                             site=1,
+                             nStates=NUM_STATES_A*NUM_STATES_B)
 
 
 # read in the sampled character histories
-# anc_states_stoch_map = readAncestralStateTrace("output/elevation_type_corr_RJ_stoch_char_map.log")
-
-# summarizeCharacterMaps(anc_states_stoch_map, phylogeny, file="output/elevation_type_corr_RJ.events.tsv", burnin=0.25)
+anc_states_stoch_map = readAncestralStateTrace("output/corr/elevation_type_corr_RJ_stoch_char_map.log")
+summarizeCharacterMaps(anc_states_stoch_map, phylogeny, file="output/corr/elevation_type_corr_RJ.events.tsv", burnin=0.25)
 
 
 # make summary tree
-# char_map_tree = characterMapTree(tree=phylogeny,
-#                 ancestral_state_trace_vector=anc_states_stoch_map,
-#                 character_file="output/elevation_type_corr_RJ_marginal_character.tree",
-#                 posterior_file="output/elevation_type_corr_RJ_marginal_posterior.tree",
-#                 burnin=0.25,
-#                 num_time_slices=500)
+char_map_tree = characterMapTree(tree=phylogeny,
+                ancestral_state_trace_vector=anc_states_stoch_map,
+                character_file="output/corr/elevation_type_corr_RJ_marginal_character.tree",
+                posterior_file="output/corr/elevation_type_corr_RJ_marginal_posterior.tree",
+                burnin=0.25,
+                num_time_slices=500)
 
 # Quit RevBayes #
 q()
