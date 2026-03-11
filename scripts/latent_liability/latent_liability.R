@@ -2,7 +2,7 @@ library(ape)
 library(tidyverse)
 setwd("~/Desktop/bomarea_traits")
 
-source("scripts/latent_liability/print_latent_liability_xml(1).R")
+source("scripts/latent_liability/print_latent_liability_functions.R")
 
 
 ### Turn traits into df

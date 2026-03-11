@@ -4,9 +4,9 @@ library(tidyverse)
 setwd("~/Desktop/bomarea_traits/")
 
 # files 
-HiSSE_tree_file <- "output/hisse/hisse_rj_asr.tree"
-HiSSE_rates_file <- "output/hisse/hisse_rj.log"
-HiSSE_maps_file <- "output/hisse/hisse_rj_stoch_maps.log"
+HiSSE_tree_file <- "output/hisse/constrained/hisse_rj_asr.tree"
+HiSSE_rates_file <- "output/hisse/constrained/hisse_rj.log"
+HiSSE_maps_file <- "output/hisse/constrained/hisse_rj_stoch_maps.log"
 
 # read in data
 p_tree <- readTrees(HiSSE_tree_file)
@@ -24,8 +24,8 @@ pies <- plotAncStatesPie(
   p_anc,
   tip_labels = TRUE,
   state_transparency = 1.0,
-  node_pie_size = 1,
-  tip_pie_size = 0.85,
+  node_pie_size = 0.8,
+  tip_pie_size = 0.70,
   pie_colors = c(
     "0A" = "#660000",
     "1A" = "#003049",
@@ -39,7 +39,7 @@ pies <- plotAncStatesPie(
   )
 pies
 ggsave("~/Desktop/bomarea_traits/figures/hisse_asr.pdf",
-           height = 10, width = 8)
+           height = 10, width = 13)
 
 # plot net div rates
 p_rates[[1]]$net_div_0 <- p_rates[[1]]$`speciation_observed[1]` -  
@@ -54,8 +54,10 @@ p_rates[[1]] %>%
     geom_violin() +
     stat_summary(fun.y = "median", geom = "point", shape = 19, size = 2) +
     ylim(-0.25,1.5) + 
-    scale_fill_manual(values = c("net_div_0" = colFun(4)[1], "net_div_1" = colFun(2)[2])) +
-    scale_x_discrete(labels = c("Umbel", "Compound")) +
+    scale_fill_manual(values = c(
+        "net_div_0" = "#e86064",
+        "net_div_1" = "#669BBC")) +
+    scale_x_discrete(labels = c("Simple", "Compound")) +
     labs(x = "Net Diversification Rate", y = "Density") +
     theme_bw() +
     theme(legend.position = "none" )
@@ -70,7 +72,7 @@ map_plot <- plotStochMaps(tree = p_tree,
                          "1" = colFun(4)[3],
                          "2" = colFun(4)[2],
                          "3" = colFun(4)[4]),
-              color_by = "PROB")
+              color_by = "PROBS")
 
-ggsave("~/Desktop/bomarea_traits/figures/hisse_stoch_maps_PROB.pdf",
+ggsave("~/Desktop/bomarea_traits/figures/hisse_stoch_maps_PROBS.pdf",
            height = 10, width = 8)
