@@ -1,4 +1,4 @@
-## Equal-rates Markov Model to estimate ancestral states of inflorescence type
+## Not equal rates Markov Model to estimate ancestral states of inflorescence type
 
 morpho <- readDiscreteCharacterData("data/type.nexus")
 phylogeny <- readTrees("data/tree_edited.tre")[1]

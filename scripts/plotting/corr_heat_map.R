@@ -1,0 +1,37 @@
+cor_mat <- matrix(
+  c(
+    1,      NA,     -0.159, -0.193,
+    NA,      1,      NA,    -0.587,
+    NA,   NA,      1,         0.728,
+    NA,   NA,     NA,             1
+  ),
+  nrow = 4,
+  byrow = TRUE
+)
+
+colnames(cor_mat) <- c("size", "density", "flowers", "type")
+rownames(cor_mat) <- c("size", "density", "flowers", "type")
+
+cor_long <- as.data.frame(as.table(cor_mat))
+
+ggplot(cor_long, aes(Var1, Var2, fill = Freq)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(Freq, 2)), size = 5) +
+  scale_y_discrete(limits = rev) +
+  scale_fill_gradient2(
+    low = "steelblue",
+    mid = "white",
+    high = "red",
+    midpoint = 0,
+    limits = c(-1, 1),
+    na.value = "white"
+  ) +
+  theme_minimal(base_size = 14) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = "Correlation"
+  ) +
+  coord_fixed()
+
+ggsave("~/Desktop/bomarea_traits/figures/corr_heat_map.pdf", width = 10, height = 10)

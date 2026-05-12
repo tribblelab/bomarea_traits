@@ -1,52 +1,82 @@
 library(RevGadgets)
 library(ggplot2)
+library(tidyr)
+library(ggthemes)
 
 setwd("~/Desktop/bomarea_traits/")
 
-CHARACTER_A <- "elevation"
-CHARACTER_B <- "type"
+rates <- readTrace(c("output/corr/elevation_type_corr_RJ_run_1.log",
+                     "output/corr/elevation_type_corr_RJ_run_2.log"))
 
-# Specify the input file
-file <- paste0("output/corr/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ.log")
+rates <- combineTraces(rates)
 
-# Read the trace and discard burnin
-trace_qual <- readTrace(path = file, burnin = 0.25)
+df <- rates[[1]]
 
-# Bayes factors and thresholds
-BF <- c(3.2, 10, 100)
-thresholds <- BF / (1 + BF)
+cols <- c("rate_decrease_when_0",
+          "rate_decrease_when_1",
+          "rate_increase_when_0",
+          "rate_increase_when_1")
 
-# All variables to plot (20 total)
-vars_to_plot <- c(
-"prob_decrease_indep", "prob_increase_indep",
-"rate_0_to_1", "rate_1_to_0",
-"rate_decrease_when_0", "rate_decrease_when_1",
-"rate_increase_when_0", "rate_increase_when_1"
-)
 
-# Split variables into two groups (max 10 per group)
-vars_group1 <- vars_to_plot[1:10]
-vars_group2 <- vars_to_plot[11:20]
+# change column names to more informative parameters
+#    A  B
+# A  X  1
+# B  2  X
+# where A = plain, B = compound
 
-# Plot first group
-plot1 <- plotTrace(trace = trace_qual, vars = vars_group1)[[1]] +
-  ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "solid", color = "black") +
-  geom_hline(yintercept = thresholds, linetype = c("longdash", "dashed", "dotted"), color = "red") +
-  geom_hline(yintercept = 1 - thresholds, linetype = c("longdash", "dashed", "dotted"), color = "red") +
-  theme(legend.position = c(0.40, 0.825))
+df_cols <- df[, cols]
+colnames(df_cols) <- c("Decrease when umbellate",
+                       "Decrease when compound",
+                       "Increase when umbellate",
+                       "Increase when compound")
 
-# Plot second group
-plot2 <- plotTrace(trace = trace_qual, vars = vars_group2)[[1]] +
-  ylim(0, 1) +
-  geom_hline(yintercept = 0.5, linetype = "solid", color = "black") +
-  geom_hline(yintercept = thresholds, linetype = c("longdash", "dashed", "dotted"), color = "red") +
-  geom_hline(yintercept = 1 - thresholds, linetype = c("longdash", "dashed", "dotted"), color = "red") +
-  theme(legend.position = c(0.40, 0.825))
+df_cols %>%
+  tidyr::gather(key = "grp",
+                value = "val",
+                factor_key = TRUE) -> df_rates
 
-# Save plots
-ggsave(paste0("figures/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ_part1.png"),
-       plot1, width = 15, height = 5)
 
-ggsave(paste0("figures/", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ_part2.png"),
-       plot2, width = 15, height = 5)
+colors <- c("#D62828",
+            "#F77F00",
+            "#FCBF49",
+            "#0085CC")
+
+names(colors) <- levels(df_rates$grp)
+
+g <- ggplot(df_rates) +
+  geom_violin(data = df_rates,
+              aes(x = grp,
+                  y = val,
+                  group = grp,
+                  fill = grp),
+              color = "black",
+              lwd = 1,
+              scale = "width",
+              show.legend = FALSE) +
+  stat_summary(fun = mean,
+               aes(x = grp, y = val),
+               geom = "point",
+               size = 2,
+               color = "black") +
+  scale_color_manual(values = colors) +
+  scale_fill_manual(values = colors) +
+  scale_x_discrete(name = "Transition type") +
+  ylab("Transition rate") +
+  ggthemes::theme_few() +
+  theme(axis.text.x = element_text(face = "bold",
+                                   size = 14,
+                                   angle = 30,
+                                   hjust = 1),
+        axis.title.y = element_text(face = "bold",
+                                    size = 20),
+        axis.title.x = element_text(face = "bold",
+                                    size = 20))
+
+summarizeTrace(rates,
+               vars = c("rate_decrease_when_0",
+                        "rate_decrease_when_1",
+                        "rate_increase_when_0",
+                        "rate_increase_when_1"))
+
+print(g)
+ggsave("figures/elevation_type_violin.pdf", width = 10, height = 15, dpi = 200)

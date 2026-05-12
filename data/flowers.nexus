@@ -1,21 +1,21 @@
 #NEXUS
-[Data written by write.nexus.data.R, Wed Feb 25 08:42:57 2026]
+[Data written by write.nexus.data.R, Mon May 11 10:32:41 2026]
 BEGIN DATA;
   DIMENSIONS NTAX=55 NCHAR=1;
   FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="0123456789";
   MATRIX
     Bomarea_brevis_Bolivia_Teran1759                       1.09861228866811
     Bomarea_coccinea_Peru_Nunez13229                       1.94591014905531
-    Bomarea_sp__oso_Peru_Graham12613                       3
+    Bomarea_sp__oso_Peru_Graham12613                       1.09861228866811
     Bomarea_pumila_Bolivia_Fuentes13830                    0
     Bomarea_secundifolia_Peru_Macbride4962                 1.38629436111989
     Bomarea_dispar_Peru_SchunkeV_3544                      2.77258872223978
-    Bomarea_sp__ponillalsoya_Peru_Graham12616              6
+    Bomarea_sp__ponillalsoya_Peru_Graham12616              1.79175946922805
     Bomarea_diffracta_Colombia_Tribble12                   4.27666611901606
     Bomarea_amilcariana_Venezuela_Dorr8337                 3.17805383034795
     Bomarea_peruviana_Peru_Stein2033B                      2.99573227355399
     Bomarea_setacea_Colombia_Tribble7                      3.13549421592915
-    Bomarea_sp__catanatasoya_Peru_Graham12611              12
+    Bomarea_sp__catanatasoya_Peru_Graham12611              2.484906649788
     Bomarea_ampayesana_Peru_Bocke3215                      2.484906649788
     Bomarea_macrocephala_Bolivia_Vargas7052                2.56494935746154
     Bomarea_involucrosa_Peru_Galiano6988                   2.63905732961526

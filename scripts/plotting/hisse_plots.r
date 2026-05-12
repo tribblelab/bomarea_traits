@@ -1,5 +1,6 @@
 library(RevGadgets)
 library(tidyverse)
+library(stringr)
 
 setwd("~/Desktop/bomarea_traits/")
 
@@ -19,10 +20,42 @@ p_maps <- processStochMaps(tree = p_tree,
                            paths = HiSSE_maps_file,
                            states = as.character(0:3) )                
 
+# function to clean labels
+clean_tip_label <- function(x) {
+  parts <- stringr::str_split(x, "_")[[1]]
+  
+  genus <- paste0(substr(parts[1], 1, 1), ".")
+  
+  if (length(parts) >= 3 && parts[2] == "cf") {
+    paste(genus, "cf.", parts[3])
+  } else if (length(parts) >= 2 && parts[2] == "sp") {
+    paste(genus, "sp.")
+  } else {
+    paste(genus, parts[2])
+  }
+}
+
+# read in data
+p_tree$tip.label <- sapply(p_tree$tip.label, clean_tip_label)
+
+p_anc <- processAncStates(
+  HiSSE_tree_file,
+  state_labels = c("0" = "0A",
+                   "1" = "1A",
+                   "2" = "0B",
+                   "3" = "1B")
+)
+
+
+# replace labels inside ancestral-state object
+p_anc@phylo$tip.label <- sapply(p_anc@phylo$tip.label, clean_tip_label)
+
 # plot the ancestral states
 pies <- plotAncStatesPie(
   p_anc,
   tip_labels = TRUE,
+  tip_labels_italics = TRUE,
+  tip_labels_states_size = 5,
   state_transparency = 1.0,
   node_pie_size = 0.8,
   tip_pie_size = 0.70,

@@ -56,7 +56,7 @@ manual_add <- data.frame(
   label = c("Bomarea_sp__oso_Peru_Graham12613",
             "Bomarea_sp__ponillalsoya_Peru_Graham12616",
             "Bomarea_sp__catanatasoya_Peru_Graham12611"),
-  flowers = c(3, 6, 12)
+  flowers = c(log(3), log(6), log(12))
 )
 
 # merge into existing df

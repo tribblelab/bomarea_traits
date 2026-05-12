@@ -25,3 +25,18 @@ p <- plotTrace(
   theme(legend.position = c(0.40, 0.825))
 
 ggsave(paste0("Primates_", CHARACTER_A, "_", CHARACTER_B, "_corr_RJ.pdf"), p, width = 5, height = 5)
+
+
+
+# confidence intervals
+trace_df <- trace_qual[[1]]
+
+apply(trace_df[, c(
+  "rate_decrease_when_0",
+  "rate_decrease_when_1",
+  "rate_increase_when_0",
+  "rate_increase_when_1"
+)], 2, quantile, probs = c(0.025, 0.5, 0.975))
+
+
+
