@@ -283,7 +283,7 @@ printLatentLiability = function(file,latent.liability.info,tree,log.name,ngen,lo
 	}
 	if ( hasArg(is.multistate) ) {
 	  cat('\t\t<randomWalkOperator windowSize="0.01" weight="1" >',append=TRUE,sep="\n",file=file)
-	  cat('\t\t\t<compountParameter idref="threshold"/>',append=TRUE,sep="\n",file=file)
+	  cat('\t\t\t<compoundParameter idref="threshold"/>',append=TRUE,sep="\n",file=file)
 	  cat('\t\t</randomWalkOperator>',append=TRUE,sep="\n",file=file)
 	}
 	cat('\t\t<precisionGibbsOperator weight="1">',append=TRUE,sep="\n",file=file)
