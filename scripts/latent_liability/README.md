@@ -11,9 +11,3 @@ to
     <state code="0"/>
     <state code="1"/>
 </generalDataType>
-
-and 
-
-<compountParameter idref="threshold"/>
-to 
-<compoundParameter idref="threshold"/>
