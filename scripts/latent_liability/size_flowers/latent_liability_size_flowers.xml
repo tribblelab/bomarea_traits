@@ -1,0 +1,460 @@
+<?xml version="1.0"?>
+<beast>
+<!-- ntax=55												-->
+<taxa id="taxa">
+	<taxon id="Bomarea_albimontana_Peru_LeivaS_N_"> <attr name="latent"> 0 -0.910935127296215 -0.815834537953771 </attr></taxon>
+	<taxon id="Bomarea_amilcariana_Venezuela_Dorr8337"> <attr name="latent"> 1 -0.304686988577315 0.34964468707178 </attr></taxon>
+	<taxon id="Bomarea_ampayesana_Peru_Bocke3215"> <attr name="latent"> 1 -0.395171785401031 -0.38569083316625 </attr></taxon>
+	<taxon id="Bomarea_andimarcana_Peru_Suclli1307"> <attr name="latent"> 1 -0.901886647613844 -0.38569083316625 </attr></taxon>
+	<taxon id="Bomarea_angulata_Peru_Quiroz3208"> <attr name="latent"> 0 0.455385304741903 0.392951308550716 </attr></taxon>
+	<taxon id="Bomarea_aurantiaca_Bolivia_Fuentes13880"> <attr name="latent"> 0 0.27441571109447 0.304494685618269 </attr></taxon>
+	<taxon id="Bomarea_brachysepala_Ecuador_Jorgensen2129"> <attr name="latent"> 1 -0.340880907306802 -0.690882648616746 </attr></taxon>
+	<taxon id="Bomarea_bredemeyerana_Colombia_Tribble06"> <attr name="latent"> 0 -0.2775415495302 0.0444528716212727 </attr></taxon>
+	<taxon id="Bomarea_bredemeyerana_Venezuela_Liesner7935"> <attr name="latent"> 0 -0.2775415495302 0.0444528716212727 </attr></taxon>
+	<taxon id="Bomarea_brevis_Bolivia_Teran1759"> <attr name="latent"> 0 -0.539947460318978 -1.8563618736423 </attr></taxon>
+	<taxon id="Bomarea_campylophylla_Bolivia_Maldonado3174"> <attr name="latent"> 1 0.618257939024593 -0.148965670033015 </attr></taxon>
+	<taxon id="Bomarea_cf_anceps_Peru_LopezM_8913"> <attr name="latent"> 0 0.88066384981337 0.89156166565551 </attr></taxon>
+	<taxon id="Bomarea_chaparensis_Bolivia_Steinbach8897"> <attr name="latent"> 0 0.527773142200876 -0.38569083316625 </attr></taxon>
+	<taxon id="Bomarea_chiriquina_Panama_Hammel6374"> <attr name="latent"> 0 0.636354898389336 -0.148965670033015 </attr></taxon>
+	<taxon id="Bomarea_coccinea_Peru_Nunez13229"> <attr name="latent"> 0 -0.630432257142695 -0.957493306563846 </attr></taxon>
+	<taxon id="Bomarea_cornuta_Bolivia_Fuentes17664"> <attr name="latent"> 1 0.410142906330045 0.89156166565551 </attr></taxon>
+	<taxon id="Bomarea_densiflora_Alzate3151"> <attr name="latent"> 0 0.446336825059532 1.35649094282981 </attr></taxon>
+	<taxon id="Bomarea_diffracta_Colombia_Tribble12"> <attr name="latent"> 1 0.346803548553443 1.51512391209733 </attr></taxon>
+	<taxon id="Bomarea_dispar_Peru_SchunkeV_3544"> <attr name="latent"> 1 0.971148646637087 -0.0804990177157536 </attr></taxon>
+	<taxon id="Bomarea_distichifolia_CultivatedinCA_SFBG20120053"> <attr name="latent"> 0 -0.93808056634333 -0.957493306563846 </attr></taxon>
+	<taxon id="Bomarea_edulis_Argentina_Novara2378"> <attr name="latent"> 1 0.355852028235816 0.992672890826725 </attr></taxon>
+	<taxon id="Bomarea_edulis_MorelosN_Tribble325"> <attr name="latent"> 1 0.355852028235816 0.992672890826725 </attr></taxon>
+	<taxon id="Bomarea_euryphylla_Ecuador_Vargas2930"> <attr name="latent"> 0 1.83980269614477 1.30387528840924 </attr></taxon>
+	<taxon id="Bomarea_hieronymi_Ecuador_Aluarez2557"> <attr name="latent"> 1 -0.232299151118342 0.156226145417481 </attr></taxon>
+	<taxon id="Bomarea_hirsuta_CR_Bonifacino6052"> <attr name="latent"> 0 0.120591556494152 0.257337370588707 </attr></taxon>
+	<taxon id="Bomarea_involucrosa_Peru_Galiano6988"> <attr name="latent"> 1 -1.30906823332057 -0.222157786325817 </attr></taxon>
+	<taxon id="Bomarea_libertadensis_Peru_Alayo020"> <attr name="latent"> 0 -0.00608715905905059 -0.38569083316625 </attr></taxon>
+	<taxon id="Bomarea_linifolia_Colombia_Tribble8"> <attr name="latent"> 0 -0.702820094601668 -1.12102635340428 </attr></taxon>
+	<taxon id="Bomarea_lutea_Ecuador_vanderWerff12169"> <attr name="latent"> 0 0.944003207589972 -0.148965670033015 </attr></taxon>
+	<taxon id="Bomarea_macrocephala_Bolivia_Vargas7052"> <attr name="latent"> 0 0.102494597129409 -0.300776333419118 </attr></taxon>
+	<taxon id="Bomarea_multiflora_AlzateS_N_"> <attr name="latent"> 0 0.844469931083885 0.392951308550716 </attr></taxon>
+	<taxon id="Bomarea_multipes_Alzate3153"> <attr name="latent"> 1 1.02543952473132 0.586369850205014 </attr></taxon>
+	<taxon id="Bomarea_nervosa_Alzate3154"> <attr name="latent"> 0 -0.503753541589491 -0.579109374820537 </attr></taxon>
+	<taxon id="Bomarea_obovata_Ecuador_Clark4985"> <attr name="latent"> 1 0.129640036176524 0.89156166565551 </attr></taxon>
+	<taxon id="Bomarea_ovallei_KEW"> <attr name="latent"> 1 -1.12809863967313 -1.5511700581918 </attr></taxon>
+	<taxon id="Bomarea_ovata_Peru_Farfan526"> <attr name="latent"> 1 -0.0513295574709087 1.32170537044303 </attr></taxon>
+	<taxon id="Bomarea_patacocensis_Ecuador_Luteyn14078"> <attr name="latent"> 0 1.73122093995631 1.16989470705693 </attr></taxon>
+	<taxon id="Bomarea_patinii_Colombia_Tribble3"> <attr name="latent"> 0 1.39642719170855 1.0849802073098 </attr></taxon>
+	<taxon id="Bomarea_peruviana_Peru_Stein2033B"> <attr name="latent"> 0 1.57739678535599 0.156226145417481 </attr></taxon>
+	<taxon id="Bomarea_porrecta_Peru_AlayoB_020"> <attr name="latent"> 1 -1.3000197536382 -0.690882648616746 </attr></taxon>
+	<taxon id="Bomarea_pumila_Bolivia_Fuentes13830"> <attr name="latent"> 0 -0.874741208566729 -3.02184109866785 </attr></taxon>
+	<taxon id="Bomarea_puracensis_GarciaBarriga13025"> <attr name="latent"> 0 -0.0422810777885372 -0.300776333419118 </attr></taxon>
+	<taxon id="Bomarea_salsilla_Chile_Ackerman545"> <attr name="latent"> 1 -0.304686988577315 0.586369850205014 </attr></taxon>
+	<taxon id="Bomarea_secundifolia_Peru_Macbride4962"> <attr name="latent"> 0 -0.358977866671545 -1.5511700581918 </attr></taxon>
+	<taxon id="Bomarea_setacea_Colombia_Tribble7"> <attr name="latent"> 0 0.0934461174470378 0.304494685618269 </attr></taxon>
+	<taxon id="Bomarea_sp__catanatasoya_Peru_Graham12611"> <attr name="latent"> 1 -2.39488579520517 -0.38569083316625 </attr></taxon>
+	<taxon id="Bomarea_sp__oso_Peru_Graham12613"> <attr name="latent"> 0 -3.65262447105482 -1.8563618736423 </attr></taxon>
+	<taxon id="Bomarea_sp__ponillalsoya_Peru_Graham12616"> <attr name="latent"> 1 -1.77054069712152 -1.12102635340428 </attr></taxon>
+	<taxon id="Bomarea_speciosa_Bolivia_Cornejo800"> <attr name="latent"> 1 1.28784543552009 0.779788391859301 </attr></taxon>
+	<taxon id="Bomarea_suberecta_CR_Bonifacino6053"> <attr name="latent"> 0 -0.268493069847828 -0.477998149649322 </attr></taxon>
+	<taxon id="Bomarea_tarmensis_Bolivia_Fernandez3467"> <attr name="latent"> 1 0.88066384981337 1.51512391209733 </attr></taxon>
+	<taxon id="Bomarea_torta_Alzate3270"> <attr name="latent"> 0 0.310609629823957 1.06264538428886 </attr></taxon>
+	<taxon id="Bomarea_trichophylla_Venezuela_Rivero1217"> <attr name="latent"> 1 1.15211824028452 2.22057393752148 </attr></taxon>
+	<taxon id="Bomarea_vestita_AlzateS_N_"> <attr name="latent"> 0 0.156785475223639 -0.222157786325817 </attr></taxon>
+	<taxon id="Bomarea_weigendii_Peru_Davis1224"> <attr name="latent"> 0 0.54587010156562 -0.815834537953771 </attr></taxon>
+</taxa>
+<generalDataType id="multinomial">
+	<state code="0"/>
+	<state code="1"/>
+</generalDataType>
+<alignment id="alignment">
+<dataType idref="multinomial"/>
+	<sequence>
+		<taxon idref="Bomarea_albimontana_Peru_LeivaS_N_"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_amilcariana_Venezuela_Dorr8337"/>
+		101
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_ampayesana_Peru_Bocke3215"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_andimarcana_Peru_Suclli1307"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_angulata_Peru_Quiroz3208"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_aurantiaca_Bolivia_Fuentes13880"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_brachysepala_Ecuador_Jorgensen2129"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_bredemeyerana_Colombia_Tribble06"/>
+		001
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_bredemeyerana_Venezuela_Liesner7935"/>
+		001
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_brevis_Bolivia_Teran1759"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_campylophylla_Bolivia_Maldonado3174"/>
+		110
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_cf_anceps_Peru_LopezM_8913"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_chaparensis_Bolivia_Steinbach8897"/>
+		010
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_chiriquina_Panama_Hammel6374"/>
+		010
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_coccinea_Peru_Nunez13229"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_cornuta_Bolivia_Fuentes17664"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_densiflora_Alzate3151"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_diffracta_Colombia_Tribble12"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_dispar_Peru_SchunkeV_3544"/>
+		110
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_distichifolia_CultivatedinCA_SFBG20120053"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_edulis_Argentina_Novara2378"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_edulis_MorelosN_Tribble325"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_euryphylla_Ecuador_Vargas2930"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_hieronymi_Ecuador_Aluarez2557"/>
+		101
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_hirsuta_CR_Bonifacino6052"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_involucrosa_Peru_Galiano6988"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_libertadensis_Peru_Alayo020"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_linifolia_Colombia_Tribble8"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_lutea_Ecuador_vanderWerff12169"/>
+		010
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_macrocephala_Bolivia_Vargas7052"/>
+		010
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_multiflora_AlzateS_N_"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_multipes_Alzate3153"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_nervosa_Alzate3154"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_obovata_Ecuador_Clark4985"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_ovallei_KEW"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_ovata_Peru_Farfan526"/>
+		101
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_patacocensis_Ecuador_Luteyn14078"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_patinii_Colombia_Tribble3"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_peruviana_Peru_Stein2033B"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_porrecta_Peru_AlayoB_020"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_pumila_Bolivia_Fuentes13830"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_puracensis_GarciaBarriga13025"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_salsilla_Chile_Ackerman545"/>
+		101
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_secundifolia_Peru_Macbride4962"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_setacea_Colombia_Tribble7"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_sp__catanatasoya_Peru_Graham12611"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_sp__oso_Peru_Graham12613"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_sp__ponillalsoya_Peru_Graham12616"/>
+		100
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_speciosa_Bolivia_Cornejo800"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_suberecta_CR_Bonifacino6053"/>
+		000
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_tarmensis_Bolivia_Fernandez3467"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_torta_Alzate3270"/>
+		011
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_trichophylla_Venezuela_Rivero1217"/>
+		111
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_vestita_AlzateS_N_"/>
+		010
+	</sequence>
+	<sequence>
+		<taxon idref="Bomarea_weigendii_Peru_Davis1224"/>
+		010
+	</sequence>
+</alignment>
+
+	<!-- The unique patterns															-->
+	<patterns id="patterns" from="1" unique="false">
+		<alignment idref="alignment"/>
+	</patterns>
+
+	<!-- The is the fixed tree topology and branch lengths:												-->
+	<newick id="startingTree">
+		((((((((((((((((Bomarea_brevis_Bolivia_Teran1759:0.2352,Bomarea_coccinea_Peru_Nunez13229:0.2352):0.679176,Bomarea_sp__oso_Peru_Graham12613:0.914376):0.190835,Bomarea_pumila_Bolivia_Fuentes13830:1.105211):0.392772,Bomarea_secundifolia_Peru_Macbride4962:1.497983):0.518485,(Bomarea_dispar_Peru_SchunkeV_3544:0.999399,Bomarea_sp__ponillalsoya_Peru_Graham12616:0.999399):1.017069):0.203651,(Bomarea_diffracta_Colombia_Tribble12:1.600137,Bomarea_amilcariana_Venezuela_Dorr8337:1.600137):0.619982):0.182475,Bomarea_peruviana_Peru_Stein2033B:2.402594):0.181951,(Bomarea_setacea_Colombia_Tribble7:1.796898,Bomarea_sp__catanatasoya_Peru_Graham12611:1.796898):0.787647):0.222529,((((Bomarea_ampayesana_Peru_Bocke3215:0.866567,Bomarea_macrocephala_Bolivia_Vargas7052:0.866567):0.224528,Bomarea_involucrosa_Peru_Galiano6988:1.091095):0.267526,Bomarea_andimarcana_Peru_Suclli1307:1.358621):0.792584,((Bomarea_libertadensis_Peru_Alayo020:0.456358,Bomarea_porrecta_Peru_AlayoB_020:0.456358):0.870258,Bomarea_albimontana_Peru_LeivaS_N_:1.326616):0.824589):0.655868):0.49074,(((Bomarea_aurantiaca_Bolivia_Fuentes13880:0.255862,Bomarea_cornuta_Bolivia_Fuentes17664:0.255862):0.408268,Bomarea_campylophylla_Bolivia_Maldonado3174:0.66413):1.201244,Bomarea_ovata_Peru_Farfan526:1.865374):1.432441):0.350783,((((Bomarea_brachysepala_Ecuador_Jorgensen2129:1.259162,(Bomarea_hieronymi_Ecuador_Aluarez2557:0.459841,Bomarea_linifolia_Colombia_Tribble8:0.459841):0.799321):0.735013,Bomarea_lutea_Ecuador_vanderWerff12169:1.994175):0.4541,(((Bomarea_multipes_Alzate3153:1.150286,Bomarea_torta_Alzate3270:1.150286):0.619918,Bomarea_angulata_Peru_Quiroz3208:1.770205):0.296781,Bomarea_trichophylla_Venezuela_Rivero1217:2.066986):0.38129):0.422247,((Bomarea_densiflora_Alzate3151:1.524991,Bomarea_cf_anceps_Peru_LopezM_8913:1.524992):0.896469,(Bomarea_distichifolia_CultivatedinCA_SFBG20120053:1.502561,Bomarea_nervosa_Alzate3154:1.502562):0.918899):0.449062):0.778074):0.361324,(((((((((Bomarea_euryphylla_Ecuador_Vargas2930:0.283494,Bomarea_vestita_AlzateS_N_:0.283494):0.412245,Bomarea_patinii_Colombia_Tribble3:0.695738):0.517961,Bomarea_patacocensis_Ecuador_Luteyn14078:1.2137):0.192221,Bomarea_multiflora_AlzateS_N_:1.40592):0.148521,((Bomarea_bredemeyerana_Venezuela_Liesner7935:0.336346,Bomarea_chiriquina_Panama_Hammel6374:0.336346):0.623359,Bomarea_hirsuta_CR_Bonifacino6052:0.959705):0.594735):0.178262,Bomarea_puracensis_GarciaBarriga13025:1.732703):0.328506,(Bomarea_suberecta_CR_Bonifacino6053:1.514808,Bomarea_bredemeyerana_Colombia_Tribble06:1.514808):0.546402):0.470593,Bomarea_tarmensis_Bolivia_Fernandez3467:2.531802):0.389668,((Bomarea_chaparensis_Bolivia_Steinbach8897:0.934774,Bomarea_weigendii_Peru_Davis1224:0.934774):1.18444,Bomarea_speciosa_Bolivia_Cornejo800:2.119214):0.802255):1.088451):0.399614,(Bomarea_edulis_Argentina_Novara2378:3.117554,Bomarea_edulis_MorelosN_Tribble325:3.117554):1.291981):0.666741,Bomarea_obovata_Ecuador_Clark4985:5.076275):1.087237,Bomarea_ovallei_KEW:6.163512):1.527553,Bomarea_salsilla_Chile_Ackerman545:7.691065):0;
+	</newick>
+	<treeModel id="treeModel">
+		<tree idref="startingTree"/>
+		<rootHeight>
+			<parameter id="treeModel.rootHeight"/>
+		</rootHeight>
+		<nodeHeights internalNodes="true">
+			<parameter id="treeModel.internalNodeHeights"/>
+		</nodeHeights>
+		<nodeHeights internalNodes="true" rootNode="true">
+			<parameter id="treeModel.allInternalNodeHeights"/>
+		</nodeHeights>
+		<nodeTraits rootNode="false" internalNodes="false" leafNodes="true" traitDimension="3" name="latent">
+			<parameter id="bomareaTraits"/>
+		</nodeTraits>
+	</treeModel>
+	<report>
+		Newick Tree:
+		<tree idref="startingTree"/>
+		<parameter idref="bomareaTraits"/>
+	</report>
+	<!-- Begin latent-liability model														-->
+	<multivariateDiffusionModel id="diffusionModel">
+		<precisionMatrix>
+			<matrixParameter id="precisionMatrix">
+				<parameter value=" 0.05 0 0"/>
+				<parameter value=" 0 0.05 0"/>
+				<parameter value=" 0 0 0.05"/>
+	 		</matrixParameter>
+		</precisionMatrix>
+	</multivariateDiffusionModel>
+
+	<!-- We have used the recommended value for df of k traits +2						-->
+	<multivariateWishartPrior id="precisionPrior" df=" 5 ">
+		<scaleMatrix>
+			<matrixParameter>
+				<parameter value=" 0.1 0 0"/>
+				<parameter value=" 0 0.1 0"/>
+				<parameter value=" 0 0 0.1"/>
+	 		</matrixParameter>
+		</scaleMatrix>
+		<data>
+			<matrixParameter idref="precisionMatrix"/>
+		</data>
+	</multivariateWishartPrior>
+
+	<multivariateTraitLikelihood id="traitLikelihood" traitName="latent"
+	 							 useTreeLength="true" scaleByTime="true"
+								 cacheBranches="true"
+								 reportAsMultivariate="true" reciprocalRates="true" 
+								 integrateInternalTraits="true">
+		<multivariateDiffusionModel idref="diffusionModel"/>
+		<treeModel idref="treeModel"/>
+		<traitParameter>
+			<parameter idref="bomareaTraits"/>
+		</traitParameter>
+		
+		<jitter window="0 0 0" duplicatesOnly="true">
+			<parameter idref="bomareaTraits"/>
+		</jitter>
+		
+		<conjugateRootPrior>
+			<meanParameter>
+				<parameter value="0.0 0.0 0.0"/>
+			</meanParameter>
+			<priorSampleSize>
+				<parameter value="0.01"/>
+			</priorSampleSize>
+		</conjugateRootPrior>
+	</multivariateTraitLikelihood>
+
+	<report>
+		<maskedParameter id= "latentParameters" >
+			<!-- Define mask to be 1 for: a) every discrete trait b) every continuous trait missing data-->
+			<mask>
+				<parameter id="mask" value="1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0"  />
+			</mask>
+			<parameter idref="bomareaTraits"/>
+		</maskedParameter>
+	</report>
+
+	<CompoundParameter id="threshold">
+		<parameter value="1"/>
+	</CompoundParameter>
+	<orderedLatentLiabilityLikelihood id="liabilityLikelihood">
+		<patterns idref="patterns"/>
+		<treeModel idref="treeModel"/>
+		<multivariateTraitLikelihood idref="traitLikelihood"/>
+		<tipTrait>
+			<parameter idref="bomareaTraits"/>
+		</tipTrait>
+		<threshold>
+			<parameter idref="threshold"/>
+		</threshold>
+		<numClasses>
+			<parameter value = "2 1.0 1.0"/>
+		</numClasses>
+	</orderedLatentLiabilityLikelihood>
+
+
+	<!-- We are only proposing updates to parameters of the latent liability model		  -->
+	<operators id="operators" optimizationSchedule="log">
+		<randomWalkOperator windowSize="1.0" weight="100" >
+			<maskedParameter idref="latentParameters"/>
+		</randomWalkOperator>
+		<randomWalkOperator windowSize="0.01" weight="1" >
+			<compoundParameter idref="threshold"/>
+		</randomWalkOperator>
+		<precisionGibbsOperator weight="1">
+			<multivariateTraitLikelihood idref="traitLikelihood"/>
+			<multivariateWishartPrior idref="precisionPrior"/>
+		</precisionGibbsOperator>
+	</operators>
+
+	<mcmc id="mcmc" chainLength="100000000" autoOptimize="true" operatorAnalysis="bomarea_latent_liability_size_flowers_autoOptimize.ops">
+		<posterior id="posterior">
+			<prior id="prior">
+				<multivariateWishartPrior idref="precisionPrior"/>
+				<gammaPrior shape="1" scale="0.5" offset="0.0">
+					<parameter idref="threshold"/>
+				</gammaPrior>
+			</prior>
+			<likelihood id="likelihood">
+				<multivariateTraitLikelihood idref="traitLikelihood"/>
+				<MultinomialLatentLiabilityLikelihood idref="liabilityLikelihood"/>
+			</likelihood>
+		</posterior>
+
+		<operators idref="operators"/>
+
+		<log id="screenLog" logEvery="10000">
+			<column label="Posterior" dp="4" width="12">
+				<posterior idref="posterior"/>
+			</column>
+			<column label="Prior" dp="4" width="12">
+				<prior idref="prior"/>
+			</column>
+			<column label="Likelihood" dp="4" width="12">
+				<likelihood idref="likelihood"/>
+			</column>
+			<column label="threshold" sf="6" width="12">
+			 <CompoundParameter idref="threshold"/>
+			</column>
+		</log>
+
+		<log id="fileLog1" logEvery="10000" fileName="bomarea_latent_liability_size_flowers.log">
+			<posterior idref="posterior"/>
+			<prior idref="prior"/>
+			<likelihood idref="likelihood"/>
+			<CompoundParameter idref="threshold"/>
+			<parameter idref="bomareaTraits"/>
+			<matrixParameter idref="precisionMatrix"/>
+		</log>
+		
+		<log id="fileLog2" logEvery="10000" fileName="bomarea_latent_liability_size_flowers_PRECISION.log">
+			<posterior idref="posterior"/>
+			<prior idref="prior"/>
+			<likelihood idref="likelihood"/>
+			<matrixParameter idref="precisionMatrix"/>
+		</log>
+		
+		
+	</mcmc>
+</beast>

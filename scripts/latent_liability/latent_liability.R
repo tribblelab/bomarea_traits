@@ -58,7 +58,7 @@ names(density_df) <- c("species", "density")
 
 # 3 variables
 bom.data <- Reduce(function(x, y) merge(x, y, by = "species", all = TRUE),
-                   list(type_df, size_df, density_df))
+                   list(type_df, size_df, flowers_df))
 bom.tree <- read.tree("data/tree_edited.tre")
 
 bom.data.for.xml <- bom.data[, -1]
@@ -68,15 +68,12 @@ row.names(bom.data.for.xml) <- bom.data$species
 bom.data.for.xml[, 1] <- gsub("\\?", NA, bom.data.for.xml[, 1])
 bom.data.for.xml[, 1] <- as.numeric(bom.data.for.xml[, 1])
 
-# bom.data.for.xml <- bom.data.for.xml[, c(1, 3, 4)]
-# names(bom.data.for.xml) <- c("d", "c", "c")
-
 bom.data.for.xml[, 2:3] <- lapply(bom.data.for.xml[, 2:3], as.numeric)
 bom.data.for.xml[, 2:3] <- scale(bom.data.for.xml[, 2:3])
 
 # 2 variables
 bom.data <- Reduce(function(x, y) merge(x, y, by = "species", all = TRUE),
-                   list(type_df, density_df))
+                   list(type_df, flowers_df))
 bom.tree <- read.tree("data/tree_edited.tre")
 
 bom.data.for.xml <- bom.data[, -1]
@@ -86,13 +83,10 @@ row.names(bom.data.for.xml) <- bom.data$species
 bom.data.for.xml[, 1] <- gsub("\\?", NA, bom.data.for.xml[, 1])
 bom.data.for.xml[, 1] <- as.numeric(bom.data.for.xml[, 1])
 
-# bom.data.for.xml <- bom.data.for.xml[, c(1, 3)]
-# names(bom.data.for.xml) <- c("d", "c")
-
 bom.data.for.xml[, 2] <- scale(bom.data.for.xml[, 2])
 
 ## Write the xml
-printLatentLiability(file="scripts/latent_liability/size_flowers_log/latent_liability_size_flowers_log.xml",
+printLatentLiability(file="scripts/latent_liability/size_flowers/latent_liability_size_flowers.xml",
                      latent.liability.info=bom.data.for.xml,
                      tree=bom.tree,
                      log.name="bomarea_latent_liability_size_flowers_log",

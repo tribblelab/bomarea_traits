@@ -4,33 +4,33 @@ source("latent_liability_figs_functions.R")
 library(RColorBrewer)
 
 extractPrecision(
-  log.file.path = "size_density/bomarea_latent_liability_size_density.log",
-  out.file.path = "size_density/bomarea_latent_liability_size_density_PRECISION.log"
+  log.file.path = "size_flowers/bomarea_latent_liability_size_flowers_log.log",
+  out.file.path = "size_flowers/bomarea_latent_liability_size_flowers_log_PRECISION.log"
 )
 
 extractCorrelations(
-  log.file.path = "size_density/bomarea_latent_liability_size_density.log",
-  out.file.path = "size_density/bomarea_latent_liability_size_density_CORR.log",
-  trait.names   = c("type", "size", "density")
+  log.file.path = "size_flowers/bomarea_latent_liability_size_flowers_log.log",
+  out.file.path = "size_flowers/bomarea_latent_liability_size_flowers_log_CORR.log",
+  trait.names   = c("type", "size", "flowers")
 )
 
 extractVarCovar(
-  log.file.path = "size_density/bomarea_latent_liability_size_density.log",
-  out.file.path = "size_density/bomarea_latent_liability_size_density_VARCOVAR.log",
-  trait.names = c("type", "size", "density")
+  log.file.path = "size_flowers/bomarea_latent_liability_size_flowers_log.log",
+  out.file.path = "size_flowers/bomarea_latent_liability_size_flowers_log_VARCOVAR.log",
+  trait.names = c("type", "size", "flowers")
 )
 
 corrs <- read.table(
-  "size_density/bomarea_latent_liability_size_density_CORR.log",
+  "size_flowers/bomarea_latent_liability_size_flowers_log_CORR.log",
   header = TRUE,
   row.names = 1,
   stringsAsFactors = FALSE
 )
 
-pdf("~/Desktop/bomarea_traits/figures/latent_liability_size_density.pdf", width = 7, height = 7)
+pdf("~/Desktop/bomarea_traits/figures/latent_liability_size_flowers_log.pdf", width = 7, height = 7)
 plotCorrelationDistributions(
   correlations = corrs,
-  labels = c("type", "size", "density"),
+  labels = c("type", "size", "flowers"),
   lwd = 2,
   cex.labels = 1.2,
   omi = c(1,1,1,1)
